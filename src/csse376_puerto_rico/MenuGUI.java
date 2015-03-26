@@ -32,6 +32,7 @@ public class MenuGUI {
            imgPanel.add(new JLabel(new ImageIcon(image)));
            
            JButton newGame = new JButton("New Game");
+           newGame.addActionListener(new ButtonHandler(mainframe));
            JButton quit = new JButton("Quit");
            
            buttonPanel.add(newGame);
