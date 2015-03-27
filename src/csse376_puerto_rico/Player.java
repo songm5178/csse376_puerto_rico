@@ -13,7 +13,11 @@ public class Player {
 	}
 	
 	public String getRole(){
-		return "trader";
+		if(this.role == "trader"){
+			return "trader";
+		}else{
+			return "mayor";
+		}
 	}
 
 }
