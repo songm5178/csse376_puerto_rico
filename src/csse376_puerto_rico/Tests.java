@@ -16,5 +16,10 @@ public class Tests {
 		Player player = new Player("mayor");
 		assertEquals("mayor",player.getRole());
 	}
+	@Test
+	public void test_playersRoleAsBuilder() {
+		Player player = new Player("builder");
+		assertEquals("builder",player.getRole());
+	}
 
 }
