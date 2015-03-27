@@ -20,6 +20,9 @@ public class ButtonHandler implements ActionListener {
 		String action = ae.getActionCommand();
 		if(action.equals("Quit")){
 			System.exit(0);
+		}else if(action.equals("New Game")){
+			Player player = new Player("mayor");
+			new GameBoardGUI(this.mainframe);
 		}
 	}
 

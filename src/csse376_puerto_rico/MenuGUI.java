@@ -15,7 +15,7 @@ public class MenuGUI {
      JFrame mainframe = new JFrame();
      
      /**
-     * Constructs the Start up screen.
+     * Constructs the Menu.
      * 
      */
      public MenuGUI() {
