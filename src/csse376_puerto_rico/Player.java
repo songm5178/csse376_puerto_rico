@@ -13,7 +13,7 @@ public class Player {
 	}
 	
 	public String getRole(){
-		return null;
+		return "trader";
 	}
 
 }
