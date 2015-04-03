@@ -1,13 +1,10 @@
 package csse376_puerto_rico;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 public class ButtonHandler implements ActionListener {
 	
