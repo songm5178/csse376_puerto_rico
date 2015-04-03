@@ -14,6 +14,10 @@ public class Player {
 			"Settler", "Mayor", "Builder", "Craftsman", "Trader", "Captain",
 			"Prospector"));
 
+	// For Testing purposes, null player
+	public Player(){
+		this.role = "";
+	}
 	public Player(String role) {
 		this.role = role;
 
