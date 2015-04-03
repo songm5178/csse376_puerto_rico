@@ -7,14 +7,15 @@ import java.util.List;
 public class Player {
 
 	private String role;
-	private boolean isTurn;
-	private boolean isMayor;
-	private static List<String> roles = new ArrayList<String>(Arrays.asList("Settler",
-			"Mayor", "Builder", "Craftsman", "Trader", "Captain", "Prospector"));
+	public boolean isTurn;
+
+	private static List<String> roles = new ArrayList<String>(Arrays.asList(
+			"Settler", "Mayor", "Builder", "Craftsman", "Trader", "Captain",
+			"Prospector"));
 
 	public Player(String role) {
 		this.role = role;
-		this.isMayor = false;
+
 		this.isTurn = false;
 	}
 
