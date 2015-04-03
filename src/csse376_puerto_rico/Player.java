@@ -74,6 +74,8 @@ public class Player extends JTextArea {
 		g2.drawString(score, 10, 30);
 		String role = "Role: " + this.role;
 		g2.drawString(role, 890, 30);
+		this.setRows(5);
+		this.setColumns(15);
 	}
 	
 }

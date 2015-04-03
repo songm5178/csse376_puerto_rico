@@ -55,6 +55,7 @@ public class GameBoardGUI {
 						
 			this.mainframe.add(jta);
 			this.mainframe.add(p);
+//			this.mainframe.update(this.mainframe.getGraphics());
 		}
 		return this.players;
 	}
