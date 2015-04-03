@@ -48,11 +48,10 @@ public class GameBoardGUI {
 	}
 	
 	public List<Player> addPlayers(int numberOfPlayers) {
-		List<Player> answ = new ArrayList<Player>();
-		answ.add(new Player("a"));
-		answ.add(new Player("b"));
-		answ.add(new Player("c"));
-		return answ;
+		for(int i = 0; i < numberOfPlayers; i++){
+			this.players.add(new Player());
+		}
+		return this.players;
 	}
 
 	public List<Player> getPlayers(){
