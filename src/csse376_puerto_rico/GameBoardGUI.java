@@ -52,11 +52,14 @@ public class GameBoardGUI {
 			Player p = new Player();
 			String role = p.getRoles().get(i);
 			p.setRole(role);
-			
 			this.players.add(p);
 			
-			String hud = "Player "+(i + 1)+"\nRole: "+p.getRole()+"\nScore: "+p.getPoints()+"\n";
-			this.mainframe.add(new JTextArea(hud, 5, 15));
+			JTextArea jta = new JTextArea("Player "+(i+1)+"\nRole: "+p.getRole()+"\nScore: "+p.getPoints());
+			jta.setRows(5);
+			jta.setColumns(15);
+						
+			this.mainframe.add(jta);
+			this.mainframe.add(p);
 		}
 		return this.players;
 	}
