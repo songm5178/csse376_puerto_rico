@@ -18,7 +18,7 @@ import org.junit.Test;
 public class GameBoardTest {
 	
 	@Test
-	public void addListOfPlayers_NotNullTest() {
+	public void addListOfPlayers_Test() {
 		GameBoardGUI gb = new GameBoardGUI(new JFrame(), new ButtonGroup());
 		Assert.assertEquals(3, gb.addPlayers(3).size());
 	}
@@ -26,7 +26,6 @@ public class GameBoardTest {
 	@Test
 	public void getListOfPlayers_NotNullTest() {
 		GameBoardGUI gb = new GameBoardGUI(new JFrame(), new ButtonGroup());
-		
 		assertNotNull(gb.getPlayers());
 	}
 	

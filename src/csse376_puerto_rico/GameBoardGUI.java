@@ -30,7 +30,7 @@ public class GameBoardGUI {
 		JPanel mainPanel = new JPanel();
 
 		this.bGroup = group;
-		String temp = "";
+		String temp = "0";
 		for (Enumeration<AbstractButton> buttons = this.bGroup.getElements(); buttons
 				.hasMoreElements();) {
 			AbstractButton button = buttons.nextElement();
@@ -48,7 +48,12 @@ public class GameBoardGUI {
 	}
 	
 	public List<Player> addPlayers(int numberOfPlayers) {
-		return players;
+		List<Player> answ = new ArrayList<Player>();
+		answ.add(new Player("a"));
+		answ.add(new Player("b"));
+		answ.add(new Player("c"));
+		System.out.println(answ.size());
+		return answ;
 	}
 
 	public List<Player> getPlayers(){
