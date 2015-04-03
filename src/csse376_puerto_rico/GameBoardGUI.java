@@ -9,9 +9,11 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -22,14 +24,17 @@ public class GameBoardGUI {
 	private ButtonGroup bGroup;
 
 	public GameBoardGUI(JFrame frame, ButtonGroup group) {
+		this.players = new ArrayList<Player>();
 		this.mainframe = frame;
+		this.bGroup = group;
+
 		this.mainframe.getContentPane().removeAll();
 		this.mainframe.getContentPane().revalidate();
-		this.mainframe.setBackground(Color.BLACK);
-		this.mainframe.setTitle("Your Adventure");
-		JPanel mainPanel = new JPanel();
+		this.mainframe.setBackground(Color.GREEN);
+		this.mainframe.setTitle("Puerto Rico");
+		MigLayout layout = new MigLayout();
+		this.mainframe.setLayout(layout);
 
-		this.bGroup = group;
 		String temp = "0";
 		for (Enumeration<AbstractButton> buttons = this.bGroup.getElements(); buttons
 				.hasMoreElements();) {
@@ -39,17 +44,19 @@ public class GameBoardGUI {
 			}
 		}
 		int numberPlayers = Integer.parseInt(temp);
-		
 		this.addPlayers(numberPlayers);
-		
-		this.mainframe.add(mainPanel);
-		
-		this.players = new ArrayList<Player>();
 	}
 	
 	public List<Player> addPlayers(int numberOfPlayers) {
 		for(int i = 0; i < numberOfPlayers; i++){
-			this.players.add(new Player());
+			Player p = new Player();
+			String role = p.getRoles().get(i);
+			p.setRole(role);
+			
+			this.players.add(p);
+			
+			String hud = "Player "+(i + 1)+"\nRole: "+p.getRole()+"\nScore: "+p.getPoints()+"\n";
+			this.mainframe.add(new JTextArea(hud, 5, 15));
 		}
 		return this.players;
 	}

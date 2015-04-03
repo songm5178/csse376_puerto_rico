@@ -29,6 +29,8 @@ public class ButtonHandler implements ActionListener {
 			new StartUpGameBoardGUI(this.mainframe);
 		}else if(action.equals("Start")){
 			new GameBoardGUI(this.mainframe, this.bGroup);
+		}else if(action.equals("Add Points")){
+			
 		}
 	}
 
