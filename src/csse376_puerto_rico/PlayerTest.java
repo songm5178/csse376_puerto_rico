@@ -48,5 +48,12 @@ public class PlayerTest {
 		assertEquals(false, player.isTurn);
 		
 	}
+	
+	@Test
+	public void test_getPlayersPoints(){
+		
+		Player player = new Player(Player.getRoles().get(0));
+		assertEquals(0, player.getPoints());
+	}
 
 }
