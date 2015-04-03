@@ -55,5 +55,12 @@ public class PlayerTest {
 		Player player = new Player(Player.getRoles().get(0));
 		assertEquals(0, player.getPoints());
 	}
+	
+	@Test
+	public void test_setPlayerRole(){
+		Player player = new Player();
+		player.setRole(player.getRoles().get(0));
+		assertEquals("Settler", player.getRole());
+	}
 
 }
