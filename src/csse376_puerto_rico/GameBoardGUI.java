@@ -2,8 +2,10 @@ package csse376_puerto_rico;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
@@ -26,7 +28,15 @@ public class GameBoardGUI {
 		JPanel mainPanel = new JPanel();
 
 		this.bGroup = group;
-		ButtonModel select = this.bGroup.getSelection();
+		String temp = "";
+		for (Enumeration<AbstractButton> buttons = this.bGroup.getElements(); buttons
+				.hasMoreElements();) {
+			AbstractButton button = buttons.nextElement();
+			if (button.isSelected()) {
+				temp = button.getText();
+			}
+		}
+		System.out.println(temp);
 		
 		String image = "sample.jpg";
 		JLabel imageLabel = new JLabel(new ImageIcon(image));
