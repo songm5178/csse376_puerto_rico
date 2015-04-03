@@ -40,5 +40,13 @@ public class PlayerTest {
 
 		assertEquals(roles, Player.getRoles());
 	}
+	
+	@Test
+	public void test_getPlayerTurn(){
+		//Default turn should be false;
+		Player player = new Player(Player.getRoles().get(0));
+		assertEquals(false, player.isTurn);
+		
+	}
 
 }
