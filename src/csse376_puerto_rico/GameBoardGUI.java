@@ -1,6 +1,8 @@
 package csse376_puerto_rico;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,6 +12,7 @@ import javax.swing.JPanel;
 public class GameBoardGUI {
 
 	private JFrame mainframe;
+	private List<Player> players;
 
 	public GameBoardGUI(JFrame frame) {
 		this.mainframe = frame;
@@ -26,6 +29,12 @@ public class GameBoardGUI {
 		mainPanel.add(imageLabel);
 		
 		this.mainframe.add(mainPanel);
+		
+		this.players = new ArrayList<Player>();
+	}
+	
+	public List<Player> getPlayers(){
+		return this.players;
 	}
 
 }
