@@ -18,9 +18,21 @@ import org.junit.Test;
 public class GameBoardTest {
 	
 	@Test
-	public void addListOfPlayers_Test() {
+	public void addListOfPlayers_Test3() {
 		GameBoardGUI gb = new GameBoardGUI(new JFrame(), new ButtonGroup());
 		Assert.assertEquals(3, gb.addPlayers(3).size());
+	}
+	
+	@Test
+	public void addListOfPlayers_Test4() {
+		GameBoardGUI gb = new GameBoardGUI(new JFrame(), new ButtonGroup());
+		Assert.assertEquals(4, gb.addPlayers(4).size());
+	}
+	
+	@Test
+	public void addListOfPlayers_Test5() {
+		GameBoardGUI gb = new GameBoardGUI(new JFrame(), new ButtonGroup());
+		Assert.assertEquals(5, gb.addPlayers(5).size());
 	}
 	
 	@Test

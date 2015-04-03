@@ -52,7 +52,6 @@ public class GameBoardGUI {
 		answ.add(new Player("a"));
 		answ.add(new Player("b"));
 		answ.add(new Player("c"));
-		System.out.println(answ.size());
 		return answ;
 	}
 
