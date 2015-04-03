@@ -15,9 +15,10 @@ public class Player {
 			"Prospector"));
 
 	// For Testing purposes, null player
-	public Player(){
+	public Player() {
 		this.role = "";
 	}
+
 	public Player(String role) {
 		this.role = role;
 
@@ -32,15 +33,20 @@ public class Player {
 
 		return roles;
 	}
-	
-	public int getPoints(){
+
+	public int getPoints() {
 		return points;
 	}
-	
-	//Test method
-	public void setPoints(int points){
-		//This method is strictly for setting points
+
+	// Test method
+	public void setPoints(int points) {
+		// This method is strictly for setting points
 		this.points = points;
+	}
+
+	public void setRole(String string) {
+		this.role = string;
+
 	}
 
 }
