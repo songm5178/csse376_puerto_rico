@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.miginfocom.swing.MigLayout;
+
 public class GameBoardGUI {
 
 	private JFrame mainframe;
@@ -36,18 +38,19 @@ public class GameBoardGUI {
 				temp = button.getText();
 			}
 		}
-		System.out.println(temp);
+		int numberPlayers = Integer.parseInt(temp);
 		
-		String image = "sample.jpg";
-		JLabel imageLabel = new JLabel(new ImageIcon(image));
-		
-		mainPanel.add(imageLabel);
+		this.addPlayers(numberPlayers);
 		
 		this.mainframe.add(mainPanel);
 		
 		this.players = new ArrayList<Player>();
 	}
 	
+	public List<Player> addPlayers(int numberOfPlayers) {
+		return players;
+	}
+
 	public List<Player> getPlayers(){
 		return this.players;
 	}

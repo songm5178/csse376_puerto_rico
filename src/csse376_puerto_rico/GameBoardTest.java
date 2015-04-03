@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotNull;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 /**
@@ -14,10 +16,11 @@ import org.junit.Test;
  *         Created Apr 2, 2015.
  */
 public class GameBoardTest {
-
+	
 	@Test
-	public void initial_test() {
+	public void addListOfPlayers_NotNullTest() {
 		GameBoardGUI gb = new GameBoardGUI(new JFrame(), new ButtonGroup());
+		Assert.assertEquals(3, gb.addPlayers(3).size());
 	}
 	
 	@Test
@@ -26,5 +29,6 @@ public class GameBoardTest {
 		
 		assertNotNull(gb.getPlayers());
 	}
+	
 
 }
