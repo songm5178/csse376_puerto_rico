@@ -8,20 +8,23 @@ public class Player {
 
 	private String role;
 	public boolean isTurn;
+	public boolean mayor;
 	private int points = 0;
+	
 
 	private static List<String> roles = new ArrayList<String>(Arrays.asList(
-			"Settler", "Mayor", "Builder", "Craftsman", "Trader", "Captain",
+			"Settler", "Builder", "Craftsman", "Trader", "Captain",
 			"Prospector"));
 
 	// For Testing purposes, null player
 	public Player() {
 		this.role = "";
+		this.mayor = false;
 	}
 
 	public Player(String role) {
 		this.role = role;
-
+		this.mayor = false;
 		this.isTurn = false;
 	}
 
@@ -36,6 +39,10 @@ public class Player {
 
 	public int getPoints() {
 		return points;
+	}
+	
+	public boolean isMayor(){
+		return mayor;
 	}
 
 	// Test method
