@@ -32,5 +32,11 @@ public class Player {
 	public int getPoints(){
 		return points;
 	}
+	
+	//Test method
+	public void setPoints(int points){
+		//This method is strictly for setting points
+		this.points = points;
+	}
 
 }
