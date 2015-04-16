@@ -44,6 +44,12 @@ public class PlayerTest {
 		Player player = new Player("Prospector");
 		assertEquals("Prospector", player.getRole());
 	}
+	
+	@Test
+	public void test_playersRoleAsMayor() {
+		Player player = new Player();
+		assertEquals("Mayor", player.getRole());
+	}
 
 	@Test
 	public void test_getRolesList() {
@@ -54,6 +60,7 @@ public class PlayerTest {
 		roles.add("Trader");
 		roles.add("Captain");
 		roles.add("Prospector");
+		roles.add("Mayor");
 
 		assertEquals(roles, Player.getRoles());
 	}
@@ -89,17 +96,17 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void test_checkMayor1(){
+	public void test_checkGovorner1(){
 		
 		Player player = new Player();
-		assertEquals(false, player.isMayor());
+		assertEquals(true, player.isGovernor());
 	}
 	
 	@Test
-	public void test_checkMayor2(){
+	public void test_checkGovernor2(){
 		
 		Player player = new Player(Player.getRoles().get(0));
-		assertEquals(false, player.isMayor());
+		assertEquals(true, player.isGovernor());
 	}
 	
 	@Test
