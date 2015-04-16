@@ -2,6 +2,9 @@ package csse376_puerto_rico;
 
 import static org.junit.Assert.*;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
+
 import org.junit.Test;
 
 /**
@@ -13,8 +16,8 @@ import org.junit.Test;
 public class GameBoardGuiTest {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void constructor_test() {
+		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
 	}
 
 }
