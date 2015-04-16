@@ -13,23 +13,23 @@ public class Player extends JTextArea {
 
 	private String role;
 	public boolean isTurn;
-	public boolean mayor;
+	public boolean isGovernor;
 	private int points = 0;
 	
 
 	private static List<String> roles = new ArrayList<String>(Arrays.asList(
 			"Settler", "Builder", "Craftsman", "Trader", "Captain",
-			"Prospector"));
+			"Prospector", "Mayor"));
 
 	// For Testing purposes, null player
 	public Player() {
 		this.role = "";
-		this.mayor = false;
+		this.isGovernor = false;
 	}
 
 	public Player(String role) {
 		this.role = role;
-		this.mayor = false;
+		this.isGovernor = false;
 		this.isTurn = false;
 	}
 
@@ -46,8 +46,8 @@ public class Player extends JTextArea {
 		return points;
 	}
 	
-	public boolean isMayor(){
-		return mayor;
+	public boolean isGovernor(){
+		return isGovernor;
 	}
 
 	// Test method
