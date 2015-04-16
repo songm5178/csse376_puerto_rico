@@ -46,6 +46,7 @@ public class GameBoardGUI {
 		for(int i = 0; i < numberOfPlayers; i++){
 			Player p = new Player();
 			String role = p.getRoles().get(i);
+			p.isGovernor() = true;
 			p.setRole(role);
 			this.players.add(p);
 			
