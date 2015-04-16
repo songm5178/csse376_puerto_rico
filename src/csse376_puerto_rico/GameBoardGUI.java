@@ -7,7 +7,10 @@ import java.util.List;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
@@ -41,27 +44,33 @@ public class GameBoardGUI {
 		int numberPlayers = Integer.parseInt(temp);
 		this.addPlayers(numberPlayers);
 	}
-	
+
 	public List<Player> addPlayers(int numberOfPlayers) {
-		for(int i = 0; i < numberOfPlayers; i++){
+		for (int i = 0; i < numberOfPlayers; i++) {
 			Player p = new Player();
 			String role = p.getRoles().get(i);
 			p.isGovernor = true;
 			p.setRole(role);
 			this.players.add(p);
-			
-			JTextArea jta = new JTextArea("Player "+(i+1)+"\nRole: "+p.getRole()+"\nScore: "+p.getPoints());
+			JButton startButton = new JButton("Start");
+
+			JTextArea jta = new JTextArea("Player " + (i + 1) + "\nRole: "
+					+ p.getRole() + "\nScore: " + p.getPoints());
 			jta.setRows(5);
 			jta.setColumns(15);
-						
+
 			this.mainframe.add(jta);
 			this.mainframe.add(p);
-//			this.mainframe.update(this.mainframe.getGraphics());
+			// this.mainframe.update(this.mainframe.getGraphics());
 		}
+
+		JOptionPane.showMessageDialog(this.mainframe,
+				"Eggs are not supposed to be green.");
+
 		return this.players;
 	}
 
-	public List<Player> getPlayers(){
+	public List<Player> getPlayers() {
 		return this.players;
 	}
 
