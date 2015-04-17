@@ -68,10 +68,18 @@ public class GameBoardGUI {
 		return this.players;
 	}
 
-	public String getPlayerText(int playerNum, String role, int points) {
-		return String.format("Player %d \nRole: %s \nScore: %d", playerNum,
-				role, points);
+	public String getPlayerText(int playerNum, String role, int points, boolean isGovernor) {
+		String rtn = null;
+		if(isGovernor){
+			rtn = String.format("Player %d \nRole: %s \nScore: %d \nGovernor", playerNum,
+					role, points);
 
+		}else{
+			rtn = String.format("Player %d \nRole: %s \nScore: %d", playerNum,
+					role, points);
+
+		}
+		return rtn;
 	}
 
 	public void updateRoles() {
@@ -85,7 +93,7 @@ public class GameBoardGUI {
 					options[options.length - 1]);
 			String role = (String) options[n];
 			int points = player.getPoints();
-			player.getHUD().setText(getPlayerText(i + 1, role, points));
+			player.getHUD().setText(getPlayerText(i + 1, role, points, player.isGovernor));
 		}
 	}
 }
