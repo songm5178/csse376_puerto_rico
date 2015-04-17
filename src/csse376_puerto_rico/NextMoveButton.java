@@ -2,6 +2,7 @@ package csse376_puerto_rico;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -9,16 +10,26 @@ import javax.swing.JButton;
 public class NextMoveButton extends JButton 
 {
 	private List<Player> players;
-	private static int clickCount;
 	public NextMoveButton()
 	{
 		players = GameBoardGUI.players;
-		clickCount = 0;
+		final ArrayList<Integer> count = new ArrayList<Integer>();
+		final Integer zero = 0;
+		count.add(zero);
 		this.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				clickCount++;
+				Integer newCount = count.get(0);
+				newCount = newCount +1;
+				count.remove(0);
+				count.add(newCount);
+				if(newCount > 0 && newCount %3 ==0)
+				{
+					Integer finalCount = newCount/3;
+					setText("Turn " +finalCount.toString());
+				}
+				
 				makeMove();
 			}
 		});
@@ -46,11 +57,6 @@ public class NextMoveButton extends JButton
 			}
 		}
 		GameBoardGUI.players = players;
-		if(clickCount > 0 && clickCount%3==0)
-		{
-			int newCount = GameBoardGUI.getTurnCount()+1;
-			this.setText("Turn" + newCount);
-		}
 	}
 }
 
