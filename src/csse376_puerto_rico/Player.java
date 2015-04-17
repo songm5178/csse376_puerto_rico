@@ -27,12 +27,14 @@ public class Player {
 	public Player() {
 		this.role = "";
 		this.isGovernor = false;
+		this.hud = new JTextArea();
 	}
 
 	public Player(String role) {
 		this.role = role;
 		this.isGovernor = false;
 		this.isTurn = false;
+		this.hud = null;
 	}
 
 	public String getRole() {
@@ -49,7 +51,7 @@ public class Player {
 	}
 	
 	public JTextArea getHUD(){
-		return this.hud;
+		return null;
 	}
 	
 	public void setHUD(JTextArea hud){
@@ -69,21 +71,6 @@ public class Player {
 	public void setRole(String string) {
 		this.role = string;
 
-	}
-
-	/**
-	 * Draws the parts of the HUD.
-	 *
-	 * @param g2
-	 */
-	public void drawOn(Graphics2D g2){
-		g2.setFont(new Font( "SansSerif", Font.BOLD, 20 ));
-		g2.setColor(Color.BLACK);
-		
-		String score = "Score: " + this.points;
-		g2.drawString(score, 10, 30);
-		String role = "Role: " + this.role;
-		g2.drawString(role, 890, 30);
 	}
 	
 }

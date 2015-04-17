@@ -5,6 +5,10 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JTextArea;
+
+import junit.framework.Assert;
+
 import org.junit.Test;
 
 public class PlayerTest {
@@ -114,6 +118,12 @@ public class PlayerTest {
 		Player player = new Player();
 		player.setRole(player.getRoles().get(0));
 		assertEquals("Settler", player.getRole());
+	}
+	
+	@Test
+	public void test_getHUD(){
+		Player player = new Player();
+		Assert.assertNotNull(player.getHUD());
 	}
 
 }
