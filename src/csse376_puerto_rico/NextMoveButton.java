@@ -9,13 +9,16 @@ import javax.swing.JButton;
 public class NextMoveButton extends JButton 
 {
 	private List<Player> players;
+	private static int clickCount;
 	public NextMoveButton()
 	{
 		players = GameBoardGUI.players;
+		clickCount = 0;
 		this.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				clickCount++;
 				makeMove();
 			}
 		});
@@ -43,6 +46,11 @@ public class NextMoveButton extends JButton
 			}
 		}
 		GameBoardGUI.players = players;
+		if(clickCount > 0 && clickCount%3==0)
+		{
+			int newCount = GameBoardGUI.getTurnCount()+1;
+			this.setText("Turn" + newCount);
+		}
 	}
 }
 
