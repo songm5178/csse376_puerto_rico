@@ -18,7 +18,7 @@ import net.miginfocom.swing.MigLayout;
 public class GameBoardGUI {
 
 	private JFrame mainframe;
-	private List<Player> players;
+	public static List<Player> players;
 	private ButtonGroup bGroup;
 
 	public GameBoardGUI(JFrame frame, ButtonGroup group) {
@@ -48,7 +48,6 @@ public class GameBoardGUI {
 	public List<Player> addPlayers(int numberOfPlayers) {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			Player p = new Player();
-
 			if (i == 0) {
 				p.isGovernor = true;
 			}
