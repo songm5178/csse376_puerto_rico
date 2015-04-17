@@ -7,8 +7,7 @@ import java.util.List;
 
 import javax.swing.JTextArea;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 public class PlayerTest {
