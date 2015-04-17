@@ -63,10 +63,12 @@ public class GameBoardGUI {
 			this.mainframe.add(p);
 			// this.mainframe.update(this.mainframe.getGraphics());
 		}
-
-		JOptionPane.showMessageDialog(this.mainframe,
-				"Eggs are not supposed to be green.");
-
+		Object[] options = { "role1", "role2", "role3" };
+		int n = JOptionPane.showOptionDialog(this.mainframe,
+				"Choose your role", "Choose Role",
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+				null, options, options[2]);
+		
 		return this.players;
 	}
 
