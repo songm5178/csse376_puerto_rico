@@ -51,7 +51,7 @@ public class Player {
 	}
 	
 	public JTextArea getHUD(){
-		return null;
+		return new JTextArea();
 	}
 	
 	public void setHUD(JTextArea hud){

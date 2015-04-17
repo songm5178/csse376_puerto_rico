@@ -121,9 +121,17 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void test_getHUD(){
+	public void test_getHUDisNotNull(){
 		Player player = new Player();
 		Assert.assertNotNull(player.getHUD());
+	}
+	
+	@Test
+	public void test_setHUD(){
+		Player player = new Player();
+		JTextArea fakeHUD = new JTextArea();
+		player.setHUD(fakeHUD);
+		assertEquals(fakeHUD, player.getHUD());
 	}
 
 }
