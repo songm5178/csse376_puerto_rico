@@ -26,7 +26,7 @@ public class NextMoveButton extends JButton
 				count.add(newCount);
 				if(newCount > 0 && newCount % players.size() ==0)
 				{
-					Integer finalCount = newCount/3;
+					Integer finalCount = newCount/players.size();
 					setText("Turn " +finalCount.toString());
 				}
 				
