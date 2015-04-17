@@ -1,6 +1,7 @@
 package csse376_puerto_rico;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,8 +29,10 @@ public class MenuGUI {
            JPanel imgPanel = new JPanel();
            JPanel buttonPanel = new JPanel();
            
-           String image = "puerto-rico.jpg";
-           imgPanel.add(new JLabel(new ImageIcon(image)));
+           String imageLoc = "puerto-rico.jpg";
+           ImageIcon imageIcon = new ImageIcon(imageLoc);
+           
+           imgPanel.add(new JLabel(imageIcon));
            
            JButton newGame = new JButton("New Game");
            newGame.addActionListener(new ButtonHandler(mainframe, null));

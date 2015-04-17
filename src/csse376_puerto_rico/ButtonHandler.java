@@ -22,7 +22,6 @@ public class ButtonHandler implements ActionListener {
 		if(action.equals("Quit")){
 			System.exit(0);
 		}else if(action.equals("New Game")){
-//			Player player = new Player("mayor");
 			new StartUpGameBoardGUI(this.mainframe);
 		}else if(action.equals("Start")){
 			new GameBoardGUI(this.mainframe, this.bGroup);
