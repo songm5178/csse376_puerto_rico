@@ -77,4 +77,10 @@ public class GameBoardGUI {
 		return this.players;
 	}
 
+	public String getPlayerText(int playerNum, String role, int points) {
+		return String.format("Player %d \nRole: %s \nScore: %d", playerNum,
+				role, points);
+
+	}
+
 }
