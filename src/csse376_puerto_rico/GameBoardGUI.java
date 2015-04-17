@@ -48,8 +48,10 @@ public class GameBoardGUI {
 	public List<Player> addPlayers(int numberOfPlayers) {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			Player p = new Player();
-			p.isGovernor = true;
 
+			if (i == 0) {
+				p.isGovernor = true;
+			}
 			JTextArea jta = new JTextArea("Player " + (i + 1) + "\nRole: "
 					+ "\nScore: " + p.getPoints());
 			jta.setRows(5);
@@ -68,13 +70,14 @@ public class GameBoardGUI {
 		return this.players;
 	}
 
-	public String getPlayerText(int playerNum, String role, int points, boolean isGovernor) {
+	public String getPlayerText(int playerNum, String role, int points,
+			boolean isGovernor) {
 		String rtn = null;
-		if(isGovernor){
-			rtn = String.format("Player %d \nRole: %s \nScore: %d \nGovernor", playerNum,
-					role, points);
+		if (isGovernor) {
+			rtn = String.format("Player %d \nRole: %s \nScore: %d \nGovernor",
+					playerNum, role, points);
 
-		}else{
+		} else {
 			rtn = String.format("Player %d \nRole: %s \nScore: %d", playerNum,
 					role, points);
 
@@ -93,7 +96,8 @@ public class GameBoardGUI {
 					options[options.length - 1]);
 			String role = (String) options[n];
 			int points = player.getPoints();
-			player.getHUD().setText(getPlayerText(i + 1, role, points, player.isGovernor));
+			player.getHUD().setText(
+					getPlayerText(i + 1, role, points, player.isGovernor));
 		}
 	}
 }
