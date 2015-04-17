@@ -30,6 +30,18 @@ public class GameBoardGuiTest {
 		assertEquals(p0.isGovernor(), true);
 	}
 	
+	@Test
+	public void player_text_format_test(){
+		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
+		int playerNum = 0;
+		String role = "roleTest";
+		int points = 1;
+		String expected = String.format("Player %d \nRole: %s \nScore: %d", playerNum, role, points);
+		
+		assertEquals(expected, g.getPlayerText(playerNum, role, points));
+		
+		
+	}
 	
 
 }

@@ -51,24 +51,25 @@ public class GameBoardGUI {
 			String role = p.getRoles().get(i);
 			p.isGovernor = true;
 			p.setRole(role);
-			this.players.add(p);
-			JButton startButton = new JButton("Start");
 
 			JTextArea jta = new JTextArea("Player " + (i + 1) + "\nRole: "
 					+ p.getRole() + "\nScore: " + p.getPoints());
 			jta.setRows(5);
 			jta.setColumns(15);
-
+			p.setHUD(jta);
+			this.players.add(p);
 			this.mainframe.add(jta);
-			this.mainframe.add(p);
-			// this.mainframe.update(this.mainframe.getGraphics());
+
 		}
-		Object[] options = { "role1", "role2", "role3" };
-		int n = JOptionPane.showOptionDialog(this.mainframe,
-				"Choose your role", "Choose Role",
-				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-				null, options, options[2]);
-		
+		for (Player player : this.players) {
+			Object[] options = Player.getRoles().toArray();
+			int n = JOptionPane.showOptionDialog(this.mainframe,
+					"Choose your role", "Choose Role",
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, options,
+					options[options.length - 1]);
+			player.getHUD().setText((String) options[n]);
+		}
 		return this.players;
 	}
 
