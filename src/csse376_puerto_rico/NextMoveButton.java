@@ -16,7 +16,7 @@ public class NextMoveButton extends JButton
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//makeMove();
+				makeMove();
 			}
 		});
 	}

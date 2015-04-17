@@ -20,16 +20,19 @@ public class GameBoardGUI {
 	private JFrame mainframe;
 	public static List<Player> players;
 	private ButtonGroup bGroup;
+	private int turnCount;
 
 	public GameBoardGUI(JFrame frame, ButtonGroup group) {
 		this.players = new ArrayList<Player>();
 		this.mainframe = frame;
 		this.bGroup = group;
-
+		NextMoveButton nextMove = new NextMoveButton();
+		nextMove.setText("Turn"+turnCount);
 		this.mainframe.getContentPane().removeAll();
 		this.mainframe.getContentPane().revalidate();
 		this.mainframe.setBackground(Color.GREEN);
 		this.mainframe.setTitle("Puerto Rico");
+		this.mainframe.add(nextMove);
 		MigLayout layout = new MigLayout();
 		this.mainframe.setLayout(layout);
 
@@ -67,6 +70,11 @@ public class GameBoardGUI {
 
 	public List<Player> getPlayers() {
 		return this.players;
+	}
+	
+	public int getTurnCount()
+	{
+		return this.turnCount;
 	}
 
 	public String getPlayerText(int playerNum, String role, int points,
