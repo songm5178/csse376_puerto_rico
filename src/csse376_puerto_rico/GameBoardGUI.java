@@ -79,7 +79,7 @@ public class GameBoardGUI {
 			Player player = this.players.get(i);
 			Object[] options = Player.getRoles().toArray();
 			int n = JOptionPane.showOptionDialog(this.mainframe,
-					"Choose your role", "Choose Role",
+					"Choose your role!", "Player " + (i + 1),
 					JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, options,
 					options[options.length - 1]);
