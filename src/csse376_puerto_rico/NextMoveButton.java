@@ -20,6 +20,31 @@ public class NextMoveButton extends JButton
 			}
 		});
 	}
+	public void makeMove()
+	{
+		//once you find the first true isTurn value, 
+		//you should set it off to mark that player's turn has ended
+		//then you mark the next player's turn has started by turning its isTurn value as true
+		//once these changes are made, this new players list replaces the mainboard's player's list
+		for(int i=0;i<players.size();i++)
+		{
+			if(players.get(i).isTurn)
+			{
+				players.get(i).isTurn = false;
+				if(i == players.size()-1)
+				{
+					players.get(0).isTurn = true;
+				}
+				else
+				{
+					players.get(i+1).isTurn = true;
+				}
+				break;
+			}
+		}
+		GameBoardGUI.players = players;
+	}
 }
+
 	
 
