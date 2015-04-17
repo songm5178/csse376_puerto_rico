@@ -8,10 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
-public class Player extends JPanel {
+public class Player {
 
 	private String role;
+	private JTextArea hud;
 	public boolean isTurn;
 	public boolean isGovernor;
 	private int points = 0;
@@ -44,6 +46,14 @@ public class Player extends JPanel {
 
 	public int getPoints() {
 		return points;
+	}
+	
+	public JTextArea getHUD(){
+		return this.hud;
+	}
+	
+	public void setHUD(JTextArea hud){
+		this.hud = hud;
 	}
 	
 	public boolean isGovernor(){
