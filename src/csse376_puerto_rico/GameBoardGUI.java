@@ -48,12 +48,10 @@ public class GameBoardGUI {
 	public List<Player> addPlayers(int numberOfPlayers) {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			Player p = new Player();
-			String role = p.getRoles().get(i);
 			p.isGovernor = true;
-			p.setRole(role);
 
 			JTextArea jta = new JTextArea("Player " + (i + 1) + "\nRole: "
-					+ p.getRole() + "\nScore: " + p.getPoints());
+					+ "\nScore: " + p.getPoints());
 			jta.setRows(5);
 			jta.setColumns(15);
 			p.setHUD(jta);
@@ -61,15 +59,8 @@ public class GameBoardGUI {
 			this.mainframe.add(jta);
 
 		}
-		for (Player player : this.players) {
-			Object[] options = Player.getRoles().toArray();
-			int n = JOptionPane.showOptionDialog(this.mainframe,
-					"Choose your role", "Choose Role",
-					JOptionPane.YES_NO_CANCEL_OPTION,
-					JOptionPane.QUESTION_MESSAGE, null, options,
-					options[options.length - 1]);
-			player.getHUD().setText((String) options[n]);
-		}
+		updateRoles();
+
 		return this.players;
 	}
 
@@ -83,4 +74,18 @@ public class GameBoardGUI {
 
 	}
 
+	public void updateRoles() {
+		for (int i = 0; i < this.players.size(); i++) {
+			Player player = this.players.get(i);
+			Object[] options = Player.getRoles().toArray();
+			int n = JOptionPane.showOptionDialog(this.mainframe,
+					"Choose your role", "Choose Role",
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, options,
+					options[options.length - 1]);
+			String role = (String) options[n];
+			int points = player.getPoints();
+			player.getHUD().setText(getPlayerText(i + 1, role, points));
+		}
+	}
 }
