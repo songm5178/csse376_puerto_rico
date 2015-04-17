@@ -52,5 +52,14 @@ public class GameBoardGuiTest {
 		assertEquals(expected, g.getPlayerText(playerNum, role, points, true));
 		
 	}
+	
+	@Test
+	public void other_player_isNot_governor(){
+		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
+		List<Player> players = g.addPlayers(3);
+		Player p0 = players.get(1);
+		
+		assertEquals(p0.isGovernor(), false);
+	}
 
 }
