@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JTextArea;
+import javax.swing.JPanel;
 
-public class Player extends JTextArea {
+public class Player extends JPanel {
 
 	private String role;
 	public boolean isTurn;
@@ -74,8 +74,6 @@ public class Player extends JTextArea {
 		g2.drawString(score, 10, 30);
 		String role = "Role: " + this.role;
 		g2.drawString(role, 890, 30);
-		this.setRows(5);
-		this.setColumns(15);
 	}
 	
 }
