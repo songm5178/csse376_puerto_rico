@@ -9,6 +9,10 @@ package csse376_puerto_rico;
 public enum PlayerRoles {
 	Settler,
 	Builder,
-	Captain
-	
+	Craftsman,
+	Trader,
+	Captain,
+	Prospector,
+	Mayor
+
 }
