@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import csse376_puerto_rico.Buildings;
+import csse376_puerto_rico.Buildings.Building;
 
 /**
  * TODO Put here a description of what this class does.
@@ -24,6 +25,15 @@ public class BuildingsTest {
 		Buildings b = new Buildings();
 		assertNotNull(b.getBuildings());
 		
+	}
+	
+	@Test public void getBuildingFieldsTest(){
+		Buildings b = new Buildings();
+		Building bs = b.getBuildings().get(0);
+		assertNotNull(bs.getCost);
+		assertNotNull(bs.getPoints);
+		assertNotNull(bs.getNumberOfJobs);
+		assertNotNull(bs.getNumberOfWorkers);
 	}
 
 
