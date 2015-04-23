@@ -7,6 +7,6 @@ package csse376_puerto_rico;
  *         Created Apr 22, 2015.
  */
 public enum PlayerRoles {
-	CAPTAIN
+	Captain
 	
 }

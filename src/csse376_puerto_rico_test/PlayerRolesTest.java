@@ -17,7 +17,7 @@ public class PlayerRolesTest {
 	@Test
 	public void captain_test() {
 		
-		assertEquals(PlayerRoles.CAPTAIN, "Captain");
+		assertEquals(PlayerRoles.Captain, "Captain");
 	}
 
 }
