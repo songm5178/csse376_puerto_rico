@@ -2,6 +2,7 @@ package csse376_puerto_rico;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JTextArea;
@@ -23,6 +24,7 @@ public class Player {
 		public static final String INDIGO = "Indigo";
 	}
 
+	private HashMap<String, Integer> goods = new HashMap<String, Integer>();
 	private static List<String> roles = PlayerRoles.getValues();
 
 	// For Testing purposes, null player
@@ -37,6 +39,9 @@ public class Player {
 		this.isGovernor = false;
 		this.isTurn = false;
 		this.hud = null;
+		for (String s : getGoods()) {
+			this.goods.put(s, 0);
+		}
 	}
 
 	public String getRole() {
@@ -83,6 +88,18 @@ public class Player {
 	public Object getBuildings() {
 
 		return buildings;
+	}
+
+	public List<String> getGoods() {
+		//
+		List<String> rtn = new ArrayList<String>();
+		rtn.addAll(Arrays.asList(Good.COFFEE, Good.CORN, Good.INDIGO,
+				Good.SUGAR, Good.TOBACCO));
+		return rtn;
+	}
+
+	public int getNumberOfGood(String good) {
+		return this.goods.get(good);
 	}
 
 }
