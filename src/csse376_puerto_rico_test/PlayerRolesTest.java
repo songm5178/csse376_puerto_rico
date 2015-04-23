@@ -42,7 +42,10 @@ public class PlayerRolesTest {
 				"Builder", "Craftsman", "Trader", "Captain", "Prospector",
 				"Mayor"));
 		PlayerRoles[] pRoles = PlayerRoles.values();
-		assertEquals(roles.toArray(),pRoles);
+		for(int i = 0; i < roles.size(); i++){
+			String role = roles.get(i);
+			assertEquals(role, pRoles[i].toString());
+		}
 	}
 
 }
