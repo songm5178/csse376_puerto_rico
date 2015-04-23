@@ -1,6 +1,6 @@
 package csse376_puerto_rico_test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,7 +139,13 @@ public class PlayerTest {
 	public void test_getBuildings(){
 		Player player = new Player();
 		player.addBuilding("Building");
-		Assert.assertNotNull(player.getBuildings());
+		assertNotNull(player.getBuildings());
+	}
+	
+	@Test 
+	public void test_getPlayerGoods(){
+		Player player = new Player();
+		assertNotNull(player.getGoods());
 	}
 
 }

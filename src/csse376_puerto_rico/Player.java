@@ -15,6 +15,14 @@ public class Player {
 	private int points = 0;
 	private ArrayList<String> buildings = new ArrayList<String>();
 
+	class Good {
+		public static final String COFFEE = "Coffee";
+		public static final String TOBACCO = "Tobacco";
+		public static final String CORN = "Corn";
+		public static final String SUGAR = "Sugar";
+		public static final String INDIGO = "Indigo";
+	}
+
 	private static List<String> roles = PlayerRoles.getValues();
 
 	// For Testing purposes, null player
