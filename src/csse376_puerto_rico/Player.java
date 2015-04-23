@@ -1,13 +1,9 @@
 package csse376_puerto_rico;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class Player {

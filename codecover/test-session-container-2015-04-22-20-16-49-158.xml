@@ -1,0 +1,1531 @@
+<?xml version="1.0" encoding="UTF-8"?><TestSessionContainer xmlns="http://www.codecover.org/xml/testsession-container" Date="1429748209135" TestSessionContainerId="506b9d9e-44d2-4992-9d74-6fbb947b2ba7" version="1.0">
+<SrcFileList>
+<SrcFile Content="package csse376_puerto_rico;&#10;&#10;import java.awt.Color;&#10;&#10;import javax.swing.ButtonGroup;&#10;import javax.swing.JButton;&#10;import javax.swing.JFrame;&#10;import javax.swing.JPanel;&#10;import javax.swing.JRadioButton;&#10;&#10;public class StartUpGameBoardGUI {&#10;&#10;&#9;private JFrame mainframe;&#10;&#10;&#9;public StartUpGameBoardGUI(JFrame frame) {&#10;&#9;&#9;this.mainframe = frame;&#10;&#9;&#9;this.mainframe.getContentPane().removeAll();&#10;&#9;&#9;this.mainframe.getContentPane().revalidate();&#10;&#9;&#9;this.mainframe.setBackground(Color.BLACK);&#10;&#9;&#9;this.mainframe.setTitle(&quot;Choose Players&quot;);&#10;&#10;&#9;&#9;JPanel mainPanel = new JPanel();&#10;&#9;&#9;&#10;&#9;&#9;ButtonGroup group = new ButtonGroup();&#10;&#9;&#9;JRadioButton rb3 = new JRadioButton(&quot;3&quot;, true);&#10;&#9;&#9;JRadioButton rb4 = new JRadioButton(&quot;4&quot;, false);&#10;&#9;&#9;JRadioButton rb5 = new JRadioButton(&quot;5&quot;, false);&#10;&#9;&#9;group.add(rb3);&#10;&#9;&#9;group.add(rb4);&#10;&#9;&#9;group.add(rb5);&#10;&#9;&#9;&#10;&#9;&#9;JButton startButton = new JButton(&quot;Start&quot;);&#10;&#9;&#9;startButton.addActionListener(new ButtonHandler(this.mainframe, group));&#10;&#9;&#9;&#10;&#9;&#9;mainPanel.add(rb3);&#10;&#9;&#9;mainPanel.add(rb4);&#10;&#9;&#9;mainPanel.add(rb5);&#10;&#9;&#9;mainPanel.add(startButton);&#10;&#9;&#9;&#10;&#9;&#9;this.mainframe.add(mainPanel);&#10;&#9;}&#10;&#10;}&#10;" Filename="StartUpGameBoardGUI.java" Intrnl_Id="1"/>
+<SrcFile Content="package csse376_puerto_rico;&#13;&#10;&#13;&#10;import java.awt.Color;&#13;&#10;import java.awt.Font;&#13;&#10;import java.awt.Graphics2D;&#13;&#10;import java.util.ArrayList;&#13;&#10;import java.util.Arrays;&#13;&#10;import java.util.List;&#13;&#10;&#13;&#10;import javax.swing.JPanel;&#13;&#10;import javax.swing.JTextArea;&#13;&#10;&#13;&#10;public class Player {&#13;&#10;&#13;&#10;&#9;private String role;&#13;&#10;&#9;private JTextArea hud;&#13;&#10;&#9;public boolean isTurn;&#13;&#10;&#9;public boolean isGovernor;&#13;&#10;&#9;private int points = 0;&#13;&#10;&#9;&#13;&#10;&#13;&#10;&#9;private static List&lt;String&gt; roles = new ArrayList&lt;String&gt;(Arrays.asList(&#13;&#10;&#9;&#9;&#9;&quot;Settler&quot;, &quot;Builder&quot;, &quot;Craftsman&quot;, &quot;Trader&quot;, &quot;Captain&quot;,&#13;&#10;&#9;&#9;&#9;&quot;Prospector&quot;, &quot;Mayor&quot;));&#13;&#10;&#13;&#10;&#9;// For Testing purposes, null player&#13;&#10;&#9;public Player() {&#13;&#10;&#9;&#9;this.role = &quot;&quot;;&#13;&#10;&#9;&#9;this.isGovernor = false;&#13;&#10;&#9;&#9;this.hud = new JTextArea();&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public Player(String role) {&#13;&#10;&#9;&#9;this.role = role;&#13;&#10;&#9;&#9;this.isGovernor = false;&#13;&#10;&#9;&#9;this.isTurn = false;&#13;&#10;&#9;&#9;this.hud = null;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public String getRole() {&#13;&#10;&#9;&#9;return this.role;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public static List&lt;String&gt; getRoles() {&#13;&#10;&#13;&#10;&#9;&#9;return roles;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public int getPoints() {&#13;&#10;&#9;&#9;return points;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public JTextArea getHUD(){&#13;&#10;&#9;&#9;return this.hud;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public void setHUD(JTextArea hud){&#13;&#10;&#9;&#9;this.hud = hud;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public boolean isGovernor(){&#13;&#10;&#9;&#9;return isGovernor;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;// Test method&#13;&#10;&#9;public void setPoints(int points) {&#13;&#10;&#9;&#9;// This method is strictly for setting points&#13;&#10;&#9;&#9;this.points = points;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public void setRole(String string) {&#13;&#10;&#9;&#9;this.role = string;&#13;&#10;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;}&#13;&#10;" Filename="Player.java" Intrnl_Id="2"/>
+<SrcFile Content="package csse376_puerto_rico;&#13;&#10;&#13;&#10;import java.awt.event.ActionEvent;&#13;&#10;import java.awt.event.ActionListener;&#13;&#10;import java.util.ArrayList;&#13;&#10;import java.util.List;&#13;&#10;&#13;&#10;import javax.swing.JButton;&#13;&#10;&#13;&#10;public class NextMoveButton extends JButton &#13;&#10;{&#13;&#10;&#9;private List&lt;Player&gt; players;&#13;&#10;&#9;public NextMoveButton()&#13;&#10;&#9;{&#13;&#10;&#9;&#9;players = GameBoardGUI.players;&#13;&#10;&#9;&#9;final ArrayList&lt;Integer&gt; count = new ArrayList&lt;Integer&gt;();&#13;&#10;&#9;&#9;final Integer zero = 0;&#13;&#10;&#9;&#9;count.add(zero);&#13;&#10;&#9;&#9;this.addActionListener(new ActionListener() {&#13;&#10;&#9;&#9;&#9;&#13;&#10;&#9;&#9;&#9;@Override&#13;&#10;&#9;&#9;&#9;public void actionPerformed(ActionEvent e) {&#13;&#10;&#9;&#9;&#9;&#9;Integer newCount = count.get(0);&#13;&#10;&#9;&#9;&#9;&#9;newCount = newCount +1;&#13;&#10;&#9;&#9;&#9;&#9;count.remove(0);&#13;&#10;&#9;&#9;&#9;&#9;count.add(newCount);&#13;&#10;&#9;&#9;&#9;&#9;if(newCount &gt; 0 &amp;&amp; newCount % players.size() ==0)&#13;&#10;&#9;&#9;&#9;&#9;{&#13;&#10;&#9;&#9;&#9;&#9;&#9;Integer finalCount = newCount/players.size();&#13;&#10;&#9;&#9;&#9;&#9;&#9;setText(&quot;Turn &quot; +finalCount.toString());&#13;&#10;&#9;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;&#9;&#13;&#10;&#9;&#9;&#9;&#9;makeMove();&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;});&#13;&#10;&#9;}&#13;&#10;&#9;public void makeMove()&#13;&#10;&#9;{&#13;&#10;&#9;&#9;//once you find the first true isTurn value, &#13;&#10;&#9;&#9;//you should set it off to mark that player's turn has ended&#13;&#10;&#9;&#9;//then you mark the next player's turn has started by turning its isTurn value as true&#13;&#10;&#9;&#9;//once these changes are made, this new players list replaces the mainboard's player's list&#13;&#10;&#9;&#9;for(int i=0;i&lt;players.size();i++)&#13;&#10;&#9;&#9;{&#13;&#10;&#9;&#9;&#9;if(players.get(i).isTurn)&#13;&#10;&#9;&#9;&#9;{&#13;&#10;&#9;&#9;&#9;&#9;players.get(i).isTurn = false;&#13;&#10;&#9;&#9;&#9;&#9;if(i == players.size()-1)&#13;&#10;&#9;&#9;&#9;&#9;{&#13;&#10;&#9;&#9;&#9;&#9;&#9;players.get(0).isTurn = true;&#13;&#10;&#9;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;&#9;else&#13;&#10;&#9;&#9;&#9;&#9;{&#13;&#10;&#9;&#9;&#9;&#9;&#9;players.get(i+1).isTurn = true;&#13;&#10;&#9;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;&#9;break;&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;GameBoardGUI.players = players;&#13;&#10;&#9;}&#13;&#10;}&#13;&#10;&#13;&#10;&#9;&#13;&#10;&#13;&#10;" Filename="NextMoveButton.java" Intrnl_Id="3"/>
+<SrcFile Content="package csse376_puerto_rico;&#13;&#10;&#13;&#10;import java.awt.BorderLayout;&#13;&#10;import java.awt.Image;&#13;&#10;&#13;&#10;import javax.swing.ImageIcon;&#13;&#10;import javax.swing.JButton;&#13;&#10;import javax.swing.JFrame;&#13;&#10;import javax.swing.JLabel;&#13;&#10;import javax.swing.JPanel;&#13;&#10;&#13;&#10;public class MenuGUI {&#13;&#10;&#9;/**&#13;&#10;     * Mainframe.&#13;&#10;     */&#13;&#10;     JFrame mainframe = new JFrame();&#13;&#10;     &#13;&#10;     /**&#13;&#10;     * Constructs the Menu.&#13;&#10;     * &#13;&#10;     */&#13;&#10;     public MenuGUI() {&#13;&#10;           this.mainframe.setTitle(&quot;Puerto Rico&quot;);&#13;&#10;           this.mainframe.setSize(1366, 800);&#13;&#10;           this.mainframe.setVisible(true);&#13;&#10;           this.mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);&#13;&#10;           this.mainframe.setResizable(false);&#13;&#10;           &#13;&#10;           JPanel imgPanel = new JPanel();&#13;&#10;           JPanel buttonPanel = new JPanel();&#13;&#10;           &#13;&#10;           String imageLoc = &quot;puerto-rico.jpg&quot;;&#13;&#10;           ImageIcon imageIcon = new ImageIcon(imageLoc);&#13;&#10;           &#13;&#10;           imgPanel.add(new JLabel(imageIcon));&#13;&#10;           &#13;&#10;           JButton newGame = new JButton(&quot;New Game&quot;);&#13;&#10;           newGame.addActionListener(new ButtonHandler(mainframe, null));&#13;&#10;           JButton quit = new JButton(&quot;Quit&quot;);&#13;&#10;           &#13;&#10;           buttonPanel.add(newGame);&#13;&#10;           buttonPanel.add(quit);&#13;&#10;           &#13;&#10;           this.mainframe.add(imgPanel, BorderLayout.NORTH);&#13;&#10;           this.mainframe.add(buttonPanel, BorderLayout.SOUTH);&#13;&#10;     }&#13;&#10;&#13;&#10;}&#13;&#10;" Filename="MenuGUI.java" Intrnl_Id="4"/>
+<SrcFile Content="package csse376_puerto_rico;&#10;&#10;public class Main {&#10;&#9;/**&#10;&#9; * @param args&#10;&#9; * &#10;&#9; * &#10;&#9; */&#10;&#9;public static void main(String[] args) {&#10;&#9;&#9;new MenuGUI();&#10;&#9;}&#10;}&#10;" Filename="Main.java" Intrnl_Id="5"/>
+<SrcFile Content="package csse376_puerto_rico;&#13;&#10;&#13;&#10;import java.awt.Color;&#13;&#10;import java.util.ArrayList;&#13;&#10;import java.util.Enumeration;&#13;&#10;import java.util.List;&#13;&#10;&#13;&#10;import javax.swing.AbstractButton;&#13;&#10;import javax.swing.ButtonGroup;&#13;&#10;import javax.swing.JButton;&#13;&#10;import javax.swing.JFrame;&#13;&#10;import javax.swing.JOptionPane;&#13;&#10;import javax.swing.JPanel;&#13;&#10;import javax.swing.JTextArea;&#13;&#10;&#13;&#10;import net.miginfocom.swing.MigLayout;&#13;&#10;&#13;&#10;public class GameBoardGUI {&#13;&#10;&#13;&#10;&#9;private JFrame mainframe;&#13;&#10;&#9;public static List&lt;Player&gt; players;&#13;&#10;&#9;private ButtonGroup bGroup;&#13;&#10;&#9;private static int turnCount;&#13;&#10;&#13;&#10;&#9;public GameBoardGUI(JFrame frame, ButtonGroup group) {&#13;&#10;&#9;&#9;this.players = new ArrayList&lt;Player&gt;();&#13;&#10;&#9;&#9;this.mainframe = frame;&#13;&#10;&#9;&#9;this.bGroup = group;&#13;&#10;&#9;&#9;NextMoveButton nextMove = new NextMoveButton();&#13;&#10;&#9;&#9;nextMove.setText(&quot;Turn &quot;+turnCount);&#13;&#10;&#9;&#9;this.mainframe.getContentPane().removeAll();&#13;&#10;&#9;&#9;this.mainframe.getContentPane().revalidate();&#13;&#10;&#9;&#9;this.mainframe.setBackground(Color.GREEN);&#13;&#10;&#9;&#9;this.mainframe.setTitle(&quot;Puerto Rico&quot;);&#13;&#10;&#9;&#9;this.mainframe.add(nextMove);&#13;&#10;&#9;&#9;MigLayout layout = new MigLayout();&#13;&#10;&#9;&#9;this.mainframe.setLayout(layout);&#13;&#10;&#13;&#10;&#9;&#9;String temp = &quot;0&quot;;&#13;&#10;&#9;&#9;for (Enumeration&lt;AbstractButton&gt; buttons = this.bGroup.getElements(); buttons&#13;&#10;&#9;&#9;&#9;&#9;.hasMoreElements();) {&#13;&#10;&#9;&#9;&#9;AbstractButton button = buttons.nextElement();&#13;&#10;&#9;&#9;&#9;if (button.isSelected()) {&#13;&#10;&#9;&#9;&#9;&#9;temp = button.getText();&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;int numberPlayers = Integer.parseInt(temp);&#13;&#10;&#9;&#9;this.addPlayers(numberPlayers);&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public List&lt;Player&gt; addPlayers(int numberOfPlayers) {&#13;&#10;&#9;&#9;for (int i = 0; i &lt; numberOfPlayers; i++) {&#13;&#10;&#9;&#9;&#9;Player p = new Player();&#13;&#10;&#9;&#9;&#9;if (i == 0) {&#13;&#10;&#9;&#9;&#9;&#9;p.isGovernor = true;&#13;&#10;&#9;&#9;&#9;}&#13;&#10;&#9;&#9;&#9;JTextArea jta = new JTextArea(&quot;Player &quot; + (i + 1) + &quot;\nRole: &quot;&#13;&#10;&#9;&#9;&#9;&#9;&#9;+ &quot;\nScore: &quot; + p.getPoints());&#13;&#10;&#9;&#9;&#9;jta.setRows(5);&#13;&#10;&#9;&#9;&#9;jta.setColumns(15);&#13;&#10;&#9;&#9;&#9;p.setHUD(jta);&#13;&#10;&#9;&#9;&#9;this.players.add(p);&#13;&#10;&#9;&#9;&#9;this.mainframe.add(jta);&#13;&#10;&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;updateRoles();&#13;&#10;&#13;&#10;&#9;&#9;return this.players;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public List&lt;Player&gt; getPlayers() {&#13;&#10;&#9;&#9;return this.players;&#13;&#10;&#9;}&#13;&#10;&#9;&#13;&#10;&#9;public static int getTurnCount()&#13;&#10;&#9;{&#13;&#10;&#9;&#9;return turnCount;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public String getPlayerText(int playerNum, String role, int points,&#13;&#10;&#9;&#9;&#9;boolean isGovernor) {&#13;&#10;&#9;&#9;String rtn = null;&#13;&#10;&#9;&#9;if (isGovernor) {&#13;&#10;&#9;&#9;&#9;rtn = String.format(&quot;Player %d \nRole: %s \nScore: %d \nGovernor&quot;,&#13;&#10;&#9;&#9;&#9;&#9;&#9;playerNum, role, points);&#13;&#10;&#13;&#10;&#9;&#9;} else {&#13;&#10;&#9;&#9;&#9;rtn = String.format(&quot;Player %d \nRole: %s \nScore: %d&quot;, playerNum,&#13;&#10;&#9;&#9;&#9;&#9;&#9;role, points);&#13;&#10;&#13;&#10;&#9;&#9;}&#13;&#10;&#9;&#9;return rtn;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;public void updateRoles() {&#13;&#10;&#9;&#9;for (int i = 0; i &lt; this.players.size(); i++) {&#13;&#10;&#9;&#9;&#9;Player player = this.players.get(i);&#13;&#10;&#9;&#9;&#9;Object[] options = Player.getRoles().toArray();&#13;&#10;&#9;&#9;&#9;int n = JOptionPane.showOptionDialog(this.mainframe,&#13;&#10;&#9;&#9;&#9;&#9;&#9;&quot;Choose your role!&quot;, &quot;Player &quot; + (i + 1),&#13;&#10;&#9;&#9;&#9;&#9;&#9;JOptionPane.YES_NO_CANCEL_OPTION,&#13;&#10;&#9;&#9;&#9;&#9;&#9;JOptionPane.QUESTION_MESSAGE, null, options,&#13;&#10;&#9;&#9;&#9;&#9;&#9;options[options.length - 1]);&#13;&#10;&#9;&#9;&#9;String role = (String) options[n];&#13;&#10;&#9;&#9;&#9;int points = player.getPoints();&#13;&#10;&#9;&#9;&#9;player.getHUD().setText(&#13;&#10;&#9;&#9;&#9;&#9;&#9;getPlayerText(i + 1, role, points, player.isGovernor));&#13;&#10;&#9;&#9;}&#13;&#10;&#9;}&#13;&#10;}&#13;&#10;" Filename="GameBoardGUI.java" Intrnl_Id="6"/>
+<SrcFile Content="package csse376_puerto_rico;&#13;&#10;&#13;&#10;import java.awt.event.ActionEvent;&#13;&#10;import java.awt.event.ActionListener;&#13;&#10;&#13;&#10;import javax.swing.ButtonGroup;&#13;&#10;import javax.swing.JFrame;&#13;&#10;&#13;&#10;public class ButtonHandler implements ActionListener {&#13;&#10;&#9;&#13;&#10;&#9;private JFrame mainframe;&#13;&#10;&#9;private ButtonGroup bGroup;&#13;&#10;&#13;&#10;&#9;public ButtonHandler(JFrame frame, ButtonGroup group) {&#13;&#10;&#9;&#9;this.mainframe = frame;&#13;&#10;&#9;&#9;this.bGroup = group;&#13;&#10;&#9;}&#13;&#10;&#13;&#10;&#9;@Override&#13;&#10;&#9;public void actionPerformed(ActionEvent ae) {&#13;&#10;&#9;&#9;String action = ae.getActionCommand();&#13;&#10;&#9;&#9;if(action.equals(&quot;Quit&quot;)){&#13;&#10;&#9;&#9;&#9;System.exit(0);&#13;&#10;&#9;&#9;}else if(action.equals(&quot;New Game&quot;)){&#13;&#10;&#9;&#9;&#9;new StartUpGameBoardGUI(this.mainframe);&#13;&#10;&#9;&#9;}else if(action.equals(&quot;Start&quot;)){&#13;&#10;&#9;&#9;&#9;new GameBoardGUI(this.mainframe, this.bGroup);&#13;&#10;&#9;&#9;}else if(action.equals(&quot;Add Points&quot;)){&#13;&#10;&#9;&#9;&#9;&#13;&#10;&#9;&#9;}&#13;&#10;&#9;}&#13;&#10;&#13;&#10;}&#13;&#10;" Filename="ButtonHandler.java" Intrnl_Id="7"/>
+</SrcFileList>
+<CritList>
+<CritListEntry Name="org.codecover.model.utils.criteria.LoopCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.BranchCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.ConditionCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.SynchronizedStatementCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.QMOCoverage" PluginName="org.codecover"/>
+<CritListEntry Name="org.codecover.model.utils.criteria.StatementCoverage" PluginName="org.codecover"/>
+</CritList>
+<BoolOpList>
+<BoolOp Arity="2" Intrnl_Id="8" Name="conditional and (&amp;&amp;)">
+<BoolAssgnmntBoolMapList>
+<MapEntry BoolAssgnmnt="10" Value="false"/>
+<MapEntry BoolAssgnmnt="02" Value="false"/>
+<MapEntry BoolAssgnmnt="11" Value="true"/>
+</BoolAssgnmntBoolMapList>
+</BoolOp>
+</BoolOpList>
+<HierarchyLvlTypeList>
+<HierarchyLvlType EnglishName="package" IntrnlName="package" Intrnl_Id="9"/>
+<HierarchyLvlType EnglishName="class" IntrnlName="class" Intrnl_Id="10"/>
+<HierarchyLvlType EnglishName="method" IntrnlName="method" Intrnl_Id="11"/>
+<HierarchyLvlType EnglishName="default package" IntrnlName="default package" Intrnl_Id="12"/>
+<HierarchyLvlType EnglishName="anonymous class" IntrnlName="class" Intrnl_Id="13"/>
+</HierarchyLvlTypeList>
+<MASTRoot>
+<HierarchyLvl HierarchyLvlId="99" HierarchyLvlTypeId="12" Intrnl_Id="14" Name="default package">
+<Header/>
+<LocList/>
+<HierarchyLvl HierarchyLvlId="98" HierarchyLvlTypeId="9" Intrnl_Id="15" Name="csse376_puerto_rico">
+<Header/>
+<LocList/>
+<HierarchyLvl HierarchyLvlId="67" HierarchyLvlTypeId="10" Intrnl_Id="16" Name="StartUpGameBoardGUI">
+<Header>
+<Loc EndOffset="234" SrcFileId="1" StartOffset="202"/>
+</Header>
+<LocList>
+<Loc EndOffset="1071" SrcFileId="1" StartOffset="202"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="66" HierarchyLvlTypeId="11" Intrnl_Id="17" Name="StartUpGameBoardGUI">
+<Header>
+<Loc EndOffset="307" SrcFileId="1" StartOffset="267"/>
+</Header>
+<LocList>
+<Loc EndOffset="1068" SrcFileId="1" StartOffset="267"/>
+</LocList>
+<StmntSeq Intrnl_Id="18">
+<LocList>
+<Loc EndOffset="335" SrcFileId="1" StartOffset="312"/>
+<Loc EndOffset="382" SrcFileId="1" StartOffset="338"/>
+<Loc EndOffset="430" SrcFileId="1" StartOffset="385"/>
+<Loc EndOffset="475" SrcFileId="1" StartOffset="433"/>
+<Loc EndOffset="520" SrcFileId="1" StartOffset="478"/>
+<Loc EndOffset="556" SrcFileId="1" StartOffset="524"/>
+<Loc EndOffset="600" SrcFileId="1" StartOffset="562"/>
+<Loc EndOffset="650" SrcFileId="1" StartOffset="603"/>
+<Loc EndOffset="701" SrcFileId="1" StartOffset="653"/>
+<Loc EndOffset="752" SrcFileId="1" StartOffset="704"/>
+<Loc EndOffset="770" SrcFileId="1" StartOffset="755"/>
+<Loc EndOffset="788" SrcFileId="1" StartOffset="773"/>
+<Loc EndOffset="806" SrcFileId="1" StartOffset="791"/>
+<Loc EndOffset="855" SrcFileId="1" StartOffset="812"/>
+<Loc EndOffset="930" SrcFileId="1" StartOffset="858"/>
+<Loc EndOffset="955" SrcFileId="1" StartOffset="936"/>
+<Loc EndOffset="977" SrcFileId="1" StartOffset="958"/>
+<Loc EndOffset="999" SrcFileId="1" StartOffset="980"/>
+<Loc EndOffset="1029" SrcFileId="1" StartOffset="1002"/>
+<Loc EndOffset="1065" SrcFileId="1" StartOffset="1035"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="19">
+<LocList>
+<Loc EndOffset="335" SrcFileId="1" StartOffset="312"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="20">
+<LocList>
+<Loc EndOffset="382" SrcFileId="1" StartOffset="338"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="21">
+<LocList>
+<Loc EndOffset="430" SrcFileId="1" StartOffset="385"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S4" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="22">
+<LocList>
+<Loc EndOffset="475" SrcFileId="1" StartOffset="433"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S5" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="23">
+<LocList>
+<Loc EndOffset="520" SrcFileId="1" StartOffset="478"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S6" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="24">
+<LocList>
+<Loc EndOffset="556" SrcFileId="1" StartOffset="524"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S7" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="25">
+<LocList>
+<Loc EndOffset="600" SrcFileId="1" StartOffset="562"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S8" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="26">
+<LocList>
+<Loc EndOffset="650" SrcFileId="1" StartOffset="603"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S9" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="27">
+<LocList>
+<Loc EndOffset="701" SrcFileId="1" StartOffset="653"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S10" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="28">
+<LocList>
+<Loc EndOffset="752" SrcFileId="1" StartOffset="704"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S11" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="29">
+<LocList>
+<Loc EndOffset="770" SrcFileId="1" StartOffset="755"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S12" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="30">
+<LocList>
+<Loc EndOffset="788" SrcFileId="1" StartOffset="773"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S13" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="31">
+<LocList>
+<Loc EndOffset="806" SrcFileId="1" StartOffset="791"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S14" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="32">
+<LocList>
+<Loc EndOffset="855" SrcFileId="1" StartOffset="812"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S15" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="33">
+<LocList>
+<Loc EndOffset="930" SrcFileId="1" StartOffset="858"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S16" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="34">
+<LocList>
+<Loc EndOffset="955" SrcFileId="1" StartOffset="936"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S17" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="35">
+<LocList>
+<Loc EndOffset="977" SrcFileId="1" StartOffset="958"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S18" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="36">
+<LocList>
+<Loc EndOffset="999" SrcFileId="1" StartOffset="980"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S19" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="37">
+<LocList>
+<Loc EndOffset="1029" SrcFileId="1" StartOffset="1002"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S20" CovItemPrefix="csse376_puerto_rico.StartUpGameBoardGUI.java" Intrnl_Id="38">
+<LocList>
+<Loc EndOffset="1065" SrcFileId="1" StartOffset="1035"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="78" HierarchyLvlTypeId="10" Intrnl_Id="39" Name="Player">
+<Header>
+<Loc EndOffset="269" SrcFileId="2" StartOffset="250"/>
+</Header>
+<LocList>
+<Loc EndOffset="1406" SrcFileId="2" StartOffset="250"/>
+</LocList>
+<StmntSeq Intrnl_Id="40">
+<LocList>
+<Loc EndOffset="401" SrcFileId="2" StartOffset="378"/>
+<Loc EndOffset="570" SrcFileId="2" StartOffset="409"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="41">
+<LocList>
+<Loc EndOffset="401" SrcFileId="2" StartOffset="378"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="42">
+<LocList>
+<Loc EndOffset="570" SrcFileId="2" StartOffset="409"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<HierarchyLvl HierarchyLvlId="68" HierarchyLvlTypeId="11" Intrnl_Id="43" Name="Player">
+<Header>
+<Loc EndOffset="629" SrcFileId="2" StartOffset="614"/>
+</Header>
+<LocList>
+<Loc EndOffset="713" SrcFileId="2" StartOffset="614"/>
+</LocList>
+<StmntSeq Intrnl_Id="44">
+<LocList>
+<Loc EndOffset="650" SrcFileId="2" StartOffset="635"/>
+<Loc EndOffset="678" SrcFileId="2" StartOffset="654"/>
+<Loc EndOffset="709" SrcFileId="2" StartOffset="682"/>
+</LocList>
+<BasicStmnt CovItemId="S3" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="45">
+<LocList>
+<Loc EndOffset="650" SrcFileId="2" StartOffset="635"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S4" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="46">
+<LocList>
+<Loc EndOffset="678" SrcFileId="2" StartOffset="654"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S5" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="47">
+<LocList>
+<Loc EndOffset="709" SrcFileId="2" StartOffset="682"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="69" HierarchyLvlTypeId="11" Intrnl_Id="48" Name="Player">
+<Header>
+<Loc EndOffset="744" SrcFileId="2" StartOffset="718"/>
+</Header>
+<LocList>
+<Loc EndOffset="843" SrcFileId="2" StartOffset="718"/>
+</LocList>
+<StmntSeq Intrnl_Id="49">
+<LocList>
+<Loc EndOffset="767" SrcFileId="2" StartOffset="750"/>
+<Loc EndOffset="795" SrcFileId="2" StartOffset="771"/>
+<Loc EndOffset="819" SrcFileId="2" StartOffset="799"/>
+<Loc EndOffset="839" SrcFileId="2" StartOffset="823"/>
+</LocList>
+<BasicStmnt CovItemId="S6" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="50">
+<LocList>
+<Loc EndOffset="767" SrcFileId="2" StartOffset="750"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S7" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="51">
+<LocList>
+<Loc EndOffset="795" SrcFileId="2" StartOffset="771"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S8" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="52">
+<LocList>
+<Loc EndOffset="819" SrcFileId="2" StartOffset="799"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S9" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="53">
+<LocList>
+<Loc EndOffset="839" SrcFileId="2" StartOffset="823"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="70" HierarchyLvlTypeId="11" Intrnl_Id="54" Name="getRole">
+<Header>
+<Loc EndOffset="871" SrcFileId="2" StartOffset="848"/>
+</Header>
+<LocList>
+<Loc EndOffset="898" SrcFileId="2" StartOffset="848"/>
+</LocList>
+<StmntSeq Intrnl_Id="55">
+<LocList>
+<Loc EndOffset="894" SrcFileId="2" StartOffset="877"/>
+</LocList>
+<BasicStmnt CovItemId="S10" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="56">
+<LocList>
+<Loc EndOffset="894" SrcFileId="2" StartOffset="877"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="71" HierarchyLvlTypeId="11" Intrnl_Id="57" Name="getRoles">
+<Header>
+<Loc EndOffset="940" SrcFileId="2" StartOffset="903"/>
+</Header>
+<LocList>
+<Loc EndOffset="965" SrcFileId="2" StartOffset="903"/>
+</LocList>
+<StmntSeq Intrnl_Id="58">
+<LocList>
+<Loc EndOffset="961" SrcFileId="2" StartOffset="948"/>
+</LocList>
+<BasicStmnt CovItemId="S11" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="59">
+<LocList>
+<Loc EndOffset="961" SrcFileId="2" StartOffset="948"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="72" HierarchyLvlTypeId="11" Intrnl_Id="60" Name="getPoints">
+<Header>
+<Loc EndOffset="992" SrcFileId="2" StartOffset="970"/>
+</Header>
+<LocList>
+<Loc EndOffset="1016" SrcFileId="2" StartOffset="970"/>
+</LocList>
+<StmntSeq Intrnl_Id="61">
+<LocList>
+<Loc EndOffset="1012" SrcFileId="2" StartOffset="998"/>
+</LocList>
+<BasicStmnt CovItemId="S12" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="62">
+<LocList>
+<Loc EndOffset="1012" SrcFileId="2" StartOffset="998"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="73" HierarchyLvlTypeId="11" Intrnl_Id="63" Name="getHUD">
+<Header>
+<Loc EndOffset="1047" SrcFileId="2" StartOffset="1022"/>
+</Header>
+<LocList>
+<Loc EndOffset="1072" SrcFileId="2" StartOffset="1022"/>
+</LocList>
+<StmntSeq Intrnl_Id="64">
+<LocList>
+<Loc EndOffset="1068" SrcFileId="2" StartOffset="1052"/>
+</LocList>
+<BasicStmnt CovItemId="S13" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="65">
+<LocList>
+<Loc EndOffset="1068" SrcFileId="2" StartOffset="1052"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="74" HierarchyLvlTypeId="11" Intrnl_Id="66" Name="setHUD">
+<Header>
+<Loc EndOffset="1111" SrcFileId="2" StartOffset="1078"/>
+</Header>
+<LocList>
+<Loc EndOffset="1135" SrcFileId="2" StartOffset="1078"/>
+</LocList>
+<StmntSeq Intrnl_Id="67">
+<LocList>
+<Loc EndOffset="1131" SrcFileId="2" StartOffset="1116"/>
+</LocList>
+<BasicStmnt CovItemId="S14" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="68">
+<LocList>
+<Loc EndOffset="1131" SrcFileId="2" StartOffset="1116"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="75" HierarchyLvlTypeId="11" Intrnl_Id="69" Name="isGovernor">
+<Header>
+<Loc EndOffset="1168" SrcFileId="2" StartOffset="1141"/>
+</Header>
+<LocList>
+<Loc EndOffset="1195" SrcFileId="2" StartOffset="1141"/>
+</LocList>
+<StmntSeq Intrnl_Id="70">
+<LocList>
+<Loc EndOffset="1191" SrcFileId="2" StartOffset="1173"/>
+</LocList>
+<BasicStmnt CovItemId="S15" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="71">
+<LocList>
+<Loc EndOffset="1191" SrcFileId="2" StartOffset="1173"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="76" HierarchyLvlTypeId="11" Intrnl_Id="72" Name="setPoints">
+<Header>
+<Loc EndOffset="1250" SrcFileId="2" StartOffset="1217"/>
+</Header>
+<LocList>
+<Loc EndOffset="1330" SrcFileId="2" StartOffset="1217"/>
+</LocList>
+<StmntSeq Intrnl_Id="73">
+<LocList>
+<Loc EndOffset="1326" SrcFileId="2" StartOffset="1305"/>
+</LocList>
+<BasicStmnt CovItemId="S16" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="74">
+<LocList>
+<Loc EndOffset="1326" SrcFileId="2" StartOffset="1305"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="77" HierarchyLvlTypeId="11" Intrnl_Id="75" Name="setRole">
+<Header>
+<Loc EndOffset="1369" SrcFileId="2" StartOffset="1335"/>
+</Header>
+<LocList>
+<Loc EndOffset="1400" SrcFileId="2" StartOffset="1335"/>
+</LocList>
+<StmntSeq Intrnl_Id="76">
+<LocList>
+<Loc EndOffset="1394" SrcFileId="2" StartOffset="1375"/>
+</LocList>
+<BasicStmnt CovItemId="S17" CovItemPrefix="csse376_puerto_rico.Player.java" Intrnl_Id="77">
+<LocList>
+<Loc EndOffset="1394" SrcFileId="2" StartOffset="1375"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="83" HierarchyLvlTypeId="10" Intrnl_Id="78" Name="NextMoveButton">
+<Header>
+<Loc EndOffset="236" SrcFileId="3" StartOffset="193"/>
+</Header>
+<LocList>
+<Loc EndOffset="1535" SrcFileId="3" StartOffset="193"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="81" HierarchyLvlTypeId="11" Intrnl_Id="79" Name="NextMoveButton">
+<Header>
+<Loc EndOffset="298" SrcFileId="3" StartOffset="275"/>
+</Header>
+<LocList>
+<Loc EndOffset="886" SrcFileId="3" StartOffset="275"/>
+</LocList>
+<StmntSeq Intrnl_Id="80">
+<LocList>
+<Loc EndOffset="337" SrcFileId="3" StartOffset="306"/>
+<Loc EndOffset="399" SrcFileId="3" StartOffset="341"/>
+<Loc EndOffset="426" SrcFileId="3" StartOffset="403"/>
+<Loc EndOffset="446" SrcFileId="3" StartOffset="430"/>
+<Loc EndOffset="473" SrcFileId="3" StartOffset="450"/>
+<Loc EndOffset="882" SrcFileId="3" StartOffset="880"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="81">
+<LocList>
+<Loc EndOffset="337" SrcFileId="3" StartOffset="306"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="82">
+<LocList>
+<Loc EndOffset="399" SrcFileId="3" StartOffset="341"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="83">
+<LocList>
+<Loc EndOffset="426" SrcFileId="3" StartOffset="403"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S4" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="84">
+<LocList>
+<Loc EndOffset="446" SrcFileId="3" StartOffset="430"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S5" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="85">
+<LocList>
+<Loc EndOffset="473" SrcFileId="3" StartOffset="450"/>
+<Loc EndOffset="882" SrcFileId="3" StartOffset="880"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<HierarchyLvl HierarchyLvlId="80" HierarchyLvlTypeId="13" Intrnl_Id="86" Name="ActionListener">
+<Header>
+<Loc EndOffset="493" SrcFileId="3" StartOffset="477"/>
+</Header>
+<LocList>
+<Loc EndOffset="880" SrcFileId="3" StartOffset="473"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="79" HierarchyLvlTypeId="11" Intrnl_Id="87" Name="actionPerformed">
+<Header>
+<Loc EndOffset="561" SrcFileId="3" StartOffset="505"/>
+</Header>
+<LocList>
+<Loc EndOffset="875" SrcFileId="3" StartOffset="505"/>
+</LocList>
+<StmntSeq Intrnl_Id="88">
+<LocList>
+<Loc EndOffset="601" SrcFileId="3" StartOffset="569"/>
+<Loc EndOffset="630" SrcFileId="3" StartOffset="607"/>
+<Loc EndOffset="652" SrcFileId="3" StartOffset="636"/>
+<Loc EndOffset="678" SrcFileId="3" StartOffset="658"/>
+<Loc EndOffset="846" SrcFileId="3" StartOffset="684"/>
+<Loc EndOffset="869" SrcFileId="3" StartOffset="858"/>
+</LocList>
+<BasicStmnt CovItemId="S6" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="89">
+<LocList>
+<Loc EndOffset="601" SrcFileId="3" StartOffset="569"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S7" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="90">
+<LocList>
+<Loc EndOffset="630" SrcFileId="3" StartOffset="607"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S8" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="91">
+<LocList>
+<Loc EndOffset="652" SrcFileId="3" StartOffset="636"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S9" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="92">
+<LocList>
+<Loc EndOffset="678" SrcFileId="3" StartOffset="658"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S10" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="93">
+<Branch CovItemId="B1" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Implct="false" Intrnl_Id="94">
+<Cond/>
+<LocList>
+<Loc EndOffset="846" SrcFileId="3" StartOffset="739"/>
+</LocList>
+<StmntSeq Intrnl_Id="95">
+<LocList>
+<Loc EndOffset="792" SrcFileId="3" StartOffset="747"/>
+<Loc EndOffset="839" SrcFileId="3" StartOffset="799"/>
+</LocList>
+<BasicStmnt CovItemId="S11" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="96">
+<LocList>
+<Loc EndOffset="792" SrcFileId="3" StartOffset="747"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S12" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="97">
+<LocList>
+<Loc EndOffset="839" SrcFileId="3" StartOffset="799"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B2" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Implct="true" Intrnl_Id="98">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="99">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="686" SrcFileId="3" StartOffset="684"/>
+<LocList>
+<Loc EndOffset="846" SrcFileId="3" StartOffset="684"/>
+</LocList>
+<RootTerm CovItemId="C1" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="100">
+<OpTerm BooleanOpId="8" Intrnl_Id="101">
+<BasicBoolTerm Intrnl_Id="102">
+<LocList>
+<Loc EndOffset="699" SrcFileId="3" StartOffset="687"/>
+</LocList>
+</BasicBoolTerm>
+<BasicBoolTerm Intrnl_Id="103">
+<LocList>
+<Loc EndOffset="732" SrcFileId="3" StartOffset="703"/>
+</LocList>
+</BasicBoolTerm>
+<LocList>
+<Loc EndOffset="702" SrcFileId="3" StartOffset="700"/>
+</LocList>
+</OpTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S13" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="104">
+<LocList>
+<Loc EndOffset="869" SrcFileId="3" StartOffset="858"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="82" HierarchyLvlTypeId="11" Intrnl_Id="105" Name="makeMove">
+<Header>
+<Loc EndOffset="911" SrcFileId="3" StartOffset="889"/>
+</Header>
+<LocList>
+<Loc EndOffset="1532" SrcFileId="3" StartOffset="889"/>
+</LocList>
+<StmntSeq Intrnl_Id="106">
+<LocList>
+<Loc EndOffset="1493" SrcFileId="3" StartOffset="1217"/>
+<Loc EndOffset="1528" SrcFileId="3" StartOffset="1497"/>
+</LocList>
+<LoopStmnt CovItemId="S14" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="107" MltplExecId="L1-2" MltplExecPrefix="csse376_puerto_rico.NextMoveButton.java" NvrExecId="L1-0" NvrExecPrefix="csse376_puerto_rico.NextMoveButton.java" OnceExecutedId="L1-1" OnceExecutedPrefix="csse376_puerto_rico.NextMoveButton.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="108">
+<LocList>
+<Loc EndOffset="1488" SrcFileId="3" StartOffset="1260"/>
+</LocList>
+<CondStmnt CovItemId="S15" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="109">
+<Branch CovItemId="B3" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Implct="false" Intrnl_Id="110">
+<Cond/>
+<LocList>
+<Loc EndOffset="1488" SrcFileId="3" StartOffset="1290"/>
+</LocList>
+<StmntSeq Intrnl_Id="111">
+<LocList>
+<Loc EndOffset="1327" SrcFileId="3" StartOffset="1297"/>
+<Loc EndOffset="1470" SrcFileId="3" StartOffset="1333"/>
+<Loc EndOffset="1482" SrcFileId="3" StartOffset="1476"/>
+</LocList>
+<BasicStmnt CovItemId="S16" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="112">
+<LocList>
+<Loc EndOffset="1327" SrcFileId="3" StartOffset="1297"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S17" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="113">
+<Branch CovItemId="B5" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Implct="false" Intrnl_Id="114">
+<Cond/>
+<LocList>
+<Loc EndOffset="1408" SrcFileId="3" StartOffset="1364"/>
+</LocList>
+<StmntSeq Intrnl_Id="115">
+<LocList>
+<Loc EndOffset="1401" SrcFileId="3" StartOffset="1372"/>
+</LocList>
+<BasicStmnt CovItemId="S18" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="116">
+<LocList>
+<Loc EndOffset="1401" SrcFileId="3" StartOffset="1372"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B6" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Implct="false" Intrnl_Id="117">
+<Cond>
+<Loc EndOffset="1418" SrcFileId="3" StartOffset="1414"/>
+</Cond>
+<LocList>
+<Loc EndOffset="1470" SrcFileId="3" StartOffset="1424"/>
+</LocList>
+<StmntSeq Intrnl_Id="118">
+<LocList>
+<Loc EndOffset="1463" SrcFileId="3" StartOffset="1432"/>
+</LocList>
+<BasicStmnt CovItemId="S19" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="119">
+<LocList>
+<Loc EndOffset="1463" SrcFileId="3" StartOffset="1432"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1335" SrcFileId="3" StartOffset="1333"/>
+<LocList>
+<Loc EndOffset="1470" SrcFileId="3" StartOffset="1333"/>
+</LocList>
+<RootTerm CovItemId="C4" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="120">
+<BasicBoolTerm Intrnl_Id="121">
+<LocList>
+<Loc EndOffset="1357" SrcFileId="3" StartOffset="1336"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S20" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="122">
+<LocList>
+<Loc EndOffset="1482" SrcFileId="3" StartOffset="1476"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B4" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Implct="true" Intrnl_Id="123">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="124">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1262" SrcFileId="3" StartOffset="1260"/>
+<LocList>
+<Loc EndOffset="1488" SrcFileId="3" StartOffset="1260"/>
+</LocList>
+<RootTerm CovItemId="C3" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="125">
+<BasicBoolTerm Intrnl_Id="126">
+<LocList>
+<Loc EndOffset="1284" SrcFileId="3" StartOffset="1263"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+<Keyword EndOffset="1220" SrcFileId="3" StartOffset="1217"/>
+<LocList>
+<Loc EndOffset="1493" SrcFileId="3" StartOffset="1217"/>
+</LocList>
+<RootTerm CovItemId="C2" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="127">
+<BasicBoolTerm Intrnl_Id="128">
+<LocList>
+<Loc EndOffset="1245" SrcFileId="3" StartOffset="1229"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</LoopStmnt>
+<BasicStmnt CovItemId="S21" CovItemPrefix="csse376_puerto_rico.NextMoveButton.java" Intrnl_Id="129">
+<LocList>
+<Loc EndOffset="1528" SrcFileId="3" StartOffset="1497"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="85" HierarchyLvlTypeId="10" Intrnl_Id="130" Name="MenuGUI">
+<Header>
+<Loc EndOffset="255" SrcFileId="4" StartOffset="235"/>
+</Header>
+<LocList>
+<Loc EndOffset="1403" SrcFileId="4" StartOffset="235"/>
+</LocList>
+<StmntSeq Intrnl_Id="131">
+<LocList>
+<Loc EndOffset="330" SrcFileId="4" StartOffset="298"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="132">
+<LocList>
+<Loc EndOffset="330" SrcFileId="4" StartOffset="298"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<HierarchyLvl HierarchyLvlId="84" HierarchyLvlTypeId="11" Intrnl_Id="133" Name="MenuGUI">
+<Header>
+<Loc EndOffset="417" SrcFileId="4" StartOffset="401"/>
+</Header>
+<LocList>
+<Loc EndOffset="1398" SrcFileId="4" StartOffset="401"/>
+</LocList>
+<StmntSeq Intrnl_Id="134">
+<LocList>
+<Loc EndOffset="471" SrcFileId="4" StartOffset="432"/>
+<Loc EndOffset="518" SrcFileId="4" StartOffset="484"/>
+<Loc EndOffset="563" SrcFileId="4" StartOffset="531"/>
+<Loc EndOffset="638" SrcFileId="4" StartOffset="576"/>
+<Loc EndOffset="686" SrcFileId="4" StartOffset="651"/>
+<Loc EndOffset="743" SrcFileId="4" StartOffset="712"/>
+<Loc EndOffset="790" SrcFileId="4" StartOffset="756"/>
+<Loc EndOffset="852" SrcFileId="4" StartOffset="816"/>
+<Loc EndOffset="911" SrcFileId="4" StartOffset="865"/>
+<Loc EndOffset="973" SrcFileId="4" StartOffset="937"/>
+<Loc EndOffset="1041" SrcFileId="4" StartOffset="999"/>
+<Loc EndOffset="1116" SrcFileId="4" StartOffset="1054"/>
+<Loc EndOffset="1164" SrcFileId="4" StartOffset="1129"/>
+<Loc EndOffset="1215" SrcFileId="4" StartOffset="1190"/>
+<Loc EndOffset="1250" SrcFileId="4" StartOffset="1228"/>
+<Loc EndOffset="1325" SrcFileId="4" StartOffset="1276"/>
+<Loc EndOffset="1390" SrcFileId="4" StartOffset="1338"/>
+</LocList>
+<BasicStmnt CovItemId="S2" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="135">
+<LocList>
+<Loc EndOffset="471" SrcFileId="4" StartOffset="432"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="136">
+<LocList>
+<Loc EndOffset="518" SrcFileId="4" StartOffset="484"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S4" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="137">
+<LocList>
+<Loc EndOffset="563" SrcFileId="4" StartOffset="531"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S5" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="138">
+<LocList>
+<Loc EndOffset="638" SrcFileId="4" StartOffset="576"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S6" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="139">
+<LocList>
+<Loc EndOffset="686" SrcFileId="4" StartOffset="651"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S7" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="140">
+<LocList>
+<Loc EndOffset="743" SrcFileId="4" StartOffset="712"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S8" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="141">
+<LocList>
+<Loc EndOffset="790" SrcFileId="4" StartOffset="756"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S9" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="142">
+<LocList>
+<Loc EndOffset="852" SrcFileId="4" StartOffset="816"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S10" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="143">
+<LocList>
+<Loc EndOffset="911" SrcFileId="4" StartOffset="865"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S11" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="144">
+<LocList>
+<Loc EndOffset="973" SrcFileId="4" StartOffset="937"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S12" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="145">
+<LocList>
+<Loc EndOffset="1041" SrcFileId="4" StartOffset="999"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S13" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="146">
+<LocList>
+<Loc EndOffset="1116" SrcFileId="4" StartOffset="1054"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S14" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="147">
+<LocList>
+<Loc EndOffset="1164" SrcFileId="4" StartOffset="1129"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S15" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="148">
+<LocList>
+<Loc EndOffset="1215" SrcFileId="4" StartOffset="1190"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S16" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="149">
+<LocList>
+<Loc EndOffset="1250" SrcFileId="4" StartOffset="1228"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S17" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="150">
+<LocList>
+<Loc EndOffset="1325" SrcFileId="4" StartOffset="1276"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S18" CovItemPrefix="csse376_puerto_rico.MenuGUI.java" Intrnl_Id="151">
+<LocList>
+<Loc EndOffset="1390" SrcFileId="4" StartOffset="1338"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="87" HierarchyLvlTypeId="10" Intrnl_Id="152" Name="Main">
+<Header>
+<Loc EndOffset="47" SrcFileId="5" StartOffset="30"/>
+</Header>
+<LocList>
+<Loc EndOffset="149" SrcFileId="5" StartOffset="30"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="86" HierarchyLvlTypeId="11" Intrnl_Id="153" Name="main">
+<Header>
+<Loc EndOffset="125" SrcFileId="5" StartOffset="87"/>
+</Header>
+<LocList>
+<Loc EndOffset="147" SrcFileId="5" StartOffset="87"/>
+</LocList>
+<StmntSeq Intrnl_Id="154">
+<LocList>
+<Loc EndOffset="144" SrcFileId="5" StartOffset="130"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="csse376_puerto_rico.Main.java" Intrnl_Id="155">
+<LocList>
+<Loc EndOffset="144" SrcFileId="5" StartOffset="130"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="94" HierarchyLvlTypeId="10" Intrnl_Id="156" Name="GameBoardGUI">
+<Header>
+<Loc EndOffset="429" SrcFileId="6" StartOffset="404"/>
+</Header>
+<LocList>
+<Loc EndOffset="3000" SrcFileId="6" StartOffset="404"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="88" HierarchyLvlTypeId="11" Intrnl_Id="157" Name="GameBoardGUI">
+<Header>
+<Loc EndOffset="618" SrcFileId="6" StartOffset="566"/>
+</Header>
+<LocList>
+<Loc EndOffset="1442" SrcFileId="6" StartOffset="566"/>
+</LocList>
+<StmntSeq Intrnl_Id="158">
+<LocList>
+<Loc EndOffset="663" SrcFileId="6" StartOffset="624"/>
+<Loc EndOffset="690" SrcFileId="6" StartOffset="667"/>
+<Loc EndOffset="714" SrcFileId="6" StartOffset="694"/>
+<Loc EndOffset="765" SrcFileId="6" StartOffset="718"/>
+<Loc EndOffset="805" SrcFileId="6" StartOffset="769"/>
+<Loc EndOffset="853" SrcFileId="6" StartOffset="809"/>
+<Loc EndOffset="902" SrcFileId="6" StartOffset="857"/>
+<Loc EndOffset="948" SrcFileId="6" StartOffset="906"/>
+<Loc EndOffset="991" SrcFileId="6" StartOffset="952"/>
+<Loc EndOffset="1024" SrcFileId="6" StartOffset="995"/>
+<Loc EndOffset="1063" SrcFileId="6" StartOffset="1028"/>
+<Loc EndOffset="1100" SrcFileId="6" StartOffset="1067"/>
+<Loc EndOffset="1124" SrcFileId="6" StartOffset="1106"/>
+<Loc EndOffset="1356" SrcFileId="6" StartOffset="1128"/>
+<Loc EndOffset="1403" SrcFileId="6" StartOffset="1360"/>
+<Loc EndOffset="1438" SrcFileId="6" StartOffset="1407"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="159">
+<LocList>
+<Loc EndOffset="663" SrcFileId="6" StartOffset="624"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="160">
+<LocList>
+<Loc EndOffset="690" SrcFileId="6" StartOffset="667"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S3" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="161">
+<LocList>
+<Loc EndOffset="714" SrcFileId="6" StartOffset="694"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S4" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="162">
+<LocList>
+<Loc EndOffset="765" SrcFileId="6" StartOffset="718"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S5" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="163">
+<LocList>
+<Loc EndOffset="805" SrcFileId="6" StartOffset="769"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S6" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="164">
+<LocList>
+<Loc EndOffset="853" SrcFileId="6" StartOffset="809"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S7" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="165">
+<LocList>
+<Loc EndOffset="902" SrcFileId="6" StartOffset="857"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S8" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="166">
+<LocList>
+<Loc EndOffset="948" SrcFileId="6" StartOffset="906"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S9" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="167">
+<LocList>
+<Loc EndOffset="991" SrcFileId="6" StartOffset="952"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S10" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="168">
+<LocList>
+<Loc EndOffset="1024" SrcFileId="6" StartOffset="995"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S11" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="169">
+<LocList>
+<Loc EndOffset="1063" SrcFileId="6" StartOffset="1028"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S12" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="170">
+<LocList>
+<Loc EndOffset="1100" SrcFileId="6" StartOffset="1067"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S13" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="171">
+<LocList>
+<Loc EndOffset="1124" SrcFileId="6" StartOffset="1106"/>
+</LocList>
+</BasicStmnt>
+<LoopStmnt CovItemId="S14" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="172" MltplExecId="L1-2" MltplExecPrefix="csse376_puerto_rico.GameBoardGUI.java" NvrExecId="L1-0" NvrExecPrefix="csse376_puerto_rico.GameBoardGUI.java" OnceExecutedId="L1-1" OnceExecutedPrefix="csse376_puerto_rico.GameBoardGUI.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="173">
+<LocList>
+<Loc EndOffset="1284" SrcFileId="6" StartOffset="1238"/>
+<Loc EndOffset="1351" SrcFileId="6" StartOffset="1289"/>
+</LocList>
+<BasicStmnt CovItemId="S15" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="174">
+<LocList>
+<Loc EndOffset="1284" SrcFileId="6" StartOffset="1238"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S16" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="175">
+<Branch CovItemId="B1" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Implct="false" Intrnl_Id="176">
+<Cond/>
+<LocList>
+<Loc EndOffset="1351" SrcFileId="6" StartOffset="1314"/>
+</LocList>
+<StmntSeq Intrnl_Id="177">
+<LocList>
+<Loc EndOffset="1345" SrcFileId="6" StartOffset="1321"/>
+</LocList>
+<BasicStmnt CovItemId="S17" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="178">
+<LocList>
+<Loc EndOffset="1345" SrcFileId="6" StartOffset="1321"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B2" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Implct="true" Intrnl_Id="179">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="180">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1291" SrcFileId="6" StartOffset="1289"/>
+<LocList>
+<Loc EndOffset="1351" SrcFileId="6" StartOffset="1289"/>
+</LocList>
+<RootTerm CovItemId="C2" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="181">
+<BasicBoolTerm Intrnl_Id="182">
+<LocList>
+<Loc EndOffset="1312" SrcFileId="6" StartOffset="1293"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+<Keyword EndOffset="1131" SrcFileId="6" StartOffset="1128"/>
+<LocList>
+<Loc EndOffset="1356" SrcFileId="6" StartOffset="1128"/>
+</LocList>
+<RootTerm CovItemId="C1" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="183">
+<BasicBoolTerm Intrnl_Id="184">
+<LocList>
+<Loc EndOffset="1229" SrcFileId="6" StartOffset="1198"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</LoopStmnt>
+<BasicStmnt CovItemId="S18" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="185">
+<LocList>
+<Loc EndOffset="1403" SrcFileId="6" StartOffset="1360"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S19" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="186">
+<LocList>
+<Loc EndOffset="1438" SrcFileId="6" StartOffset="1407"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="89" HierarchyLvlTypeId="11" Intrnl_Id="187" Name="addPlayers">
+<Header>
+<Loc EndOffset="1498" SrcFileId="6" StartOffset="1447"/>
+</Header>
+<LocList>
+<Loc EndOffset="1903" SrcFileId="6" StartOffset="1447"/>
+</LocList>
+<StmntSeq Intrnl_Id="188">
+<LocList>
+<Loc EndOffset="1855" SrcFileId="6" StartOffset="1504"/>
+<Loc EndOffset="1873" SrcFileId="6" StartOffset="1859"/>
+<Loc EndOffset="1899" SrcFileId="6" StartOffset="1879"/>
+</LocList>
+<LoopStmnt CovItemId="S20" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="189" MltplExecId="L2-2" MltplExecPrefix="csse376_puerto_rico.GameBoardGUI.java" NvrExecId="L2-0" NvrExecPrefix="csse376_puerto_rico.GameBoardGUI.java" OnceExecutedId="L2-1" OnceExecutedPrefix="csse376_puerto_rico.GameBoardGUI.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="190">
+<LocList>
+<Loc EndOffset="1576" SrcFileId="6" StartOffset="1552"/>
+<Loc EndOffset="1626" SrcFileId="6" StartOffset="1581"/>
+<Loc EndOffset="1731" SrcFileId="6" StartOffset="1631"/>
+<Loc EndOffset="1751" SrcFileId="6" StartOffset="1736"/>
+<Loc EndOffset="1775" SrcFileId="6" StartOffset="1756"/>
+<Loc EndOffset="1794" SrcFileId="6" StartOffset="1780"/>
+<Loc EndOffset="1819" SrcFileId="6" StartOffset="1799"/>
+<Loc EndOffset="1848" SrcFileId="6" StartOffset="1824"/>
+</LocList>
+<BasicStmnt CovItemId="S21" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="191">
+<LocList>
+<Loc EndOffset="1576" SrcFileId="6" StartOffset="1552"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S22" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="192">
+<Branch CovItemId="B3" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Implct="false" Intrnl_Id="193">
+<Cond/>
+<LocList>
+<Loc EndOffset="1626" SrcFileId="6" StartOffset="1593"/>
+</LocList>
+<StmntSeq Intrnl_Id="194">
+<LocList>
+<Loc EndOffset="1620" SrcFileId="6" StartOffset="1600"/>
+</LocList>
+<BasicStmnt CovItemId="S23" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="195">
+<LocList>
+<Loc EndOffset="1620" SrcFileId="6" StartOffset="1600"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B4" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Implct="true" Intrnl_Id="196">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="197">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="1583" SrcFileId="6" StartOffset="1581"/>
+<LocList>
+<Loc EndOffset="1626" SrcFileId="6" StartOffset="1581"/>
+</LocList>
+<RootTerm CovItemId="C4" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="198">
+<BasicBoolTerm Intrnl_Id="199">
+<LocList>
+<Loc EndOffset="1591" SrcFileId="6" StartOffset="1585"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S24" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="200">
+<LocList>
+<Loc EndOffset="1731" SrcFileId="6" StartOffset="1631"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S25" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="201">
+<LocList>
+<Loc EndOffset="1751" SrcFileId="6" StartOffset="1736"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S26" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="202">
+<LocList>
+<Loc EndOffset="1775" SrcFileId="6" StartOffset="1756"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S27" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="203">
+<LocList>
+<Loc EndOffset="1794" SrcFileId="6" StartOffset="1780"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S28" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="204">
+<LocList>
+<Loc EndOffset="1819" SrcFileId="6" StartOffset="1799"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S29" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="205">
+<LocList>
+<Loc EndOffset="1848" SrcFileId="6" StartOffset="1824"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="1507" SrcFileId="6" StartOffset="1504"/>
+<LocList>
+<Loc EndOffset="1855" SrcFileId="6" StartOffset="1504"/>
+</LocList>
+<RootTerm CovItemId="C3" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="206">
+<BasicBoolTerm Intrnl_Id="207">
+<LocList>
+<Loc EndOffset="1539" SrcFileId="6" StartOffset="1520"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</LoopStmnt>
+<BasicStmnt CovItemId="S30" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="208">
+<LocList>
+<Loc EndOffset="1873" SrcFileId="6" StartOffset="1859"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S31" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="209">
+<LocList>
+<Loc EndOffset="1899" SrcFileId="6" StartOffset="1879"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="90" HierarchyLvlTypeId="11" Intrnl_Id="210" Name="getPlayers">
+<Header>
+<Loc EndOffset="1940" SrcFileId="6" StartOffset="1908"/>
+</Header>
+<LocList>
+<Loc EndOffset="1970" SrcFileId="6" StartOffset="1908"/>
+</LocList>
+<StmntSeq Intrnl_Id="211">
+<LocList>
+<Loc EndOffset="1966" SrcFileId="6" StartOffset="1946"/>
+</LocList>
+<BasicStmnt CovItemId="S32" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="212">
+<LocList>
+<Loc EndOffset="1966" SrcFileId="6" StartOffset="1946"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="91" HierarchyLvlTypeId="11" Intrnl_Id="213" Name="getTurnCount">
+<Header>
+<Loc EndOffset="2008" SrcFileId="6" StartOffset="1976"/>
+</Header>
+<LocList>
+<Loc EndOffset="2037" SrcFileId="6" StartOffset="1976"/>
+</LocList>
+<StmntSeq Intrnl_Id="214">
+<LocList>
+<Loc EndOffset="2033" SrcFileId="6" StartOffset="2016"/>
+</LocList>
+<BasicStmnt CovItemId="S33" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="215">
+<LocList>
+<Loc EndOffset="2033" SrcFileId="6" StartOffset="2016"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="92" HierarchyLvlTypeId="11" Intrnl_Id="216" Name="getPlayerText">
+<Header>
+<Loc EndOffset="2133" SrcFileId="6" StartOffset="2042"/>
+</Header>
+<LocList>
+<Loc EndOffset="2413" SrcFileId="6" StartOffset="2042"/>
+</LocList>
+<StmntSeq Intrnl_Id="217">
+<LocList>
+<Loc EndOffset="2157" SrcFileId="6" StartOffset="2139"/>
+<Loc EndOffset="2394" SrcFileId="6" StartOffset="2161"/>
+<Loc EndOffset="2409" SrcFileId="6" StartOffset="2398"/>
+</LocList>
+<BasicStmnt CovItemId="S34" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="218">
+<LocList>
+<Loc EndOffset="2157" SrcFileId="6" StartOffset="2139"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S35" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="219">
+<Branch CovItemId="B5" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Implct="false" Intrnl_Id="220">
+<Cond/>
+<LocList>
+<Loc EndOffset="2288" SrcFileId="6" StartOffset="2177"/>
+</LocList>
+<StmntSeq Intrnl_Id="221">
+<LocList>
+<Loc EndOffset="2281" SrcFileId="6" StartOffset="2183"/>
+</LocList>
+<BasicStmnt CovItemId="S36" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="222">
+<LocList>
+<Loc EndOffset="2281" SrcFileId="6" StartOffset="2183"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B6" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Implct="false" Intrnl_Id="223">
+<Cond>
+<Loc EndOffset="2293" SrcFileId="6" StartOffset="2289"/>
+</Cond>
+<LocList>
+<Loc EndOffset="2394" SrcFileId="6" StartOffset="2294"/>
+</LocList>
+<StmntSeq Intrnl_Id="224">
+<LocList>
+<Loc EndOffset="2387" SrcFileId="6" StartOffset="2300"/>
+</LocList>
+<BasicStmnt CovItemId="S37" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="225">
+<LocList>
+<Loc EndOffset="2387" SrcFileId="6" StartOffset="2300"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="2163" SrcFileId="6" StartOffset="2161"/>
+<LocList>
+<Loc EndOffset="2394" SrcFileId="6" StartOffset="2161"/>
+</LocList>
+<RootTerm CovItemId="C5" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="226">
+<BasicBoolTerm Intrnl_Id="227">
+<LocList>
+<Loc EndOffset="2175" SrcFileId="6" StartOffset="2165"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+<BasicStmnt CovItemId="S38" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="228">
+<LocList>
+<Loc EndOffset="2409" SrcFileId="6" StartOffset="2398"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="93" HierarchyLvlTypeId="11" Intrnl_Id="229" Name="updateRoles">
+<Header>
+<Loc EndOffset="2443" SrcFileId="6" StartOffset="2418"/>
+</Header>
+<LocList>
+<Loc EndOffset="2997" SrcFileId="6" StartOffset="2418"/>
+</LocList>
+<StmntSeq Intrnl_Id="230">
+<LocList>
+<Loc EndOffset="2993" SrcFileId="6" StartOffset="2449"/>
+</LocList>
+<LoopStmnt CovItemId="S39" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="231" MltplExecId="L3-2" MltplExecPrefix="csse376_puerto_rico.GameBoardGUI.java" NvrExecId="L3-0" NvrExecPrefix="csse376_puerto_rico.GameBoardGUI.java" OnceExecutedId="L3-1" OnceExecutedPrefix="csse376_puerto_rico.GameBoardGUI.java" OptBodyExec="true">
+<StmntSeq Intrnl_Id="232">
+<LocList>
+<Loc EndOffset="2537" SrcFileId="6" StartOffset="2501"/>
+<Loc EndOffset="2589" SrcFileId="6" StartOffset="2542"/>
+<Loc EndOffset="2821" SrcFileId="6" StartOffset="2594"/>
+<Loc EndOffset="2860" SrcFileId="6" StartOffset="2826"/>
+<Loc EndOffset="2897" SrcFileId="6" StartOffset="2865"/>
+<Loc EndOffset="2988" SrcFileId="6" StartOffset="2902"/>
+</LocList>
+<BasicStmnt CovItemId="S40" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="233">
+<LocList>
+<Loc EndOffset="2537" SrcFileId="6" StartOffset="2501"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S41" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="234">
+<LocList>
+<Loc EndOffset="2589" SrcFileId="6" StartOffset="2542"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S42" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="235">
+<LocList>
+<Loc EndOffset="2821" SrcFileId="6" StartOffset="2594"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S43" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="236">
+<LocList>
+<Loc EndOffset="2860" SrcFileId="6" StartOffset="2826"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S44" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="237">
+<LocList>
+<Loc EndOffset="2897" SrcFileId="6" StartOffset="2865"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S45" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="238">
+<LocList>
+<Loc EndOffset="2988" SrcFileId="6" StartOffset="2902"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+<Keyword EndOffset="2452" SrcFileId="6" StartOffset="2449"/>
+<LocList>
+<Loc EndOffset="2993" SrcFileId="6" StartOffset="2449"/>
+</LocList>
+<RootTerm CovItemId="C6" CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java" Intrnl_Id="239">
+<BasicBoolTerm Intrnl_Id="240">
+<LocList>
+<Loc EndOffset="2488" SrcFileId="6" StartOffset="2465"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</LoopStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="97" HierarchyLvlTypeId="10" Intrnl_Id="241" Name="ButtonHandler">
+<Header>
+<Loc EndOffset="224" SrcFileId="7" StartOffset="172"/>
+</Header>
+<LocList>
+<Loc EndOffset="790" SrcFileId="7" StartOffset="172"/>
+</LocList>
+<HierarchyLvl HierarchyLvlId="95" HierarchyLvlTypeId="11" Intrnl_Id="242" Name="ButtonHandler">
+<Header>
+<Loc EndOffset="345" SrcFileId="7" StartOffset="292"/>
+</Header>
+<LocList>
+<Loc EndOffset="402" SrcFileId="7" StartOffset="292"/>
+</LocList>
+<StmntSeq Intrnl_Id="243">
+<LocList>
+<Loc EndOffset="374" SrcFileId="7" StartOffset="351"/>
+<Loc EndOffset="398" SrcFileId="7" StartOffset="378"/>
+</LocList>
+<BasicStmnt CovItemId="S1" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="244">
+<LocList>
+<Loc EndOffset="374" SrcFileId="7" StartOffset="351"/>
+</LocList>
+</BasicStmnt>
+<BasicStmnt CovItemId="S2" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="245">
+<LocList>
+<Loc EndOffset="398" SrcFileId="7" StartOffset="378"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</HierarchyLvl>
+<HierarchyLvl HierarchyLvlId="96" HierarchyLvlTypeId="11" Intrnl_Id="246" Name="actionPerformed">
+<Header>
+<Loc EndOffset="462" SrcFileId="7" StartOffset="407"/>
+</Header>
+<LocList>
+<Loc EndOffset="785" SrcFileId="7" StartOffset="407"/>
+</LocList>
+<StmntSeq Intrnl_Id="247">
+<LocList>
+<Loc EndOffset="506" SrcFileId="7" StartOffset="468"/>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="510"/>
+</LocList>
+<BasicStmnt CovItemId="S3" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="248">
+<LocList>
+<Loc EndOffset="506" SrcFileId="7" StartOffset="468"/>
+</LocList>
+</BasicStmnt>
+<CondStmnt CovItemId="S4" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="249">
+<Branch CovItemId="B1" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Implct="false" Intrnl_Id="250">
+<Cond/>
+<LocList>
+<Loc EndOffset="561" SrcFileId="7" StartOffset="535"/>
+</LocList>
+<StmntSeq Intrnl_Id="251">
+<LocList>
+<Loc EndOffset="556" SrcFileId="7" StartOffset="541"/>
+</LocList>
+<BasicStmnt CovItemId="S5" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="252">
+<LocList>
+<Loc EndOffset="556" SrcFileId="7" StartOffset="541"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B2" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Implct="false" Intrnl_Id="253">
+<Cond>
+<Loc EndOffset="565" SrcFileId="7" StartOffset="561"/>
+</Cond>
+<LocList>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="566"/>
+</LocList>
+<StmntSeq Intrnl_Id="254">
+<LocList>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="566"/>
+</LocList>
+<CondStmnt CovItemId="S6" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="255">
+<Branch CovItemId="B3" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Implct="false" Intrnl_Id="256">
+<Cond/>
+<LocList>
+<Loc EndOffset="646" SrcFileId="7" StartOffset="595"/>
+</LocList>
+<StmntSeq Intrnl_Id="257">
+<LocList>
+<Loc EndOffset="641" SrcFileId="7" StartOffset="601"/>
+</LocList>
+<BasicStmnt CovItemId="S7" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="258">
+<LocList>
+<Loc EndOffset="641" SrcFileId="7" StartOffset="601"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B4" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Implct="false" Intrnl_Id="259">
+<Cond>
+<Loc EndOffset="650" SrcFileId="7" StartOffset="646"/>
+</Cond>
+<LocList>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="651"/>
+</LocList>
+<StmntSeq Intrnl_Id="260">
+<LocList>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="651"/>
+</LocList>
+<CondStmnt CovItemId="S8" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="261">
+<Branch CovItemId="B5" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Implct="false" Intrnl_Id="262">
+<Cond/>
+<LocList>
+<Loc EndOffset="734" SrcFileId="7" StartOffset="677"/>
+</LocList>
+<StmntSeq Intrnl_Id="263">
+<LocList>
+<Loc EndOffset="729" SrcFileId="7" StartOffset="683"/>
+</LocList>
+<BasicStmnt CovItemId="S9" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="264">
+<LocList>
+<Loc EndOffset="729" SrcFileId="7" StartOffset="683"/>
+</LocList>
+</BasicStmnt>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B6" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Implct="false" Intrnl_Id="265">
+<Cond>
+<Loc EndOffset="738" SrcFileId="7" StartOffset="734"/>
+</Cond>
+<LocList>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="739"/>
+</LocList>
+<StmntSeq Intrnl_Id="266">
+<LocList>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="739"/>
+</LocList>
+<CondStmnt CovItemId="S10" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="267">
+<Branch CovItemId="B7" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Implct="false" Intrnl_Id="268">
+<Cond/>
+<LocList>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="770"/>
+</LocList>
+<StmntSeq Intrnl_Id="269">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Branch CovItemId="B8" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Implct="true" Intrnl_Id="270">
+<Cond/>
+<LocList/>
+<StmntSeq Intrnl_Id="271">
+<LocList/>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="741" SrcFileId="7" StartOffset="739"/>
+<LocList>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="739"/>
+</LocList>
+<RootTerm CovItemId="C4" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="272">
+<BasicBoolTerm Intrnl_Id="273">
+<LocList>
+<Loc EndOffset="769" SrcFileId="7" StartOffset="742"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="653" SrcFileId="7" StartOffset="651"/>
+<LocList>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="651"/>
+</LocList>
+<RootTerm CovItemId="C3" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="274">
+<BasicBoolTerm Intrnl_Id="275">
+<LocList>
+<Loc EndOffset="676" SrcFileId="7" StartOffset="654"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="568" SrcFileId="7" StartOffset="566"/>
+<LocList>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="566"/>
+</LocList>
+<RootTerm CovItemId="C2" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="276">
+<BasicBoolTerm Intrnl_Id="277">
+<LocList>
+<Loc EndOffset="594" SrcFileId="7" StartOffset="569"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</Branch>
+<Keyword EndOffset="512" SrcFileId="7" StartOffset="510"/>
+<LocList>
+<Loc EndOffset="781" SrcFileId="7" StartOffset="510"/>
+</LocList>
+<RootTerm CovItemId="C1" CovItemPrefix="csse376_puerto_rico.ButtonHandler.java" Intrnl_Id="278">
+<BasicBoolTerm Intrnl_Id="279">
+<LocList>
+<Loc EndOffset="534" SrcFileId="7" StartOffset="513"/>
+</LocList>
+</BasicBoolTerm>
+</RootTerm>
+</CondStmnt>
+</StmntSeq>
+</HierarchyLvl>
+</HierarchyLvl>
+</HierarchyLvl>
+</HierarchyLvl>
+</MASTRoot>
+</TestSessionContainer>
