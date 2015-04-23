@@ -1,6 +1,6 @@
 package csse376_puerto_rico;
 
 
-public enum Buildings {
-
+public class Buildings {
+	public static String small_indigo_plant = "Small Indigo Plant";
 }
