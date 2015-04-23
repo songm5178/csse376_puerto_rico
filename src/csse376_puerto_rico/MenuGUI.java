@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.miginfocom.swing.MigLayout;
+
 public class MenuGUI {
 	/**
      * Mainframe.
@@ -25,11 +27,13 @@ public class MenuGUI {
            this.mainframe.setVisible(true);
            this.mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
            this.mainframe.setResizable(false);
+//           MigLayout layout = new MigLayout();
+//   		   this.mainframe.setLayout(layout);
            
            JPanel imgPanel = new JPanel();
            JPanel buttonPanel = new JPanel();
            
-           String imageLoc = "puerto-rico.jpg";
+           String imageLoc = "puerto-ricosmall.jpg";
            ImageIcon imageIcon = new ImageIcon(imageLoc);
            
            imgPanel.add(new JLabel(imageIcon));
