@@ -13,6 +13,7 @@ public class Player {
 	public boolean isTurn;
 	public boolean isGovernor;
 	private int points = 0;
+	private ArrayList<String> buildings = new ArrayList<String>();
 	
 
 	private static List<String> roles = new ArrayList<String>(Arrays.asList(
@@ -67,6 +68,18 @@ public class Player {
 	public void setRole(String string) {
 		this.role = string;
 
+	}
+
+	
+	public void addBuilding(String building) {
+		buildings.add(building);
+		
+	}
+
+	
+	public Object getBuildings() {
+
+		return buildings;
 	}
 	
 }
