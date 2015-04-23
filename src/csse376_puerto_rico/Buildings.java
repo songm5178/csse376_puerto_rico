@@ -13,13 +13,12 @@ public class Buildings {
 	public Buildings() {
 		buildings = new ArrayList<Building>();
 
-		
 		List<String> buildingNames = Arrays.asList("Small Indigo Plant",
 				"Small Sugar Mill", "Small Market", "Hacienda",
 				"ConstructionHut", "Small Warehouse", "Indigo Plant",
-				"Surgar Mill", "Hospice"); //TODO: add more
-		
-		for(String name: buildingNames){
+				"Surgar Mill", "Hospice"); // TODO: add more
+
+		for (String name : buildingNames) {
 			buildings.add(new Building(name));
 		}
 
@@ -33,9 +32,27 @@ public class Buildings {
 	public class Building {
 
 		public String name;
+		public int cost;
+		public int points;
+		public int numberOfJobs;
+		public int numberOfWorkers;
 
 		public Building(String name) {
+			this.name = name;
+			switch (name) {
+			case "Small Indigo Plant":
+				cost = 1;
+				points = 1;
+				numberOfJobs = 1;
+				numberOfWorkers = 0;
+				break;
 
+			default:
+				cost = 0;
+				points = 0;
+				numberOfJobs = 0;
+				numberOfWorkers = 0;
+			}
 		}
 	}
 }

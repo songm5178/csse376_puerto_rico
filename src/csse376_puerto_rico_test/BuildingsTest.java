@@ -34,6 +34,7 @@ public class BuildingsTest {
 		assertNotNull(bs.points);
 		assertNotNull(bs.numberOfJobs);
 		assertNotNull(bs.numberOfWorkers);
+		
 	}
 
 
