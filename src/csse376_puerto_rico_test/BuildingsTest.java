@@ -30,10 +30,10 @@ public class BuildingsTest {
 	@Test public void getBuildingFieldsTest(){
 		Buildings b = new Buildings();
 		Building bs = b.getBuildings().get(0);
-		assertNotNull(bs.getCost);
-		assertNotNull(bs.getPoints);
-		assertNotNull(bs.getNumberOfJobs);
-		assertNotNull(bs.getNumberOfWorkers);
+		assertNotNull(bs.cost);
+		assertNotNull(bs.points);
+		assertNotNull(bs.numberOfJobs);
+		assertNotNull(bs.numberOfWorkers);
 	}
 
 

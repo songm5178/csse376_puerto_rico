@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+
 public class Buildings {
 
 	private ArrayList<Building> buildings;
