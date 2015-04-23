@@ -18,5 +18,13 @@ public class BuildingsTest {
 	public void basic_test() {
 		Buildings b = new Buildings();
 	}
+	
+	@Test
+	public void getBuildings_test() {
+		Buildings b = new Buildings();
+		assertNotNull(b.getBuildings());
+		
+	}
+
 
 }
