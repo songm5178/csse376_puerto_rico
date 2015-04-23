@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-
 public class Buildings {
 
 	private ArrayList<Building> buildings;
@@ -47,6 +45,7 @@ public class Buildings {
 				numberOfWorkers = 0;
 				break;
 
+			// TODO: Add all cases for all buildings
 			default:
 				cost = 0;
 				points = 0;
