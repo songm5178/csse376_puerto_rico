@@ -19,5 +19,15 @@ public class PlayerRolesTest {
 		
 		assertEquals(PlayerRoles.Captain, "Captain");
 	}
+	@Test
+	public void settler_test() {
+		
+		assertEquals(PlayerRoles.Settler, "Settler");
+	}
+	@Test
+	public void builder_test() {
+		
+		assertEquals(PlayerRoles.Builder, "Builder");
+	}
 
 }
