@@ -14,11 +14,8 @@ public class Player {
 	public boolean isGovernor;
 	private int points = 0;
 	private ArrayList<String> buildings = new ArrayList<String>();
-	
 
-	private static List<String> roles = new ArrayList<String>(Arrays.asList(
-			"Settler", "Builder", "Craftsman", "Trader", "Captain",
-			"Prospector", "Mayor"));
+	private static List<String> roles = PlayerRoles.getValues();
 
 	// For Testing purposes, null player
 	public Player() {
@@ -46,16 +43,16 @@ public class Player {
 	public int getPoints() {
 		return points;
 	}
-	
-	public JTextArea getHUD(){
+
+	public JTextArea getHUD() {
 		return this.hud;
 	}
-	
-	public void setHUD(JTextArea hud){
+
+	public void setHUD(JTextArea hud) {
 		this.hud = hud;
 	}
-	
-	public boolean isGovernor(){
+
+	public boolean isGovernor() {
 		return isGovernor;
 	}
 
@@ -70,16 +67,14 @@ public class Player {
 
 	}
 
-	
 	public void addBuilding(String building) {
 		buildings.add(building);
-		
+
 	}
 
-	
 	public Object getBuildings() {
 
 		return buildings;
 	}
-	
+
 }
