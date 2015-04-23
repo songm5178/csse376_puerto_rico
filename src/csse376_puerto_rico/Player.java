@@ -85,7 +85,7 @@ public class Player {
 
 	}
 
-	public Object getBuildings() {
+	public ArrayList<String> getBuildings() {
 
 		return buildings;
 	}
@@ -100,6 +100,11 @@ public class Player {
 
 	public int getNumberOfGood(String good) {
 		return this.goods.get(good);
+	}
+
+	public void addGood(String good, int number) {
+		// adds the number to the original
+		this.goods.put(good, this.goods.get(good) + number);
 	}
 
 }
