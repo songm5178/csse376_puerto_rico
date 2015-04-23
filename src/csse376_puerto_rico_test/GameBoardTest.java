@@ -1,4 +1,4 @@
-package csse376_puerto_rico;
+package csse376_puerto_rico_test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -7,6 +7,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 
 import org.junit.Test;
+
+import csse376_puerto_rico.GameBoardGUI;
 
 /**
  * TODO Put here a description of what this class does.
