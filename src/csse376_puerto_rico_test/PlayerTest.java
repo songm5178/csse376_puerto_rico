@@ -134,5 +134,12 @@ public class PlayerTest {
 		player.setHUD(fakeHUD);
 		assertEquals(fakeHUD, player.getHUD());
 	}
+	
+	@Test
+	public void test_getBuildings(){
+		Player player = new Player();
+		player.addBuilding("Building");
+		Assert.assertNotNull(player.getBuildings());
+	}
 
 }
