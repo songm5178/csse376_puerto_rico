@@ -196,4 +196,9 @@ public class PlayerTest {
 		player.addGood("Coffee", 1);
 		assertEquals(1, player.getNumberOfGood("Coffee"));
 	}
+	
+	@Test
+	public void add_MultipleCoffee(){
+
+	}
 }
