@@ -78,7 +78,7 @@ public class GameBoardGUI {
 				p.isGovernor = true;
 			}
 			JTextArea jta = new JTextArea("Player " + (i + 1) + "\nRole: "
-					+ "\nScore: " + p.getPoints());
+					+ "\nScore: " + p.getPoints() + "\nBuildings:" + p.getBuildings() + "\nPlantations:");
 			jta.setRows(5);
 			jta.setColumns(15);
 			p.setHUD(jta);
@@ -100,16 +100,16 @@ public class GameBoardGUI {
 		return turnCount;
 	}
 
-	public String getPlayerText(int playerNum, String role, int points,
-			boolean isGovernor) {
+	public String getPlayerText(int playerNum, String role, int points, 
+			String building, String plantation, boolean isGovernor) {
 		String rtn = null;
 		if (isGovernor) {
-			rtn = String.format("Player %d \nRole: %s \nScore: %d \nGovernor",
-					playerNum, role, points);
+			rtn = String.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s \nGovernor",
+					playerNum, role, points, building, plantation);
 
 		} else {
-			rtn = String.format("Player %d \nRole: %s \nScore: %d", playerNum,
-					role, points);
+			rtn = String.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s", playerNum,
+					role, points, building, plantation);
 
 		}
 		return rtn;
@@ -124,10 +124,20 @@ public class GameBoardGUI {
 					JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, options,
 					options[options.length - 1]);
+			StringBuilder buildingList = new StringBuilder();
+			StringBuilder plantationList = new StringBuilder();
+			for (String s : player.getBuildings())
+			{
+				buildingList.append(s + ", ");
+			}
+			for (String s : player.getGoods())
+			{
+				plantationList.append(s + ", ");
+			}
 			String role = (String) options[n];
 			int points = player.getPoints();
 			player.getHUD().setText(
-					getPlayerText(i + 1, role, points, player.isGovernor));
+					getPlayerText(i + 1, role, points, buildingList.toString(), plantationList.toString(), player.isGovernor));
 		}
 	}
 }
