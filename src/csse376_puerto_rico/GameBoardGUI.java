@@ -29,11 +29,21 @@ public class GameBoardGUI {
 		this.bGroup = group;
 		NextMoveButton nextMove = new NextMoveButton();
 		nextMove.setText("Turn "+turnCount);
+		GoodsButton CoffeeButton = new GoodsButton("Coffee");
+		GoodsButton CornButton = new GoodsButton("Corn");
+		GoodsButton TobaccoButton = new GoodsButton("Tobacco");
+		GoodsButton IndigoButton = new GoodsButton("Indigo");
+		GoodsButton SugarButton = new GoodsButton("Sugar");
 		this.mainframe.getContentPane().removeAll();
 		this.mainframe.getContentPane().revalidate();
 		this.mainframe.setBackground(Color.GREEN);
 		this.mainframe.setTitle("Puerto Rico");
 		this.mainframe.add(nextMove);
+		this.mainframe.add(CoffeeButton);
+		this.mainframe.add(CornButton);
+		this.mainframe.add(TobaccoButton);
+		this.mainframe.add(SugarButton);
+		this.mainframe.add(IndigoButton);
 		MigLayout layout = new MigLayout();
 		this.mainframe.setLayout(layout);
 
@@ -124,6 +134,7 @@ public class GameBoardGUI {
 					JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, options,
 					options[options.length - 1]);
+			//in this block of code I had to convert the lists of buildings,plantations into Strings
 			StringBuilder buildingList = new StringBuilder();
 			StringBuilder plantationList = new StringBuilder();
 			for (String s : player.getBuildings())

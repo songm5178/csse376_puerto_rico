@@ -15,7 +15,6 @@ public class Player {
 	public boolean isGovernor;
 	private int points = 0;
 	private ArrayList<String> buildings = new ArrayList<String>();
-
 	class Good {
 		public static final String COFFEE = "Coffee";
 		public static final String TOBACCO = "Tobacco";
@@ -32,6 +31,9 @@ public class Player {
 		this.role = "";
 		this.isGovernor = false;
 		this.hud = new JTextArea();
+		for (String s : this.getAllGoods()) {
+			this.goods.put(s, 0);
+		}
 	}
 
 	public Player(String role) {
@@ -39,7 +41,7 @@ public class Player {
 		this.isGovernor = false;
 		this.isTurn = false;
 		this.hud = null;
-		for (String s : getGoods()) {
+		for (String s : this.getAllGoods()) {
 			this.goods.put(s, 0);
 		}
 	}
@@ -111,6 +113,14 @@ public class Player {
 		}
 		return this.goods.get(good);
 
+	}
+	
+	public List<String> getAllGoods()
+	{
+			List<String> rtn = new ArrayList<String>();
+			rtn.addAll(Arrays.asList(Good.COFFEE, Good.CORN, Good.INDIGO,
+					Good.SUGAR, Good.TOBACCO));
+			return rtn;	
 	}
 
 	public void addGood(String good, int number) {
