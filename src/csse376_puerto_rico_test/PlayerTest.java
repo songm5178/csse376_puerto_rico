@@ -157,7 +157,9 @@ public class PlayerTest {
 	
 	@Test
 	public void add_MultipleTobaccos(){
-		
+		Player player = new Player();
+		player.addGood("Tobacco", 3);
+		assertEquals(3, player.getNumberOfGood("Tobacco"));
 	}
 	
 
