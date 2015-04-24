@@ -40,8 +40,7 @@ public class GameBoardGuiTest {
 		int playerNum = 0;
 		String role = "roleTest";
 		int points = 1;
-		String expected = String.format("Player %d \nRole: %s \nScore: %d \nBuilding:[] \nPlantation:", playerNum, role, points);
-		
+		String expected = String.format("Player %d \nRole: %s \nScore: %d \nBuilding: [] \nPlantation: ", playerNum, role, points);
 		assertEquals(expected, g.getPlayerText(playerNum, role, points, "[]", "", false));
 		
 	}
@@ -51,9 +50,9 @@ public class GameBoardGuiTest {
 		int playerNum = 0;
 		String role = "roleTest";
 		int points = 1;
-		String expected = String.format("Player %d \nRole: %s \nScore: %d \nBuilding:[] \nPlantation: \nGovernor", playerNum, role, points);
+		String expected = String.format("Player %d \nRole: %s \nScore: %d \nBuilding: [] \nPlantation:  \nGovernor", playerNum, role, points);
 		
-		assertEquals(expected, g.getPlayerText(playerNum, role, points, "[]", "", true));
+		assertEquals(expected, g.getPlayerText(playerNum, role, points, "[]","", true));
 		
 	}
 	
