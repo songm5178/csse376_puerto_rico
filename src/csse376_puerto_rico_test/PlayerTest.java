@@ -203,4 +203,8 @@ public class PlayerTest {
 		player.addGood("Coffee", 3);
 		assertEquals(3, player.getNumberOfGood("Coffee"));
 	}
+	
+	public void add_1Indigo(){
+
+	}
 }
