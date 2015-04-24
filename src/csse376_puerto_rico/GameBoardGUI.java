@@ -19,6 +19,7 @@ public class GameBoardGUI {
 
 	private JFrame mainframe;
 	public static List<Player> players;
+	public static ArrayList<JPanel> playerCards;
 	private ButtonGroup bGroup;
 	private static int turnCount;
 
@@ -49,21 +50,24 @@ public class GameBoardGUI {
 	}
 
 	/**
+	 * This method allows us to add the space on the game board for buildings and goods to
+	 * be placed. It also gives a list of these "cards" so they can be accessed later.
 	 * 
 	 * @param numberPlayers
 	 * @return an arrayList of the buildingSpaces that are JPanels
 	 */
 	public ArrayList<JPanel> addPlayerCards(int numberPlayers) {
-		ArrayList<JPanel> buildingSpaces = new ArrayList<JPanel>();
+		ArrayList<JPanel> playerSpaces = new ArrayList<JPanel>();
 		for(int i = 0; i < numberPlayers; i++){
 			JPanel buildingSpace = new JPanel();
 			MigLayout layout = new MigLayout();
 			buildingSpace.setLayout(layout);
 			buildingSpace.setBackground(Color.BLACK);
-			buildingSpaces.add(buildingSpace);
+			playerSpaces.add(buildingSpace);
 			this.mainframe.add(buildingSpace, "cell "+i+" 2, w 165!, h 100!");
 		}
-		return buildingSpaces;
+		this.playerCards = playerSpaces;
+		return playerSpaces;
 	}
 
 	public List<Player> addPlayers(int numberOfPlayers) {
