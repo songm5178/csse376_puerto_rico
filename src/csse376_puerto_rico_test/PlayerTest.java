@@ -169,5 +169,10 @@ public class PlayerTest {
 		assertEquals(1, player.getNumberOfGood("Corn"));
 	}
 	
+	@Test
+	public void add_MultipleCorn(){
+
+	}
+	
 
 }
