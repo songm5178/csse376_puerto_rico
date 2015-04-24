@@ -164,8 +164,10 @@ public class PlayerTest {
 	
 	@Test
 	public void add_1Corn(){
-		
+		Player player = new Player();
+		player.addGood("Corn", 1);
+		assertEquals(1, player.getNumberOfGood("Corn"));
 	}
-	}
+	
 
 }
