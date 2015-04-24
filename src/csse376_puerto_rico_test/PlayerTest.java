@@ -185,6 +185,8 @@ public class PlayerTest {
 	
 	@Test
 	public void add_MultipleSugar(){
-
+		Player player = new Player();
+		player.addGood("Sugar", 1);
+		assertEquals(1, player.getNumberOfGood("Sugar"));
 	}
 }
