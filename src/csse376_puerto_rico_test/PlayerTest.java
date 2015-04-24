@@ -199,6 +199,8 @@ public class PlayerTest {
 	
 	@Test
 	public void add_MultipleCoffee(){
-
+		Player player = new Player();
+		player.addGood("Coffee", 3);
+		assertEquals(3, player.getNumberOfGood("Coffee"));
 	}
 }
