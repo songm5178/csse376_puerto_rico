@@ -24,8 +24,9 @@ public class GoodsButton extends JButton
 			
 					for(int i=0;i<players.size();i++)
 					{
-							System.out.println(players.get(i).getGoods());
-							players.get(i).addGood(goodsName, 1);
+						int playerNumber = i+1;
+						System.out.println( "Player "+playerNumber+": "+ players.get(i).getGoods());
+						players.get(i).addGood(goodsName, 1);
 						
 					}
 			}

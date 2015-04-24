@@ -79,16 +79,13 @@ public class Player {
 
 	public void setRole(String string) {
 		this.role = string;
-
 	}
 
 	public void addBuilding(String building) {
 		buildings.add(building);
-
 	}
 
 	public ArrayList<String> getBuildings() {
-
 		return buildings;
 	}
 
