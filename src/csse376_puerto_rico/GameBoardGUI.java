@@ -48,6 +48,11 @@ public class GameBoardGUI {
 		this.addPlayers(numberPlayers);
 	}
 
+	/**
+	 * 
+	 * @param numberPlayers
+	 * @return an arrayList of the buildingSpaces that are JPanels
+	 */
 	public ArrayList<JPanel> addPlayerCards(int numberPlayers) {
 		ArrayList<JPanel> buildingSpaces = new ArrayList<JPanel>();
 		for(int i = 0; i < numberPlayers; i++){
@@ -58,13 +63,7 @@ public class GameBoardGUI {
 			buildingSpaces.add(buildingSpace);
 			this.mainframe.add(buildingSpace, "cell "+i+" 2, w 165!, h 100!");
 		}
-		ArrayList answer = new ArrayList();
-		answer.add(null);
-		answer.add(null);
-		answer.add(null);
-		answer.add(null);
-		answer.add(null);
-		return answer;
+		return buildingSpaces;
 	}
 
 	public List<Player> addPlayers(int numberOfPlayers) {
