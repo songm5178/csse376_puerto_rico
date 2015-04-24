@@ -124,5 +124,5 @@ public class Player {
 		// adds the number to the original
 		this.goods.put(good, this.goods.get(good) + number);
 	}
-
+	
 }

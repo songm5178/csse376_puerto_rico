@@ -147,5 +147,13 @@ public class PlayerTest {
 		Player player = new Player();
 		assertNotNull(player.getGoods());
 	}
+	
+	@Test
+	public void add_Tobacco(){
+		Player player = new Player();
+		player.addGood("Tobacco", 1);
+		assertEquals(1, player.getNumberOfGood("Tobacco"));
+	}
+	
 
 }
