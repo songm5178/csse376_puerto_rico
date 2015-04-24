@@ -64,7 +64,7 @@ public class GameBoardGUI {
 			buildingSpace.setLayout(layout);
 			buildingSpace.setBackground(Color.BLACK);
 			playerSpaces.add(buildingSpace);
-			this.mainframe.add(buildingSpace, "cell "+i+" 2, w 165!, h 100!");
+			this.mainframe.add(buildingSpace, "cell "+i+" 2, w 165!, h 200!");
 		}
 		this.playerCards = playerSpaces;
 		return playerSpaces;
