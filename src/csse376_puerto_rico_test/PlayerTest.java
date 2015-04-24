@@ -176,5 +176,8 @@ public class PlayerTest {
 		assertEquals(3, player.getNumberOfGood("Corn"));
 	}
 	
+	@Test
+	public void add_1Sugar(){
 
+	}
 }
