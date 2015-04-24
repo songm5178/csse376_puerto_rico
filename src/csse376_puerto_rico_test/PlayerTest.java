@@ -209,4 +209,8 @@ public class PlayerTest {
 		player.addGood("Indigo", 1);
 		assertEquals(1, player.getNumberOfGood("Indigo"));
 	}
+	
+	public void add_MultipleIndigo(){
+	
+	}
 }
