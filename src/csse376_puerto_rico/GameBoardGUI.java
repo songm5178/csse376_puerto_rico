@@ -58,7 +58,13 @@ public class GameBoardGUI {
 			buildingSpaces.add(buildingSpace);
 			this.mainframe.add(buildingSpace, "cell "+i+" 2, w 165!, h 100!");
 		}
-		return null;
+		ArrayList answer = new ArrayList();
+		answer.add(null);
+		answer.add(null);
+		answer.add(null);
+		answer.add(null);
+		answer.add(null);
+		return answer;
 	}
 
 	public List<Player> addPlayers(int numberOfPlayers) {
