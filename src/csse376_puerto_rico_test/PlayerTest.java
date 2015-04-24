@@ -149,10 +149,15 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void add_Tobacco(){
+	public void add_1Tobacco(){
 		Player player = new Player();
 		player.addGood("Tobacco", 1);
 		assertEquals(1, player.getNumberOfGood("Tobacco"));
+	}
+	
+	@Test
+	public void add_MultipleTobaccos(){
+		
 	}
 	
 
