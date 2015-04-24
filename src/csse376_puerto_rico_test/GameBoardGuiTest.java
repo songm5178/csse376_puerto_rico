@@ -67,9 +67,15 @@ public class GameBoardGuiTest {
 	}
 	
 	@Test
-	public void addPlayerCard_test() {
+	public void addPlayerCard_test5() {
 		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
 		assertEquals(5, g.addPlayerCards(5).size());
+	}
+	
+	@Test
+	public void addPlayerCard_test10() {
+		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
+		assertEquals(10, g.addPlayerCards(10).size());
 	}
 
 }
