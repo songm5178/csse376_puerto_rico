@@ -48,7 +48,21 @@ public class GameBoardGUI {
 		this.addPlayers(numberPlayers);
 	}
 
+	public ArrayList<JPanel> addPlayerCards(int numberPlayers) {
+		ArrayList<JPanel> buildingSpaces = new ArrayList<JPanel>();
+		for(int i = 0; i < numberPlayers; i++){
+			JPanel buildingSpace = new JPanel();
+			MigLayout layout = new MigLayout();
+			buildingSpace.setLayout(layout);
+			buildingSpace.setBackground(Color.BLACK);
+			buildingSpaces.add(buildingSpace);
+			this.mainframe.add(buildingSpace, "cell "+i+" 2, w 165!, h 100!");
+		}
+		return null;
+	}
+
 	public List<Player> addPlayers(int numberOfPlayers) {
+		this.addPlayerCards(numberOfPlayers);
 		for (int i = 0; i < numberOfPlayers; i++) {
 			Player p = new Player();
 			if (i == 0) {
@@ -60,7 +74,7 @@ public class GameBoardGUI {
 			jta.setColumns(15);
 			p.setHUD(jta);
 			this.players.add(p);
-			this.mainframe.add(jta);
+			this.mainframe.add(jta, "cell "+i+" 1");
 
 		}
 		updateRoles();

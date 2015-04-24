@@ -24,6 +24,7 @@ public class GameBoardGuiTest {
 	public void constructor_test() {
 		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
 	}
+	
 	@Test
 	public void first_player_test() {
 		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
@@ -63,6 +64,12 @@ public class GameBoardGuiTest {
 		Player p0 = players.get(1);
 		
 		assertEquals(p0.isGovernor(), false);
+	}
+	
+	@Test
+	public void addPlayerCard_test() {
+		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
+		assertEquals(5, g.addPlayerCards(5).size());
 	}
 
 }
