@@ -205,6 +205,8 @@ public class PlayerTest {
 	}
 	
 	public void add_1Indigo(){
-
+		Player player = new Player();
+		player.addGood("Indigo", 1);
+		assertEquals(1, player.getNumberOfGood("Indigo"));
 	}
 }
