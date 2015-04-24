@@ -93,13 +93,24 @@ public class Player {
 	public List<String> getGoods() {
 		//
 		List<String> rtn = new ArrayList<String>();
-		rtn.addAll(Arrays.asList(Good.COFFEE, Good.CORN, Good.INDIGO,
-				Good.SUGAR, Good.TOBACCO));
+		String coffee = "Coffee: " + Integer.toString((getNumberOfGood("Coffee")));
+		String tobacco = "Tobacco: " + Integer.toString((getNumberOfGood("Tobacco")));
+		String corn = "Corn: " + Integer.toString((getNumberOfGood("Corn")));
+		String sugar = "Sugar: " + Integer.toString((getNumberOfGood("Sugar")));
+		String indigo = "Indigo: " + Integer.toString((getNumberOfGood("Indigo")));
+		rtn.addAll(Arrays.asList(coffee, corn, tobacco,
+				sugar, indigo));
 		return rtn;
 	}
 
 	public int getNumberOfGood(String good) {
+		//added case where there were no goods
+		if(this.goods.get(good) == null)
+		{
+			return 0;
+		}
 		return this.goods.get(good);
+
 	}
 
 	public void addGood(String good, int number) {
