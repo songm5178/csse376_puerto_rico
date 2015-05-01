@@ -36,6 +36,10 @@ public class BuildingsTest {
 		assertNotNull(bs.numberOfWorkers);
 		
 	}
+	@Test public void getBuildingNames(){
+		Buildings b= new Buildings();
+		assertNotNull(b.getBuildingNames());
+	}
 
 
 }

@@ -7,11 +7,12 @@ import java.util.List;
 public class Buildings {
 
 	private ArrayList<Building> buildings;
-
+	private List<String> buildingNames;
+	
 	public Buildings() {
 		buildings = new ArrayList<Building>();
 
-		List<String> buildingNames = Arrays.asList("Small Indigo Plant",
+		buildingNames = Arrays.asList("Small Indigo Plant",
 				"Small Sugar Mill", "Small Market", "Hacienda",
 				"ConstructionHut", "Small Warehouse", "Indigo Plant",
 				"Surgar Mill", "Hospice"); // TODO: add more
