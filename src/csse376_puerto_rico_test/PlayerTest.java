@@ -222,5 +222,8 @@ public class PlayerTest {
 		assertNotNull(player.getPlantationsStringList());
 		
 	}
-	
+	public void test_getPlantations(){
+		Player p = new Player();
+		assertNotNull(p.getPlantations());
+	}
 }
