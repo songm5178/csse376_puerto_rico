@@ -72,6 +72,14 @@ public class GameBoardGuiTest {
 		assertEquals("Updated", g.msgBar.getText());
 	}
 	
+	@Test
+	public void test_endGame(){
+		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
+		boolean isEndGame = g.checkEndGame();
+		assertEquals(false, isEndGame);
+		
+		
+	}
 //	@Test
 //	public void addPlayerCard_test5() {
 //		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());

@@ -3,6 +3,7 @@ package csse376_puerto_rico;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -138,9 +139,10 @@ public class GameBoardGUI {
 	}
 
 	public void updateRoles() {
+		Object[] options = Player.getRoles().toArray();
+		
 		for (int i = 0; i < this.players.size(); i++) {
 			Player player = this.players.get(i);
-			Object[] options = Player.getRoles().toArray();
 			//TODO: Min, make player not able to choose role already chosen for this turn.
 			int n = JOptionPane.showOptionDialog(this.mainframe,
 					"Choose your role!", "Player " + (i + 1),
@@ -148,6 +150,7 @@ public class GameBoardGUI {
 					JOptionPane.QUESTION_MESSAGE, null, options,
 					options[options.length - 1]);
 			//in this block of code I had to convert the lists of buildings,plantations into Strings
+			
 			
 			//TODO: move the building, plantation string builder to getPlayerText method.
 			// kurian
@@ -166,11 +169,20 @@ public class GameBoardGUI {
 			player.getHUD().setText(getPlayerText(i + 1, role, points, buildingList.toString(), plantationList.toString(), player.isGovernor));
 			//player.updatePlayerInfo(); TODO: uncomment this later and comment out above.
 			playRole(player);
+			
+			List<Object> temp = new ArrayList<Object>();
+			for(int j = 0; j < options.length; j++){
+				if(j != n){
+					temp.add(options[j]);
+				}
+			}
+			options = temp.toArray();
 		}
 		
 		// TODO: Check endgame, otherwise go back this loop
 		
 	}
+	
 	
 	public void updateMsgBar(){
 		this.msgBar.setText("Updated");
