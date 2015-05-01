@@ -17,6 +17,7 @@ public class Player {
 	public boolean isGovernor;
 	private int points = 0;
 	private ArrayList<Building> buildings = new ArrayList<Building>();
+
 	public static class Good {
 		public static final String COFFEE = "Coffee";
 		public static final String TOBACCO = "Tobacco";
@@ -24,14 +25,17 @@ public class Player {
 		public static final String SUGAR = "Sugar";
 		public static final String INDIGO = "Indigo";
 	}
+
 	public static class Plantation {
 		public String good;
 		public boolean hasWorker;
-		public Plantation(String good, boolean hasWorker){
+
+		public Plantation(String good, boolean hasWorker) {
 			this.good = good;
 			this.hasWorker = hasWorker;
 		}
 	}
+
 	private ArrayList<Plantation> plantations = new ArrayList<Plantation>();
 	private HashMap<String, Integer> goods = new HashMap<String, Integer>();
 	private static List<String> roles = PlayerRoles.getValues();
@@ -97,87 +101,91 @@ public class Player {
 
 	public ArrayList<String> getBuildingsStringList() {
 		ArrayList<String> rtn = new ArrayList<String>();
-		for(Building b: this.buildings){
+		for (Building b : this.buildings) {
 			rtn.add(b.name);
 		}
 		return rtn;
 	}
-	public ArrayList<Building> getBuildings(){
+
+	public ArrayList<Building> getBuildings() {
 		return this.buildings;
 	}
 
 	public List<String> getGoods() {
 		//
 		List<String> rtn = new ArrayList<String>();
-		String coffee = "Coffee: " + Integer.toString((getNumberOfGood("Coffee")));
-		String tobacco = "Tobacco: " + Integer.toString((getNumberOfGood("Tobacco")));
+		String coffee = "Coffee: "
+				+ Integer.toString((getNumberOfGood("Coffee")));
+		String tobacco = "Tobacco: "
+				+ Integer.toString((getNumberOfGood("Tobacco")));
 		String corn = "Corn: " + Integer.toString((getNumberOfGood("Corn")));
 		String sugar = "Sugar: " + Integer.toString((getNumberOfGood("Sugar")));
-		String indigo = "Indigo: " + Integer.toString((getNumberOfGood("Indigo")));
-		rtn.addAll(Arrays.asList(coffee, corn, tobacco,
-				sugar, indigo));
+		String indigo = "Indigo: "
+				+ Integer.toString((getNumberOfGood("Indigo")));
+		rtn.addAll(Arrays.asList(coffee, corn, tobacco, sugar, indigo));
 		return rtn;
 	}
 
 	public int getNumberOfGood(String good) {
-		//added case where there were no goods
-		if(this.goods.get(good) == null)
-		{
+		// added case where there were no goods
+		if (this.goods.get(good) == null) {
 			return 0;
 		}
 		return this.goods.get(good);
 
 	}
-	
-	public List<String> getAllGoods()
-	{
-			List<String> rtn = new ArrayList<String>();
-			rtn.addAll(Arrays.asList(Good.COFFEE, Good.CORN, Good.INDIGO,
-					Good.SUGAR, Good.TOBACCO));
-			return rtn;	
+
+	public List<String> getAllGoods() {
+		List<String> rtn = new ArrayList<String>();
+		rtn.addAll(Arrays.asList(Good.COFFEE, Good.CORN, Good.INDIGO,
+				Good.SUGAR, Good.TOBACCO));
+		return rtn;
 	}
 
 	public void addGood(String good, int number) {
 		// adds the number to the original
 		this.goods.put(good, this.goods.get(good) + number);
 	}
-	
+
 	@Override
 	public String toString() {
-			String rtn = null;
-			String buildingList = null;
-			String goodsList = this.getGoods().toString();
-			for(int i=0;i<this.buildings.size();i++)
-			{
-				buildingList = buildingList + " "+ this.buildings.get(i);
-			}
-			if(isGovernor)
-			{
-				rtn = String.format("Role: %s \nScore: %d \nBuilding: %s \nPlantation: %s \nGovernor",
-						role, points, buildingList, goodsList);
-			}
-			else
-			{
-				rtn = String.format("Role: %s \nScore: %d \nBuilding: %s \nPlantation: %s",
-						role, points, buildingList, goodsList);
-			}
-			return rtn;
+		String rtn = null;
+		String buildingList = null;
+		String goodsList = this.getGoods().toString();
+		String plantationList = "";
+		for (int i = 0; i < this.buildings.size(); i++) {
+			buildingList = buildingList + " " + this.buildings.get(i).name;
 		}
-		
+		for (int i = 0; i < this.plantations.size(); i++) {
+			plantationList += this.plantations.get(i).good;
+		}
+		if (isGovernor) {
+			rtn = String
+					.format("Role: %s \nScore: %d \nBuilding: %s \nPlantation: %s \nGovernor",
+							role, points, buildingList, plantationList,
+							goodsList);
+		} else {
+			rtn = String.format(
+					"Role: %s \nScore: %d \nBuilding: %s \nPlantation: %s",
+					role, points, buildingList, plantationList, goodsList);
+		}
+		return rtn;
+	}
 
-	public void updatePlayerInfo(){
+	public void updatePlayerInfo() {
 		this.hud.setText(this.toString());
 	}
 
-	public ArrayList<Plantation> getPlantations(){
+	public ArrayList<Plantation> getPlantations() {
 		return this.plantations;
 	}
+
 	public ArrayList<String> getPlantationsStringList() {
 		ArrayList<String> rtn = new ArrayList<String>();
-		for(Plantation p: this.plantations){
+		for (Plantation p : this.plantations) {
 			rtn.add(p.good);
 		}
 		return rtn;
 	}
-	
+
 }
