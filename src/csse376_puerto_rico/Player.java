@@ -11,11 +11,13 @@ import csse376_puerto_rico.Buildings.Building;
 
 public class Player {
 
+	private int pNum;
 	private String role;
 	private JTextArea hud;
 	public boolean isTurn;
 	public boolean isGovernor;
 	private int points = 0;
+	
 	private ArrayList<Building> buildings = new ArrayList<Building>();
 
 	public static class Good {
@@ -42,6 +44,7 @@ public class Player {
 
 	// For Testing purposes, null player
 	public Player() {
+		this.pNum = 0;
 		this.role = "";
 		this.isGovernor = false;
 		this.hud = new JTextArea();
@@ -59,7 +62,13 @@ public class Player {
 			this.goods.put(s, 0);
 		}
 	}
-
+	public void setPlayerNum(int i) {
+		this.pNum = i;
+		
+	}
+	public int getPlayerNum(){
+		return this.pNum;
+	}
 	public String getRole() {
 		return this.role;
 	}
@@ -187,5 +196,8 @@ public class Player {
 		}
 		return rtn;
 	}
+
+
+
 
 }
