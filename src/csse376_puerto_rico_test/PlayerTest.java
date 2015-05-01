@@ -205,11 +205,13 @@ public class PlayerTest {
 		assertEquals(3, player.getNumberOfGood("Coffee"));
 	}
 	
+	@Test
 	public void add_1Indigo(){
 		Player player = new Player();
 		player.addGood("Indigo", 1);
 		assertEquals(1, player.getNumberOfGood("Indigo"));
 	}
+	
 	
 	public void add_MultipleIndigo(){
 		Player player = new Player();
