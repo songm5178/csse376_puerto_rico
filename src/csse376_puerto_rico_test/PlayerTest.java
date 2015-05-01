@@ -219,11 +219,14 @@ public class PlayerTest {
 		assertEquals(1, player.getNumberOfGood("Indigo"));
 	}
 	
+	@Test
 	public void test_getPlantation(){
 		Player player = new Player();
 		assertNotNull(player.getPlantationsStringList());
 		
 	}
+	
+	@Test
 	public void test_getPlantations(){
 		Player p = new Player();
 		assertNotNull(p.getPlantations());
