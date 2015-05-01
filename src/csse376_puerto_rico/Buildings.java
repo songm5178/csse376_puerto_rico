@@ -8,14 +8,15 @@ public class Buildings {
 
 	private ArrayList<Building> buildings;
 	private List<String> buildingNames;
-	
+
 	public Buildings() {
 		buildings = new ArrayList<Building>();
 
-		buildingNames = Arrays.asList("Small Indigo Plant",
-				"Small Sugar Mill", "Small Market", "Hacienda",
-				"ConstructionHut", "Small Warehouse", "Indigo Plant",
-				"Surgar Mill", "Hospice"); // TODO: add more
+		buildingNames = Arrays.asList("Small Indigo Plant", "Small Sugar Mill",
+				"Small Market", "Hacienda", "ConstructionHut",
+				"Small Warehouse", "Indigo Plant", "Surgar Mill", "Hospice"); // TODO:
+																				// add
+																				// more
 
 		for (String name : buildingNames) {
 			buildings.add(new Building(name));
@@ -26,6 +27,10 @@ public class Buildings {
 	public ArrayList<Building> getBuildings() {
 
 		return buildings;
+	}
+
+	public List<String> getBuildingNames() {
+		return buildingNames;
 	}
 
 	public static class Building {
