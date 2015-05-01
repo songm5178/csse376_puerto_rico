@@ -57,7 +57,6 @@ public class GameBoardGUI {
 	}
 
 	private void addGoodsButtons() {
-		// TODO: Isaiah : Add buttons correctly.
 		GoodsButton CoffeeButton = new GoodsButton("Coffee", this);
 		GoodsButton CornButton = new GoodsButton("Corn", this);
 		GoodsButton TobaccoButton = new GoodsButton("Tobacco", this);
