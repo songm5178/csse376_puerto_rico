@@ -231,4 +231,13 @@ public class PlayerTest {
 		Player p = new Player();
 		assertNotNull(p.getPlantations());
 	}
+	
+	@Test
+	public void test_toString1()
+	{
+		Player player = new Player();
+		String expected = "";
+		assertEquals(expected, player.toString());
+	}
+
 }
