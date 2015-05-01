@@ -17,7 +17,7 @@ public class Player {
 	public boolean isTurn;
 	public boolean isGovernor;
 	private int points = 0;
-	
+
 	private ArrayList<Building> buildings = new ArrayList<Building>();
 
 	public static class Good {
@@ -62,13 +62,16 @@ public class Player {
 			this.goods.put(s, 0);
 		}
 	}
+
 	public void setPlayerNum(int i) {
 		this.pNum = i;
-		
+
 	}
-	public int getPlayerNum(){
+
+	public int getPlayerNum() {
 		return this.pNum;
 	}
+
 	public String getRole() {
 		return this.role;
 	}
@@ -170,13 +173,14 @@ public class Player {
 		}
 		if (isGovernor) {
 			rtn = String
-					.format("Role: %s \nScore: %d \nBuilding: %s \nPlantation: %s \nGovernor",
-							role, points, buildingList, plantationList,
+					.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s \nGovernor",
+							pNum, role, points, buildingList, plantationList,
 							goodsList);
 		} else {
-			rtn = String.format(
-					"Role: %s \nScore: %d \nBuilding: %s \nPlantation: %s",
-					role, points, buildingList, plantationList, goodsList);
+			rtn = String
+					.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s",
+							pNum, role, points, buildingList, plantationList,
+							goodsList);
 		}
 		return rtn;
 	}
@@ -196,8 +200,5 @@ public class Player {
 		}
 		return rtn;
 	}
-
-
-
 
 }
