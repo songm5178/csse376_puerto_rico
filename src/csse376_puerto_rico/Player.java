@@ -166,6 +166,9 @@ public class Player {
 		this.hud.setText(this.toString());
 	}
 
+	public ArrayList<Plantation> getPlantations(){
+		return this.plantations;
+	}
 	public ArrayList<String> getPlantationsStringList() {
 		ArrayList<String> rtn = new ArrayList<String>();
 		for(Plantation p: this.plantations){
