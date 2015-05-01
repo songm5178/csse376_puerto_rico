@@ -172,8 +172,7 @@ public class GameBoardGUI {
 				// TODO: move the building, plantation string builder to
 				// getPlayerText method.
 				// kurian
-				 
-				
+
 				StringBuilder buildingList = new StringBuilder();
 				StringBuilder plantationList = new StringBuilder();
 				for (String s : player.getBuildingsStringList()) {
@@ -218,22 +217,75 @@ public class GameBoardGUI {
 
 	public void playRole(Player player) {
 		// TODO: puts in all, Min
-		
-		
-		if (player.getRole().equals(PlayerRoles.Captain.toString())) {
+		String role = player.getRole();
+		if (role.equals(PlayerRoles.Captain.toString())) {
 			for (int i = 0; i < players.size(); i++) {
-				Object[] options = {"Building", "Plantation"};
-				int n = JOptionPane.showOptionDialog(this.mainframe,
-						"Give the colonosists a job!", "Player " + (i + 1),
-						JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, options,
-						options[options.length - 1]);
-				if(n == 0){
-					ArrayList<String> pBuildings = player.getBuildingsStringList();
-				}else{
-//					ArrayList<String> pPlantations= player.get
+				Object[] options = { "Building", "Plantation", "Do Nothing" };
+				boolean selected = false;
+				while (!selected) {
+					int n = JOptionPane
+							.showOptionDialog(
+									this.mainframe,
+									"Give the colonosists a job! \nChoose a structure.",
+									"Player " + (i + 1),
+									JOptionPane.YES_NO_CANCEL_OPTION,
+									JOptionPane.QUESTION_MESSAGE, null,
+									options, options[options.length - 1]);
+					if (n == 0) {
+						ArrayList<String> pBuildings = (ArrayList<String>) player
+								.getBuildingsStringList().clone();
+						pBuildings.add("Go Back");
+						Object[] temp = pBuildings.toArray();
+
+						int buildingNum = JOptionPane
+								.showOptionDialog(
+										this.mainframe,
+										"Give the colonosists a job! \nChoose a building",
+										"Player " + (i + 1),
+										JOptionPane.YES_NO_CANCEL_OPTION,
+										JOptionPane.QUESTION_MESSAGE, null,
+										temp, null);
+						if (buildingNum != temp.length - 1) {
+							selected = true;
+						}else{
+							selected = false;
+						}
+
+					} else if (n == 1) {
+						ArrayList<String> pPlantations = (ArrayList<String>) player
+								.getPlantationsStringList().clone();
+						pPlantations.add("Go Back");
+						Object[] temp = pPlantations.toArray();
+						
+						int plantationNum = JOptionPane
+								.showOptionDialog(
+										this.mainframe,
+										"Give the colonosists a job! \nChoose a plantation",
+										"Player " + (i + 1),
+										JOptionPane.YES_NO_CANCEL_OPTION,
+										JOptionPane.QUESTION_MESSAGE, null,
+										temp, null);
+						if (plantationNum != temp.length - 1) {
+							selected = true;
+						}else{
+							selected = false;
+						}
+					} else {
+						// Do nothing
+						selected = true;
+					}
 				}
 			}
+		}else if(role.equals(PlayerRoles.Builder)){
+			
+//			int n = JOptionPane
+//					.showOptionDialog(
+//							this.mainframe,
+//							"Give the colonosists a job! \nChoose a structure.",
+//							"Player " + (i + 1),
+//							JOptionPane.YES_NO_CANCEL_OPTION,
+//							JOptionPane.QUESTION_MESSAGE, null,
+//							options, options[options.length - 1]);
 		}
 	}
 
