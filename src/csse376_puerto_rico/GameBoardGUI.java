@@ -26,13 +26,14 @@ public class GameBoardGUI {
 	private ButtonGroup bGroup;
 	private static int turnCount;
 
-	public GameBoardGUI(){
+	public GameBoardGUI() {
 		// For testing purposes.
 		this.msgBar = new JTextArea();
 		this.players = new ArrayList<Player>();
 		this.mainframe = new JFrame();
 
 	}
+
 	public GameBoardGUI(JFrame frame, ButtonGroup group) {
 		this.players = new ArrayList<Player>();
 		this.mainframe = frame;
@@ -171,6 +172,8 @@ public class GameBoardGUI {
 				// TODO: move the building, plantation string builder to
 				// getPlayerText method.
 				// kurian
+				 
+				
 				StringBuilder buildingList = new StringBuilder();
 				StringBuilder plantationList = new StringBuilder();
 				for (String s : player.getBuildings()) {
@@ -180,6 +183,7 @@ public class GameBoardGUI {
 					plantationList.append(s + " ");
 				}
 				String role = (String) options[n];
+				player.setRole(role);
 				int points = player.getPoints();
 				player.getHUD().setText(
 						getPlayerText(i + 1, role, points,
@@ -189,6 +193,7 @@ public class GameBoardGUI {
 				// comment out above.
 				playRole(player);
 
+				// removing selected
 				List<Object> temp = new ArrayList<Object>();
 				for (int j = 0; j < options.length; j++) {
 					if (j != n) {
@@ -204,7 +209,7 @@ public class GameBoardGUI {
 
 	public boolean checkEndGame() {
 		// checks the end of the game, default to true for now
-		return true;
+		return false;
 	}
 
 	public void updateMsgBar() {
@@ -213,10 +218,23 @@ public class GameBoardGUI {
 
 	public void playRole(Player player) {
 		// TODO: puts in all, Min
+		
+		
 		if (player.getRole().equals(PlayerRoles.Captain.toString())) {
-
+			for (int i = 0; i < players.size(); i++) {
+				Object[] options = {"Building", "Plantation"};
+				int n = JOptionPane.showOptionDialog(this.mainframe,
+						"Give the colonosists a job!", "Player " + (i + 1),
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, options,
+						options[options.length - 1]);
+				if(n == 0){
+					ArrayList<String> pBuildings = player.getBuildings();
+				}else{
+//					ArrayList<String> pPlantations= player.get
+				}
+			}
 		}
-
 	}
 
 }

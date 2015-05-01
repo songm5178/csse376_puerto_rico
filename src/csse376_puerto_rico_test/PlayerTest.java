@@ -215,4 +215,10 @@ public class PlayerTest {
 		player.addGood("Indigo", 1);
 		assertEquals(1, player.getNumberOfGood("Indigo"));
 	}
+	
+	public void test_getPlantation(){
+		Player player = new Player();
+		assertNotNull(player.getPlantations());
+		
+	}
 }
