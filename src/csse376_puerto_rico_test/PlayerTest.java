@@ -10,6 +10,7 @@ import javax.swing.JTextArea;
 import org.junit.Assert;
 import org.junit.Test;
 
+import csse376_puerto_rico.Buildings.Building;
 import csse376_puerto_rico.Player;
 
 public class PlayerTest {
@@ -138,8 +139,8 @@ public class PlayerTest {
 	@Test
 	public void test_getBuildings(){
 		Player player = new Player();
-		player.addBuilding("Building");
-		assertNotNull(player.getBuildings());
+		player.addBuilding(new Building("Building"));
+		assertNotNull(player.getBuildingsStringList());
 	}
 	
 	@Test 
@@ -218,7 +219,7 @@ public class PlayerTest {
 	
 	public void test_getPlantation(){
 		Player player = new Player();
-		assertNotNull(player.getPlantations());
+		assertNotNull(player.getPlantationsStringList());
 		
 	}
 }

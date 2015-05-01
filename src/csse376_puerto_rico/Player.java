@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.swing.JTextArea;
 
+import csse376_puerto_rico.Buildings.Building;
+
 public class Player {
 
 	private String role;
@@ -14,15 +16,23 @@ public class Player {
 	public boolean isTurn;
 	public boolean isGovernor;
 	private int points = 0;
-	private ArrayList<String> buildings = new ArrayList<String>();
-	class Good {
+	private ArrayList<Building> buildings = new ArrayList<Building>();
+	public static class Good {
 		public static final String COFFEE = "Coffee";
 		public static final String TOBACCO = "Tobacco";
 		public static final String CORN = "Corn";
 		public static final String SUGAR = "Sugar";
 		public static final String INDIGO = "Indigo";
 	}
-
+	public static class Plantation {
+		public String good;
+		public boolean hasWorker;
+		public Plantation(String good, boolean hasWorker){
+			this.good = good;
+			this.hasWorker = hasWorker;
+		}
+	}
+	private ArrayList<Plantation> plantations = new ArrayList<Plantation>();
 	private HashMap<String, Integer> goods = new HashMap<String, Integer>();
 	private static List<String> roles = PlayerRoles.getValues();
 
@@ -81,12 +91,19 @@ public class Player {
 		this.role = string;
 	}
 
-	public void addBuilding(String building) {
+	public void addBuilding(Building building) {
 		buildings.add(building);
 	}
 
-	public ArrayList<String> getBuildings() {
-		return buildings;
+	public ArrayList<String> getBuildingsStringList() {
+		ArrayList<String> rtn = new ArrayList<String>();
+		for(Building b: this.buildings){
+			rtn.add(b.name);
+		}
+		return rtn;
+	}
+	public ArrayList<Building> getBuildings(){
+		return this.buildings;
 	}
 
 	public List<String> getGoods() {
@@ -147,6 +164,14 @@ public class Player {
 	
 	public void updatePlayerInfo(){
 		this.hud.setText(this.toString());
+	}
+
+	public ArrayList<String> getPlantationsStringList() {
+		ArrayList<String> rtn = new ArrayList<String>();
+		for(Plantation p: this.plantations){
+			rtn.add(p.good);
+		}
+		return rtn;
 	}
 	
 }

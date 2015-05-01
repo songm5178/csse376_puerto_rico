@@ -110,7 +110,7 @@ public class GameBoardGUI {
 			}
 			JTextArea jta = new JTextArea("Player " + (i + 1) + "\nRole: "
 					+ "\nScore: " + p.getPoints() + "\nBuildings:"
-					+ p.getBuildings() + "\nPlantations:\n");
+					+ p.getBuildingsStringList() + "\nPlantations:\n");
 			jta.setRows(15);
 			jta.setColumns(15);
 			p.setHUD(jta);
@@ -176,7 +176,7 @@ public class GameBoardGUI {
 				
 				StringBuilder buildingList = new StringBuilder();
 				StringBuilder plantationList = new StringBuilder();
-				for (String s : player.getBuildings()) {
+				for (String s : player.getBuildingsStringList()) {
 					buildingList.append(s + " ");
 				}
 				for (String s : player.getGoods()) {
@@ -229,7 +229,7 @@ public class GameBoardGUI {
 						JOptionPane.QUESTION_MESSAGE, null, options,
 						options[options.length - 1]);
 				if(n == 0){
-					ArrayList<String> pBuildings = player.getBuildings();
+					ArrayList<String> pBuildings = player.getBuildingsStringList();
 				}else{
 //					ArrayList<String> pPlantations= player.get
 				}

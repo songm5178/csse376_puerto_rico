@@ -27,7 +27,7 @@ public class Buildings {
 		return buildings;
 	}
 
-	public class Building {
+	public static class Building {
 
 		public String name;
 		public int cost;
