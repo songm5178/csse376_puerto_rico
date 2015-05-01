@@ -65,6 +65,13 @@ public class GameBoardGuiTest {
 		assertEquals(p0.isGovernor(), false);
 	}
 	
+	@Test
+	public void test_updateMsgBar(){
+		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
+		g.updateMsgBar();
+		assertEquals("Update", g.msgBar.getText());
+	}
+	
 //	@Test
 //	public void addPlayerCard_test5() {
 //		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
