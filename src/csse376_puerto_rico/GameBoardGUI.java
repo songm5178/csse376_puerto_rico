@@ -26,25 +26,25 @@ public class GameBoardGUI {
 	public GameBoardGUI(JFrame frame, ButtonGroup group) {
 		this.players = new ArrayList<Player>();
 		this.mainframe = frame;
+		this.mainframe.getContentPane().removeAll();
+		this.mainframe.getContentPane().revalidate();
+		this.mainframe.setBackground(Color.GREEN);
+		MigLayout layout = new MigLayout();
+		this.mainframe.setLayout(layout);
 		this.bGroup = group;
+		
 		// TODO: Isaiah : Add buttons correctly.
-
 		GoodsButton CoffeeButton = new GoodsButton("Coffee");
 		GoodsButton CornButton = new GoodsButton("Corn");
 		GoodsButton TobaccoButton = new GoodsButton("Tobacco");
 		GoodsButton IndigoButton = new GoodsButton("Indigo");
 		GoodsButton SugarButton = new GoodsButton("Sugar");
-		this.mainframe.getContentPane().removeAll();
-		this.mainframe.getContentPane().revalidate();
-		this.mainframe.setBackground(Color.GREEN);
 		this.mainframe.setTitle("Puerto Rico");
-		this.mainframe.add(CoffeeButton);
-		this.mainframe.add(CornButton);
-		this.mainframe.add(TobaccoButton);
-		this.mainframe.add(SugarButton);
-		this.mainframe.add(IndigoButton);
-		MigLayout layout = new MigLayout();
-		this.mainframe.setLayout(layout);
+		this.mainframe.add(CoffeeButton, "cell 0 2");
+		this.mainframe.add(CornButton, "cell 0 2");
+		this.mainframe.add(TobaccoButton, "cell 0 2");
+		this.mainframe.add(SugarButton, "cell 0 2");
+		this.mainframe.add(IndigoButton, "cell 0 2");
 
 		String temp = "0";
 		for (Enumeration<AbstractButton> buttons = this.bGroup.getElements(); buttons
@@ -58,29 +58,29 @@ public class GameBoardGUI {
 		this.addPlayers(numberPlayers);
 	}
 
-	/**
-	 * This method allows us to add the space on the game board for buildings and goods to
-	 * be placed. It also gives a list of these "cards" so they can be accessed later.
-	 * 
-	 * @param numberPlayers
-	 * @return an arrayList of the buildingSpaces that are JPanels
-	 */
-	public ArrayList<JPanel> addPlayerCards(int numberPlayers) {
-		ArrayList<JPanel> playerSpaces = new ArrayList<JPanel>();
-		for(int i = 0; i < numberPlayers; i++){
-			JPanel buildingSpace = new JPanel();
-			MigLayout layout = new MigLayout();
-			buildingSpace.setLayout(layout);
-			buildingSpace.setBackground(Color.BLACK);
-			playerSpaces.add(buildingSpace);
-			this.mainframe.add(buildingSpace, "cell "+i+" 2, w 165!, h 200!");
-		}
-		this.playerCards = playerSpaces;
-		return playerSpaces;
-	}
+//	/**
+//	 * This method allows us to add the space on the game board for buildings and goods to
+//	 * be placed. It also gives a list of these "cards" so they can be accessed later.
+//	 * 
+//	 * @param numberPlayers
+//	 * @return an arrayList of the buildingSpaces that are JPanels
+//	 */
+//	public ArrayList<JPanel> addPlayerCards(int numberPlayers) {
+//		ArrayList<JPanel> playerSpaces = new ArrayList<JPanel>();
+//		for(int i = 0; i < numberPlayers; i++){
+//			JPanel buildingSpace = new JPanel();
+//			MigLayout layout = new MigLayout();
+//			buildingSpace.setLayout(layout);
+//			buildingSpace.setBackground(Color.BLACK);
+//			playerSpaces.add(buildingSpace);
+//			this.mainframe.add(buildingSpace, "cell "+i+" 2, w 165!, h 200!");
+//		}
+//		this.playerCards = playerSpaces;
+//		return playerSpaces;
+//	}
 
 	public List<Player> addPlayers(int numberOfPlayers) {
-		this.addPlayerCards(numberOfPlayers);
+//		this.addPlayerCards(numberOfPlayers);
 		for (int i = 0; i < numberOfPlayers; i++) {
 			Player p = new Player();
 			if (i == 0) {
@@ -88,7 +88,7 @@ public class GameBoardGUI {
 			}
 			JTextArea jta = new JTextArea("Player " + (i + 1) + "\nRole: "
 					+ "\nScore: " + p.getPoints() + "\nBuildings:" + p.getBuildings() + "\nPlantations:");
-			jta.setRows(5);
+			jta.setRows(15);
 			// TODO: Isaiah
 			jta.setColumns(15);
 			p.setHUD(jta);

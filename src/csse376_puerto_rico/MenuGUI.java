@@ -26,7 +26,7 @@ public class MenuGUI {
            this.mainframe.setSize(1366, 800);
            this.mainframe.setVisible(true);
            this.mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-           this.mainframe.setResizable(false);
+//           this.mainframe.setResizable(false);
 //           MigLayout layout = new MigLayout();
 //   		   this.mainframe.setLayout(layout);
            
