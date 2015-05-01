@@ -109,7 +109,8 @@ public class GameBoardGUI {
 			if (i == 0) {
 				p.isGovernor = true;
 			}
-			JTextArea jta = new JTextArea("Player " + (i + 1) + "\nRole: "
+			p.setPlayerNum(i);
+			JTextArea jta = new JTextArea("Player " + i + "\nRole: "
 					+ "\nScore: " + p.getPoints() + "\nBuildings:"
 					+ p.getBuildingsStringList() + "\nPlantations:\n");
 			jta.setRows(15);
@@ -208,14 +209,15 @@ public class GameBoardGUI {
 		// TODO: puts in all, Min
 		Player player = players.get(roleNum);
 		String role = player.getRole();
-		System.out.println(role);
+		
 		if (role.equals(PlayerRoles.Mayor)) {
 
 			for (int i = 0; i < players.size(); i++) {
 				// TODO: player goes to next person, it should not start with
-				roleNum = (roleNum + i) % players.size();
-				player = players.get(roleNum);
+				roleNum = (roleNum + 1) % players.size();
 				
+				player = players.get(roleNum);
+
 				Object[] options = { "Building", "Plantation", "Do Nothing" };
 				boolean selected = false;
 				while (!selected) {
@@ -223,7 +225,7 @@ public class GameBoardGUI {
 							.showOptionDialog(
 									this.mainframe,
 									"Give the colonosists a job! \nChoose a structure.",
-									"Player " + (i + 1),
+									"Player " + roleNum,
 									JOptionPane.YES_NO_CANCEL_OPTION,
 									JOptionPane.QUESTION_MESSAGE, null,
 									options, options[options.length - 1]);
@@ -237,7 +239,7 @@ public class GameBoardGUI {
 								.showOptionDialog(
 										this.mainframe,
 										"Give the colonosists a job! \nChoose a building",
-										"Player " + (i + 1),
+										"Player " + (roleNum),
 										JOptionPane.YES_NO_CANCEL_OPTION,
 										JOptionPane.QUESTION_MESSAGE, null,
 										temp, null);
@@ -259,7 +261,7 @@ public class GameBoardGUI {
 								.showOptionDialog(
 										this.mainframe,
 										"Give the colonosists a job! \nChoose a plantation",
-										"Player " + (i + 1),
+										"Player " + (roleNum),
 										JOptionPane.YES_NO_CANCEL_OPTION,
 										JOptionPane.QUESTION_MESSAGE, null,
 										temp, null);
@@ -284,13 +286,13 @@ public class GameBoardGUI {
 			Object[] options = bNames.toArray();
 			// TODO: add condition that builder gets discount,
 			for (int i = 0; i < players.size(); i++) {
-				
-				roleNum = (roleNum + i) % players.size();
+
+				roleNum = (roleNum + 1) % players.size();
 				player = players.get(roleNum);
-				
+				System.out.println(roleNum);
 				// player = player.next at the end
 				int n = JOptionPane.showOptionDialog(this.mainframe,
-						"Choose a building to build!", "Player " + (i + 1),
+						"Choose a building to build!", "Player " + (roleNum),
 						JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, options,
 						options[options.length - 1]);
@@ -301,7 +303,7 @@ public class GameBoardGUI {
 
 			}
 		}
-		System.out.println(role);
+		
 	}
 
 }
