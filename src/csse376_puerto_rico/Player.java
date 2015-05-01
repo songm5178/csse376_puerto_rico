@@ -149,8 +149,8 @@ public class Player {
 
 	@Override
 	public String toString() {
-		String rtn = null;
-		String buildingList = null;
+		String rtn = "";
+		String buildingList = "";
 		String goodsList = this.getGoods().toString();
 		String plantationList = "";
 		for (int i = 0; i < this.buildings.size(); i++) {

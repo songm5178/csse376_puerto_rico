@@ -174,25 +174,12 @@ public class GameBoardGUI {
 				// getPlayerText method.
 				// kurian
 
-				// StringBuilder buildingList = new StringBuilder();
-				// StringBuilder plantationList = new StringBuilder();
-				// for (String s : player.getBuildingsStringList()) {
-				// buildingList.append(s + " ");
-				// }
-				// for (String s : player.getGoods()) {
-				// plantationList.append(s + " ");
-				// }
 				String role = (String) options[n];
 				player.setRole(role);
-				// int points = player.getPoints();
-				// player.getHUD().setText(
-				// getPlayerText(i + 1, role, points,
-				// buildingList.toString(),
-				// plantationList.toString(), player.isGovernor));
-				player.updatePlayerInfo(); // TODO: uncomment this later and
-				// comment out above.
 
-				playRole(player);
+				player.updatePlayerInfo();
+
+				playRole(i);
 
 				// removing selected
 				List<Object> temp = new ArrayList<Object>();
@@ -217,16 +204,18 @@ public class GameBoardGUI {
 		this.msgBar.setText("Updated");
 	}
 
-	public void playRole(Player player) {
+	public void playRole(int roleNum) {
 		// TODO: puts in all, Min
+		Player player = players.get(roleNum);
 		String role = player.getRole();
 		System.out.println(role);
 		if (role.equals(PlayerRoles.Mayor)) {
 
 			for (int i = 0; i < players.size(); i++) {
 				// TODO: player goes to next person, it should not start with
-				// player index 0
-				// player = player.next()
+				roleNum = (roleNum + i) % players.size();
+				player = players.get(roleNum);
+				
 				Object[] options = { "Building", "Plantation", "Do Nothing" };
 				boolean selected = false;
 				while (!selected) {
@@ -284,8 +273,8 @@ public class GameBoardGUI {
 						// Do nothing
 						selected = true;
 					}
+					player.updatePlayerInfo();
 				}
-				player.updatePlayerInfo();
 			}
 		} else if (role.equals(PlayerRoles.Builder)) {
 			System.out.println("here");
@@ -295,7 +284,10 @@ public class GameBoardGUI {
 			Object[] options = bNames.toArray();
 			// TODO: add condition that builder gets discount,
 			for (int i = 0; i < players.size(); i++) {
-
+				
+				roleNum = (roleNum + i) % players.size();
+				player = players.get(roleNum);
+				
 				// player = player.next at the end
 				int n = JOptionPane.showOptionDialog(this.mainframe,
 						"Choose a building to build!", "Player " + (i + 1),
@@ -305,8 +297,9 @@ public class GameBoardGUI {
 				if (n != bNames.size() - 1) {
 					player.addBuilding(new Building(bNames.get(n)));
 				}
+				player.updatePlayerInfo();
+
 			}
-			player.updatePlayerInfo();
 		}
 		System.out.println(role);
 	}

@@ -288,5 +288,13 @@ public class PlayerTest {
 		String expected = "Role: Trader \nScore: 0 \nBuilding: null \nPlantation: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
 		assertEquals(expected, player.toString());
 	}
+	
+	@Test
+	public void test_getPlayerNum(){
+		Player player = new Player();
+		player.setPlayerNum(1);
+		assertEquals(1, player.getPlayerNum());
+		
+	}
 
 }
