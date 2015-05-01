@@ -27,8 +27,8 @@ public class GameBoardGUI {
 		this.players = new ArrayList<Player>();
 		this.mainframe = frame;
 		this.bGroup = group;
-		NextMoveButton nextMove = new NextMoveButton();
-		nextMove.setText("Turn "+turnCount);
+		// TODO: Isaiah : Add buttons correctly.
+
 		GoodsButton CoffeeButton = new GoodsButton("Coffee");
 		GoodsButton CornButton = new GoodsButton("Corn");
 		GoodsButton TobaccoButton = new GoodsButton("Tobacco");
@@ -38,7 +38,6 @@ public class GameBoardGUI {
 		this.mainframe.getContentPane().revalidate();
 		this.mainframe.setBackground(Color.GREEN);
 		this.mainframe.setTitle("Puerto Rico");
-		this.mainframe.add(nextMove);
 		this.mainframe.add(CoffeeButton);
 		this.mainframe.add(CornButton);
 		this.mainframe.add(TobaccoButton);
@@ -90,6 +89,7 @@ public class GameBoardGUI {
 			JTextArea jta = new JTextArea("Player " + (i + 1) + "\nRole: "
 					+ "\nScore: " + p.getPoints() + "\nBuildings:" + p.getBuildings() + "\nPlantations:");
 			jta.setRows(5);
+			// TODO: Isaiah
 			jta.setColumns(15);
 			p.setHUD(jta);
 			this.players.add(p);
@@ -110,16 +110,18 @@ public class GameBoardGUI {
 		return turnCount;
 	}
 
+	//Will be deleted
+	@Deprecated
 	public String getPlayerText(int playerNum, String role, int points, 
-			String building, String plantation, boolean isGovernor) {
+			String buildingList, String plantationList, boolean isGovernor) {
 		String rtn = null;
 		if (isGovernor) {
 			rtn = String.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s \nGovernor",
-					playerNum, role, points, building, plantation);
+					playerNum, role, points, buildingList, plantationList);
 
 		} else {
 			rtn = String.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s", playerNum,
-					role, points, building, plantation);
+					role, points, buildingList, plantationList);
 
 		}
 		return rtn;
@@ -129,26 +131,42 @@ public class GameBoardGUI {
 		for (int i = 0; i < this.players.size(); i++) {
 			Player player = this.players.get(i);
 			Object[] options = Player.getRoles().toArray();
+			//TODO: Min, make player not able to choose role already chosen for this turn.
 			int n = JOptionPane.showOptionDialog(this.mainframe,
 					"Choose your role!", "Player " + (i + 1),
 					JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, options,
 					options[options.length - 1]);
 			//in this block of code I had to convert the lists of buildings,plantations into Strings
+			
+			//TODO: move the building, plantation string builder to getPlayerText method.
+			// kurian
 			StringBuilder buildingList = new StringBuilder();
 			StringBuilder plantationList = new StringBuilder();
 			for (String s : player.getBuildings())
 			{
-				buildingList.append(s + ", ");
+				buildingList.append(s + " ");
 			}
 			for (String s : player.getGoods())
 			{
-				plantationList.append(s + ", ");
+				plantationList.append(s + " ");
 			}
 			String role = (String) options[n];
 			int points = player.getPoints();
-			player.getHUD().setText(
-					getPlayerText(i + 1, role, points, buildingList.toString(), plantationList.toString(), player.isGovernor));
+			player.getHUD().setText(getPlayerText(i + 1, role, points, buildingList.toString(), plantationList.toString(), player.isGovernor));
+			//player.updatePlayerInfo(); TODO: uncomment this later and comment out above.
+			playRole(player);
 		}
+		
+		// TODO: Check endgame, otherwise go back this loop
+		
+	}
+	
+	public void playRole(Player player){
+		//TODO: puts in all, Min
+		if(player.getRole().equals(PlayerRoles.Captain.toString())){
+			
+		}
+	
 	}
 }
