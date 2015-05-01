@@ -222,4 +222,5 @@ public class PlayerTest {
 		assertNotNull(player.getPlantationsStringList());
 		
 	}
+	
 }

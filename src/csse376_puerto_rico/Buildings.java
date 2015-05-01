@@ -7,16 +7,15 @@ import java.util.List;
 public class Buildings {
 
 	private ArrayList<Building> buildings;
-	private List<String> buildingNames;
+	private ArrayList<String> buildingNames = new ArrayList<String>(Arrays.asList("Small Indigo Plant",
+			"Small Sugar Mill", "Small Market", "Hacienda", "ConstructionHut",
+			"Small Warehouse", "Indigo Plant", "Surgar Mill", "Hospice"));
 
 	public Buildings() {
 		buildings = new ArrayList<Building>();
-
-		buildingNames = Arrays.asList("Small Indigo Plant", "Small Sugar Mill",
-				"Small Market", "Hacienda", "ConstructionHut",
-				"Small Warehouse", "Indigo Plant", "Surgar Mill", "Hospice"); // TODO:
-																				// add
-																				// more
+		// TODO:
+		// add
+		// more
 
 		for (String name : buildingNames) {
 			buildings.add(new Building(name));
@@ -29,7 +28,7 @@ public class Buildings {
 		return buildings;
 	}
 
-	public List<String> getBuildingNames() {
+	public ArrayList<String> getBuildingNames() {
 		return buildingNames;
 	}
 

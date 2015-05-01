@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import csse376_puerto_rico.Buildings.Building;
 import net.miginfocom.swing.MigLayout;
 
 public class GameBoardGUI {
@@ -218,7 +219,7 @@ public class GameBoardGUI {
 	public void playRole(Player player) {
 		// TODO: puts in all, Min
 		String role = player.getRole();
-		if (role.equals(PlayerRoles.Captain.toString())) {
+		if (role.equals(PlayerRoles.Mayor.toString())) {
 			for (int i = 0; i < players.size(); i++) {
 				Object[] options = { "Building", "Plantation", "Do Nothing" };
 				boolean selected = false;
@@ -232,10 +233,10 @@ public class GameBoardGUI {
 									JOptionPane.QUESTION_MESSAGE, null,
 									options, options[options.length - 1]);
 					if (n == 0) {
-						ArrayList<String> pBuildings = (ArrayList<String>) player
+						ArrayList<String> pBuildingsNames = (ArrayList<String>) player
 								.getBuildingsStringList().clone();
-						pBuildings.add("Go Back");
-						Object[] temp = pBuildings.toArray();
+						pBuildingsNames.add("Go Back");
+						Object[] temp = pBuildingsNames.toArray();
 
 						int buildingNum = JOptionPane
 								.showOptionDialog(
@@ -246,8 +247,10 @@ public class GameBoardGUI {
 										JOptionPane.QUESTION_MESSAGE, null,
 										temp, null);
 						if (buildingNum != temp.length - 1) {
+							//TODO: need a check on this, adding workers.
+							player.getBuildings().get(buildingNum).numberOfWorkers++;
 							selected = true;
-						}else{
+						} else {
 							selected = false;
 						}
 
@@ -256,7 +259,7 @@ public class GameBoardGUI {
 								.getPlantationsStringList().clone();
 						pPlantations.add("Go Back");
 						Object[] temp = pPlantations.toArray();
-						
+
 						int plantationNum = JOptionPane
 								.showOptionDialog(
 										this.mainframe,
@@ -266,8 +269,9 @@ public class GameBoardGUI {
 										JOptionPane.QUESTION_MESSAGE, null,
 										temp, null);
 						if (plantationNum != temp.length - 1) {
+							
 							selected = true;
-						}else{
+						} else {
 							selected = false;
 						}
 					} else {
@@ -276,17 +280,25 @@ public class GameBoardGUI {
 					}
 				}
 			}
-		}else if(role.equals(PlayerRoles.Builder)){
-			
-//			int n = JOptionPane
-//					.showOptionDialog(
-//							this.mainframe,
-//							"Give the colonosists a job! \nChoose a structure.",
-//							"Player " + (i + 1),
-//							JOptionPane.YES_NO_CANCEL_OPTION,
-//							JOptionPane.QUESTION_MESSAGE, null,
-//							options, options[options.length - 1]);
+		} else if (role.equals(PlayerRoles.Builder.toString())) {
+			System.out.println("here");
+			Buildings b = new Buildings();
+			ArrayList<String> bNames = b.getBuildingNames();
+			bNames.add("Nothing");
+			Object[] options = bNames.toArray();
+			// TODO: add condition that builder gets discount,
+			for (int i = 0; i < players.size(); i++) {
+				int n = JOptionPane.showOptionDialog(this.mainframe,
+						"Choose a building to build!", "Player " + (i + 1),
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, options,
+						options[options.length - 1]);
+				if(n != bNames.size()-1){
+					players.get(i).addBuilding(new Building(bNames.get(n)));
+				}
+			}
 		}
+		System.out.println(role);
 	}
 
 }

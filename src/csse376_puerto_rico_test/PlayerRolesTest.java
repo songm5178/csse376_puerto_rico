@@ -12,11 +12,7 @@ import csse376_puerto_rico.PlayerRoles;
 
 public class PlayerRolesTest {
 
-	@Test
-	public void basic_test() {
-
-		PlayerRoles.values();
-	}
+	
 
 	@Test
 	public void captain_test() {
@@ -41,7 +37,7 @@ public class PlayerRolesTest {
 		List<String> roles = new ArrayList<String>(Arrays.asList("Settler",
 				"Builder", "Craftsman", "Trader", "Captain", "Prospector",
 				"Mayor"));
-		PlayerRoles[] pRoles = PlayerRoles.values();
+		Object[] pRoles = PlayerRoles.getValues().toArray();
 		for(int i = 0; i < roles.size(); i++){
 			String role = roles.get(i);
 			assertEquals(role, pRoles[i].toString());
