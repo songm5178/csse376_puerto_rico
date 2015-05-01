@@ -31,6 +31,7 @@ public class GoodsButton extends JButton
 					}
 			}
 		});
+		
 		GameBoardGUI.players = players;
 	}
 }

@@ -125,4 +125,28 @@ public class Player {
 		this.goods.put(good, this.goods.get(good) + number);
 	}
 	
+	@Override
+	public String toString() {
+//		TODO: Use this, Kurian
+//		public String getPlayerText(int playerNum, String role, int points, 
+//				String buildingList, String plantationList, boolean isGovernor) {
+//			String rtn = null;
+//			if (isGovernor) {
+//				rtn = String.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s \nGovernor",
+//						playerNum, role, points, buildingList, plantationList);
+//
+//			} else {
+//				rtn = String.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s", playerNum,
+//						role, points, buildingList, plantationList);
+//
+//			}
+//			return rtn;
+//		}
+		return role;	
+	};
+	
+	public void updatePlayerInfo(){
+		this.hud.setText(this.toString());
+	}
+	
 }
