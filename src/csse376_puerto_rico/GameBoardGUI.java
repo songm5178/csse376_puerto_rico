@@ -220,7 +220,10 @@ public class GameBoardGUI {
 		// TODO: puts in all, Min
 		String role = player.getRole();
 		if (role.equals(PlayerRoles.Mayor.toString())) {
+			
 			for (int i = 0; i < players.size(); i++) {
+				//TODO: player goes to next person, it should not start with player index 0
+				// player = player.next()
 				Object[] options = { "Building", "Plantation", "Do Nothing" };
 				boolean selected = false;
 				while (!selected) {
@@ -288,13 +291,15 @@ public class GameBoardGUI {
 			Object[] options = bNames.toArray();
 			// TODO: add condition that builder gets discount,
 			for (int i = 0; i < players.size(); i++) {
+				
+				//player = player.next at the end
 				int n = JOptionPane.showOptionDialog(this.mainframe,
 						"Choose a building to build!", "Player " + (i + 1),
 						JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, options,
 						options[options.length - 1]);
 				if(n != bNames.size()-1){
-					players.get(i).addBuilding(new Building(bNames.get(n)));
+					player.addBuilding(new Building(bNames.get(n)));
 				}
 			}
 		}
