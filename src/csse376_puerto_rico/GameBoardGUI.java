@@ -1,22 +1,18 @@
 package csse376_puerto_rico;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import csse376_puerto_rico.Buildings.Building;
 import net.miginfocom.swing.MigLayout;
+import csse376_puerto_rico.Buildings.Building;
 
 public class GameBoardGUI {
 
@@ -57,8 +53,7 @@ public class GameBoardGUI {
 		}
 		int numberPlayers = Integer.parseInt(temp);
 		this.addPlayers(numberPlayers);
-		displayMessageBar();
-		addGoodsButtons();
+
 	}
 
 	private void displayMessageBar() {
@@ -79,29 +74,6 @@ public class GameBoardGUI {
 		this.mainframe.add(IndigoButton, "cell 0 2");
 	}
 
-	// /**
-	// * This method allows us to add the space on the game board for buildings
-	// and goods to
-	// * be placed. It also gives a list of these "cards" so they can be
-	// accessed later.
-	// *
-	// * @param numberPlayers
-	// * @return an arrayList of the buildingSpaces that are JPanels
-	// */
-	// public ArrayList<JPanel> addPlayerCards(int numberPlayers) {
-	// ArrayList<JPanel> playerSpaces = new ArrayList<JPanel>();
-	// for(int i = 0; i < numberPlayers; i++){
-	// JPanel buildingSpace = new JPanel();
-	// MigLayout layout = new MigLayout();
-	// buildingSpace.setLayout(layout);
-	// buildingSpace.setBackground(Color.BLACK);
-	// playerSpaces.add(buildingSpace);
-	// this.mainframe.add(buildingSpace, "cell "+i+" 2, w 165!, h 200!");
-	// }
-	// this.playerCards = playerSpaces;
-	// return playerSpaces;
-	// }
-
 	public List<Player> addPlayers(int numberOfPlayers) {
 		// this.addPlayerCards(numberOfPlayers);
 		for (int i = 0; i < numberOfPlayers; i++) {
@@ -120,6 +92,8 @@ public class GameBoardGUI {
 			this.mainframe.add(jta, "cell " + i + " 1");
 
 		}
+		displayMessageBar();
+		addGoodsButtons();
 		updateRoles();
 
 		return this.players;
@@ -164,7 +138,7 @@ public class GameBoardGUI {
 				// DONE: Min, make player not able to choose role already chosen
 				// for this turn.
 				int n = JOptionPane.showOptionDialog(this.mainframe,
-						"Choose your role!", "Player " + (i + 1),
+						"Choose your role!", "Player " + i,
 						JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, options,
 						options[options.length - 1]);
@@ -209,13 +183,12 @@ public class GameBoardGUI {
 		// TODO: puts in all, Min
 		Player player = players.get(roleNum);
 		String role = player.getRole();
-		
+
 		if (role.equals(PlayerRoles.Mayor)) {
 
 			for (int i = 0; i < players.size(); i++) {
 				// TODO: player goes to next person, it should not start with
-				roleNum = (roleNum + 1) % players.size();
-				
+
 				player = players.get(roleNum);
 
 				Object[] options = { "Building", "Plantation", "Do Nothing" };
@@ -277,9 +250,10 @@ public class GameBoardGUI {
 					}
 					player.updatePlayerInfo();
 				}
+				roleNum = (roleNum + 1) % players.size();
+
 			}
 		} else if (role.equals(PlayerRoles.Builder)) {
-			System.out.println("here");
 			Buildings b = new Buildings();
 			ArrayList<String> bNames = b.getBuildingNames();
 			bNames.add("Nothing");
@@ -287,7 +261,6 @@ public class GameBoardGUI {
 			// TODO: add condition that builder gets discount,
 			for (int i = 0; i < players.size(); i++) {
 
-				roleNum = (roleNum + 1) % players.size();
 				player = players.get(roleNum);
 				System.out.println(roleNum);
 				// player = player.next at the end
@@ -300,10 +273,11 @@ public class GameBoardGUI {
 					player.addBuilding(new Building(bNames.get(n)));
 				}
 				player.updatePlayerInfo();
+				roleNum = (roleNum + 1) % players.size();
 
 			}
 		}
-		
+
 	}
 
 }
