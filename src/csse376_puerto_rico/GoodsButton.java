@@ -6,16 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JTextArea;
 
 public class GoodsButton extends JButton 
 {
 	private List<Player> players;
 	private String goodsName;
-	public GoodsButton(String good)
+	private JTextArea msgBar;
+	private GameBoardGUI gbGUI;
+	public GoodsButton(String good, GameBoardGUI gbg)
 	{
+		gbGUI = gbg;
 		goodsName = good;
 		setText(goodsName);
-		players = GameBoardGUI.players;
+		players = gbg.players;
+		msgBar = gbg.msgBar;
 		this.addActionListener(new ActionListener() {
 			
 			@Override
@@ -27,7 +32,7 @@ public class GoodsButton extends JButton
 						int playerNumber = i+1;
 						System.out.println( "Player "+playerNumber+": "+ players.get(i).getGoods());
 						players.get(i).addGood(goodsName, 1);
-						
+						gbGUI.updateMsgBar();
 					}
 			}
 		});

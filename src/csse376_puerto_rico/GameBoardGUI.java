@@ -1,6 +1,7 @@
 package csse376_puerto_rico;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -19,32 +20,22 @@ public class GameBoardGUI {
 
 	private JFrame mainframe;
 	public static List<Player> players;
-	public static ArrayList<JPanel> playerCards;
+	public static JTextArea msgBar;
+//	public static ArrayList<JPanel> playerCards;
 	private ButtonGroup bGroup;
 	private static int turnCount;
 
 	public GameBoardGUI(JFrame frame, ButtonGroup group) {
 		this.players = new ArrayList<Player>();
 		this.mainframe = frame;
+		this.mainframe.setTitle("Puerto Rico");
 		this.mainframe.getContentPane().removeAll();
 		this.mainframe.getContentPane().revalidate();
 		this.mainframe.setBackground(Color.GREEN);
 		MigLayout layout = new MigLayout();
 		this.mainframe.setLayout(layout);
 		this.bGroup = group;
-		
-		// TODO: Isaiah : Add buttons correctly.
-		GoodsButton CoffeeButton = new GoodsButton("Coffee");
-		GoodsButton CornButton = new GoodsButton("Corn");
-		GoodsButton TobaccoButton = new GoodsButton("Tobacco");
-		GoodsButton IndigoButton = new GoodsButton("Indigo");
-		GoodsButton SugarButton = new GoodsButton("Sugar");
-		this.mainframe.setTitle("Puerto Rico");
-		this.mainframe.add(CoffeeButton, "cell 0 2");
-		this.mainframe.add(CornButton, "cell 0 2");
-		this.mainframe.add(TobaccoButton, "cell 0 2");
-		this.mainframe.add(SugarButton, "cell 0 2");
-		this.mainframe.add(IndigoButton, "cell 0 2");
+		this.msgBar = new JTextArea();
 
 		String temp = "0";
 		for (Enumeration<AbstractButton> buttons = this.bGroup.getElements(); buttons
@@ -56,6 +47,27 @@ public class GameBoardGUI {
 		}
 		int numberPlayers = Integer.parseInt(temp);
 		this.addPlayers(numberPlayers);
+		displayMessageBar();
+		addGoodsButtons();
+	}
+
+	private void displayMessageBar() {
+		msgBar.setColumns(90);
+		this.mainframe.add(msgBar, "cell 0 0, span "+this.players.size());
+	}
+
+	private void addGoodsButtons() {
+		// TODO: Isaiah : Add buttons correctly.
+		GoodsButton CoffeeButton = new GoodsButton("Coffee", this);
+		GoodsButton CornButton = new GoodsButton("Corn", this);
+		GoodsButton TobaccoButton = new GoodsButton("Tobacco", this);
+		GoodsButton IndigoButton = new GoodsButton("Indigo", this);
+		GoodsButton SugarButton = new GoodsButton("Sugar", this);
+		this.mainframe.add(CoffeeButton, "cell 0 2");
+		this.mainframe.add(CornButton, "cell 0 2");
+		this.mainframe.add(TobaccoButton, "cell 0 2");
+		this.mainframe.add(SugarButton, "cell 0 2");
+		this.mainframe.add(IndigoButton, "cell 0 2");
 	}
 
 //	/**
@@ -87,9 +99,8 @@ public class GameBoardGUI {
 				p.isGovernor = true;
 			}
 			JTextArea jta = new JTextArea("Player " + (i + 1) + "\nRole: "
-					+ "\nScore: " + p.getPoints() + "\nBuildings:" + p.getBuildings() + "\nPlantations:");
+					+ "\nScore: " + p.getPoints() + "\nBuildings:" + p.getBuildings() + "\nPlantations:\n");
 			jta.setRows(15);
-			// TODO: Isaiah
 			jta.setColumns(15);
 			p.setHUD(jta);
 			this.players.add(p);
@@ -160,6 +171,10 @@ public class GameBoardGUI {
 		
 		// TODO: Check endgame, otherwise go back this loop
 		
+	}
+	
+	public void updateMsgBar(){
+		this.msgBar.setText("Updated");
 	}
 	
 	public void playRole(Player player){
