@@ -69,7 +69,7 @@ public class GameBoardGuiTest {
 	public void test_updateMsgBar(){
 		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
 		g.updateMsgBar();
-		assertEquals("Update", g.msgBar.getText());
+		assertEquals("Updated", g.msgBar.getText());
 	}
 	
 //	@Test
