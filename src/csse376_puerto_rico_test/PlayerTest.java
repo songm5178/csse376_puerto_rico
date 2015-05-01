@@ -271,5 +271,13 @@ public class PlayerTest {
 		String expected = "Role: Builder \nScore: 0 \nBuilding: null \nPlantation: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
 		assertEquals(expected, player.toString());
 	}
+	
+	@Test
+	public void test_toString6()
+	{
+		Player player = new Player("Captain");
+		String expected = "Role:  \nScore: 0 \nBuilding: null \nPlantation: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
+		assertEquals(expected, player.toString());
+	}
 
 }
