@@ -212,7 +212,7 @@ public class PlayerTest {
 		assertEquals(1, player.getNumberOfGood("Indigo"));
 	}
 	
-	
+	@Test
 	public void add_MultipleIndigo(){
 		Player player = new Player();
 		player.addGood("Indigo", 1);
