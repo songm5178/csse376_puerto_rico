@@ -163,6 +163,7 @@ public class GameState {
 	}
 
 	public boolean isGameEndState() {
+		
 		return isGameEndState;
 	}
 
