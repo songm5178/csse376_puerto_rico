@@ -343,7 +343,7 @@ public class PlayerTest {
 		Player player = new Player();
 		player.getPlantations().add(new Plantation("Quarry", false));
 		String answer = player.getPlantationsStringList().toString();
-		assertEquals("[]", answer);
+		assertEquals("[Quarry]", answer);
 	}
 
 }
