@@ -298,13 +298,23 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void test_addPoints()
+	public void test_add3Points()
 	{
 		Player player = new Player();
 		player.setPoints(9);
 		assertEquals(9, player.getPoints());
 		player.addPoints(3);
 		assertEquals(12, player.getPoints());
+	}
+	
+	@Test
+	public void test_add5Points()
+	{
+		Player player = new Player();
+		player.setPoints(9);
+		assertEquals(9, player.getPoints());
+		player.addPoints(5);
+		assertEquals(14, player.getPoints());
 	}
 
 }
