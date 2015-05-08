@@ -216,8 +216,6 @@ public class Player {
 			//TODO: Change this once mayor gets fixed. Must only work if the mayor places a colonist
 			// on the plantation.
 				this.addGood(p.good, 1);
-				System.out.println(this.getGoods());
-			
 		}
 	}
 

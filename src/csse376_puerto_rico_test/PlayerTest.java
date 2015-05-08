@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import csse376_puerto_rico.Buildings.Building;
 import csse376_puerto_rico.Player;
+import csse376_puerto_rico.Player.Plantation;
 
 public class PlayerTest {
 
@@ -315,6 +316,15 @@ public class PlayerTest {
 		assertEquals(9, player.getPoints());
 		player.addPoints(5);
 		assertEquals(14, player.getPoints());
+	}
+	
+	@Test
+	public void settlerTest1()
+	{
+		Player player = new Player();
+		player.getPlantations().add(new Plantation("Corn", false));
+		String answer = player.getPlantationsStringList().toString();
+		assertEquals("", answer);
 	}
 
 }
