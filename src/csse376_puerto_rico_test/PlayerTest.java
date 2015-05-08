@@ -237,7 +237,7 @@ public class PlayerTest {
 	public void test_toString1()
 	{
 		Player player = new Player();
-		String expected = "Role:  \nScore: 0 \nBuilding: null \nPlantation: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
+		String expected = "Player 0 \nRole:  \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
 		assertEquals(expected, player.toString());
 	}
 	
@@ -245,7 +245,7 @@ public class PlayerTest {
 	public void test_toString2()
 	{
 		Player player = new Player("Mayor");
-		String expected = "Role: Mayor \nScore: 0 \nBuilding: null \nPlantation: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
+		String expected = "Player 0 \nRole: Mayor \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
 		assertEquals(expected, player.toString());
 	}
 	
@@ -253,7 +253,7 @@ public class PlayerTest {
 	public void test_toString3()
 	{
 		Player player = new Player("Prospector");
-		String expected = "Role: Prospector \nScore: 0 \nBuilding: null \nPlantation: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
+		String expected = "Player 0 \nRole: Prospector \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
 		assertEquals(expected, player.toString());
 	}
 	
@@ -261,15 +261,7 @@ public class PlayerTest {
 	public void test_toString4()
 	{
 		Player player = new Player("Builder");
-		String expected = "Role: Builder \nScore: 0 \nBuilding: null \nPlantation: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
-		assertEquals(expected, player.toString());
-	}
-	
-	@Test
-	public void test_toString5()
-	{
-		Player player = new Player("Builder");
-		String expected = "Role: Builder \nScore: 0 \nBuilding: null \nPlantation: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
+		String expected = "Player 0 \nRole: Builder \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
 		assertEquals(expected, player.toString());
 	}
 	
@@ -277,7 +269,7 @@ public class PlayerTest {
 	public void test_toString6()
 	{
 		Player player = new Player("Captain");
-		String expected = "Role: Captain \nScore: 0 \nBuilding: null \nPlantation: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
+		String expected = "Player 0 \nRole: Captain \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
 		assertEquals(expected, player.toString());
 	}
 	
@@ -286,7 +278,7 @@ public class PlayerTest {
 	public void test_toString7()
 	{
 		Player player = new Player("Trader");
-		String expected = "Role: Trader \nScore: 0 \nBuilding: null \nPlantation: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
+		String expected = "Player 0 \nRole: Trader \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
 		assertEquals(expected, player.toString());
 	}
 	
@@ -324,7 +316,7 @@ public class PlayerTest {
 		Player player = new Player();
 		player.getPlantations().add(new Plantation("Corn", false));
 		String answer = player.getPlantationsStringList().toString();
-		assertEquals("", answer);
+		assertEquals("[Corn]", answer);
 	}
 
 }
