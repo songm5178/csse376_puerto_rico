@@ -32,6 +32,15 @@ public class GameStateTest {
 		coffee = g.getGood(Player.Good.COFFEE);
 		assertEquals(1, coffee);
 	}
+	
+	@Test
+	public void testColonists(){
+		GameState g = new GameState(3);
+		
+		assertEquals(3, g.getColonistsOnBoard());
+		assertEquals(55, g.getColonistsTotal());
+		
+	}
 
 
 }
