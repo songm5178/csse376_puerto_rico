@@ -22,13 +22,14 @@ public class GameBoardGUI {
 	// public static ArrayList<JPanel> playerCards;
 	private ButtonGroup bGroup;
 	private static int turnCount;
+	private GameState gameState;
 
 	public GameBoardGUI() {
 		// For testing purposes.
 		this.msgBar = new JTextArea();
 		this.players = new ArrayList<Player>();
 		this.mainframe = new JFrame();
-
+		this.gameState = new GameState();
 	}
 
 	public GameBoardGUI(JFrame frame, ButtonGroup group) {
@@ -42,6 +43,7 @@ public class GameBoardGUI {
 		this.mainframe.setLayout(layout);
 		this.bGroup = group;
 		this.msgBar = new JTextArea();
+		this.gameState = new GameState();
 
 		String temp = "0";
 		for (Enumeration<AbstractButton> buttons = this.bGroup.getElements(); buttons
@@ -171,7 +173,7 @@ public class GameBoardGUI {
 	}
 
 	public boolean checkEndGame() {
-		// checks the end of the game, default to true for now
+		// checks the end of the game, default to true for testing, otherwise false
 		return false;
 	}
 
@@ -180,7 +182,7 @@ public class GameBoardGUI {
 	}
 
 	public void playRole(int roleNum) {
-		// TODO: puts in all, Min
+		// 
 		Player player = players.get(roleNum);
 		String role = player.getRole();
 
@@ -272,6 +274,56 @@ public class GameBoardGUI {
 				if (n != bNames.size() - 1) {
 					player.addBuilding(new Building(bNames.get(n)));
 				}
+				player.updatePlayerInfo();
+				roleNum = (roleNum + 1) % players.size();
+
+			}
+		}else if(role.equals(PlayerRoles.Settler)){
+			//TODO: kurian
+			for (int i = 0; i < players.size(); i++) {
+
+				player = players.get(roleNum);
+				//TODO:
+				player.updatePlayerInfo();
+				roleNum = (roleNum + 1) % players.size();
+
+			}
+		}else if(role.equals(PlayerRoles.Craftsman)){
+			//TODO: kurian
+			for (int i = 0; i < players.size(); i++) {
+
+				player = players.get(roleNum);
+				//TODO:
+				player.updatePlayerInfo();
+				roleNum = (roleNum + 1) % players.size();
+
+			}
+		}else if(role.equals(PlayerRoles.Trader)){
+			//TODO: Min
+			for (int i = 0; i < players.size(); i++) {
+
+				player = players.get(roleNum);
+				//TODO:
+				player.updatePlayerInfo();
+				roleNum = (roleNum + 1) % players.size();
+
+			}
+		}else if(role.equals(PlayerRoles.Captain)){
+			//TODO: Isaiah
+			for (int i = 0; i < players.size(); i++) {
+
+				player = players.get(roleNum);
+				//TODO:
+				player.updatePlayerInfo();
+				roleNum = (roleNum + 1) % players.size();
+
+			}
+		}else if(role.equals(PlayerRoles.Prospector)){
+			//:do nothing
+			for (int i = 0; i < players.size(); i++) {
+
+				player = players.get(roleNum);
+				//:
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
