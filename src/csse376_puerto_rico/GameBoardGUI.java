@@ -332,7 +332,7 @@ public class GameBoardGUI {
 
 			}
 		}else if(role.equals(PlayerRoles.Settler)){
-			//TODO: kurian
+			//DONE: kurian
 			List<String> gNames = player.getAllGoods();
 			gNames.add("Quarry");
 			Object[] options = gNames.toArray();
@@ -353,7 +353,7 @@ public class GameBoardGUI {
 				roleNum = (roleNum + 1) % players.size();
 			}
 		}else if(role.equals(PlayerRoles.Craftsman)){
-			//TODO: kurian
+			//DONE: kurian
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);

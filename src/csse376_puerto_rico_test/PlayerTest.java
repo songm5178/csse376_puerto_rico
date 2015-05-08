@@ -373,5 +373,14 @@ public class PlayerTest {
 		String answer = player.getPlantationsStringList().toString();
 		assertEquals("[Sugar, Coffee]", answer);
 	}
+	
+	@Test
+	public void craftsmanTest1()
+	{
+		Player player = new Player();
+		player.getPlantations().add(new Plantation("Sugar", false));
+		player.checkPlantation();
+		assertEquals(1, player.getNumberOfGood("Sugar"));
+	}
 
 }
