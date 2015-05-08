@@ -18,6 +18,27 @@ public class GameState {
 
 	public GameState() {
 
+		// for testing purposes
+		// goods
+		goods.put(Player.Good.COFFEE, 0);
+		goods.put(Player.Good.CORN, 0);
+		goods.put(Player.Good.INDIGO, 0);
+		goods.put(Player.Good.SUGAR, 0);
+		goods.put(Player.Good.TOBACCO, 0);
+
+		// colonists
+
+		colonistsTotal = 0;
+		colonistsOnBoard = 0;
+		// ships
+
+		// doubloons
+		doubloons = 0;
+
+	}
+
+	public GameState(int numOfPlayers) {
+
 		// TODO: game start state - Min
 		// goods
 		goods.put(Player.Good.COFFEE, 0);
@@ -27,8 +48,23 @@ public class GameState {
 		goods.put(Player.Good.TOBACCO, 0);
 
 		// colonists
-		colonistsTotal = 0;
-		colonistsOnBoard = 0;
+		/**
+		 * For each empty circle on the buildings on the player boards of all
+		 * players (empty circles on plantations and quarries do not count!),
+		 * the mayor takes one colonist from the colonist supply and places it
+		 * on the colonist ship. However, as a minimum, the mayor should always
+		 * place at least as many colonists on the ship as there are players in
+		 * the game.
+		 */
+		colonistsOnBoard = numOfPlayers;
+		if (numOfPlayers == 3) {
+			colonistsTotal = 55;
+
+		} else if (numOfPlayers == 4) {
+			colonistsTotal = 75;
+		} else if (numOfPlayers == 5) {
+			colonistsTotal = 95;
+		}
 		// ships
 
 		// doubloons
@@ -44,6 +80,16 @@ public class GameState {
 	public void addGood(String good) {
 
 		goods.put(good, goods.get(good) + 1);
+	}
+
+	public int getColonistsOnBoard() {
+		//
+		return colonistsOnBoard;
+	}
+
+	public int getColonistsTotal() {
+		//
+		return colonistsTotal;
 	}
 
 }
