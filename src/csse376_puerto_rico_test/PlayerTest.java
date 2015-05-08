@@ -371,7 +371,7 @@ public class PlayerTest {
 		player.getPlantations().add(new Plantation("Sugar", false));
 		player.getPlantations().add(new Plantation("Coffee", false));
 		String answer = player.getPlantationsStringList().toString();
-		assertEquals("[]", answer);
+		assertEquals("[Sugar, Coffee]", answer);
 	}
 
 }
