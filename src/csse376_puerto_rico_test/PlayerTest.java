@@ -325,7 +325,7 @@ public class PlayerTest {
 		Player player = new Player();
 		player.getPlantations().add(new Plantation("Coffee", false));
 		String answer = player.getPlantationsStringList().toString();
-		assertEquals("", answer);
+		assertEquals("[Coffee]", answer);
 	}
 
 }
