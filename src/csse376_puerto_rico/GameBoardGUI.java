@@ -357,7 +357,7 @@ public class GameBoardGUI {
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
-				//TODO:
+				player.checkPlantation();
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 

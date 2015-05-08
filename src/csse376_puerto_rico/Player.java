@@ -178,12 +178,12 @@ public class Player {
 		}
 		if (isGovernor) {
 			rtn = String
-					.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s \nGovernor",
+					.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s \nGoods: %s \nGovernor",
 							pNum, role, points, buildingList, plantationList,
 							goodsList);
 		} else {
 			rtn = String
-					.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s",
+					.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s \nGoods: %s",
 							pNum, role, points, buildingList, plantationList,
 							goodsList);
 		}
@@ -197,6 +197,7 @@ public class Player {
 	public ArrayList<Plantation> getPlantations() {
 		return this.plantations;
 	}
+	
 
 	public ArrayList<String> getPlantationsStringList() {
 		ArrayList<String> rtn = new ArrayList<String>();
@@ -204,6 +205,20 @@ public class Player {
 			rtn.add(p.good);
 		}
 		return rtn;
+	}
+	
+	//Only used by the Craftsman: checks if the plantation has a worker and adds one
+	//to the respective good count
+	public void checkPlantation()
+	{
+		for (Plantation p : this.plantations)
+		{
+			//TODO: Change this once mayor gets fixed. Must only work if the mayor places a colonist
+			// on the plantation.
+				this.addGood(p.good, 1);
+				System.out.println(this.getGoods());
+			
+		}
 	}
 
 
