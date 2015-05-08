@@ -169,7 +169,7 @@ public class Player {
 		String rtn = "";
 		String buildingList = "";
 		String goodsList = this.getGoods().toString();
-		String plantationList = "";
+		String plantationList= "";
 		for (int i = 0; i < this.buildings.size(); i++) {
 			buildingList = buildingList + " " + this.buildings.get(i).name;
 		}
@@ -205,5 +205,7 @@ public class Player {
 		}
 		return rtn;
 	}
+
+
 
 }

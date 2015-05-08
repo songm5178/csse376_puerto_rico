@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
 import csse376_puerto_rico.Buildings.Building;
+import csse376_puerto_rico.Player.Plantation;
 
 public class GameBoardGUI {
 
@@ -332,13 +333,24 @@ public class GameBoardGUI {
 			}
 		}else if(role.equals(PlayerRoles.Settler)){
 			//TODO: kurian
+			List<String> gNames = player.getAllGoods();
+			gNames.add("Quarry");
+			Object[] options = gNames.toArray();
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
-				//TODO:
+				// player = player.next at the end
+				int n = JOptionPane.showOptionDialog(this.mainframe,
+						"Choose a Good to harvest!", "Player " + (roleNum),
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, options,
+						options[options.length - 1]);
+					System.out.println(gNames.get(n));
+				if (n != gNames.size() - 1) {
+					player.getPlantations().add(new Plantation(gNames.get(n), false));
+				}
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
-
 			}
 		}else if(role.equals(PlayerRoles.Craftsman)){
 			//TODO: kurian
