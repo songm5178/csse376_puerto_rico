@@ -97,6 +97,11 @@ public class Player {
 		return isGovernor;
 	}
 
+
+	public void addPoints(int addition) {
+		this.points = this.points;
+	}
+	
 	// Test method
 	public void setPoints(int points) {
 		// This method is strictly for setting points

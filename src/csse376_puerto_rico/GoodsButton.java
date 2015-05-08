@@ -32,7 +32,7 @@ public class GoodsButton extends JButton
 						int playerNumber = i+1;
 						System.out.println( "Player "+playerNumber+": "+ players.get(i).getGoods());
 						players.get(i).addGood(goodsName, 1);
-						gbGUI.updateMsgBar();
+						gbGUI.updateMsgBar("You pressed a button");
 					}
 			}
 		});

@@ -182,9 +182,11 @@ public class GameBoardGUI {
 		return gameState.isGameEndState();
 	}
 
-	public void updateMsgBar() {
-		this.msgBar.setText("Updated");
+	public void updateMsgBar(String msg) {
+		this.msgBar.setText(msg);
 	}
+	
+	
 
 	public void playRole(int roleNum) {
 		// 
@@ -228,6 +230,7 @@ public class GameBoardGUI {
 							player.getBuildings().get(buildingNum).numberOfWorkers++;
 							selected = true;
 						} else {
+//							updateMsgBar("You have no buildings");
 							selected = false;
 						}
 
@@ -246,9 +249,9 @@ public class GameBoardGUI {
 										JOptionPane.QUESTION_MESSAGE, null,
 										temp, null);
 						if (plantationNum != temp.length - 1) {
-
 							selected = true;
 						} else {
+//							updateMsgBar("You have no plantions");
 							selected = false;
 						}
 					} else {
@@ -316,7 +319,7 @@ public class GameBoardGUI {
 		}else if(role.equals(PlayerRoles.Captain)){
 			//TODO: Isaiah
 			for (int i = 0; i < players.size(); i++) {
-
+				
 				player = players.get(roleNum);
 				//TODO:
 				player.updatePlayerInfo();

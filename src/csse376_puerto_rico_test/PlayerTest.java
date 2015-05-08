@@ -296,5 +296,15 @@ public class PlayerTest {
 		assertEquals(1, player.getPlayerNum());
 		
 	}
+	
+	@Test
+	public void test_addPoints()
+	{
+		Player player = new Player();
+		player.setPoints(9);
+		assertEquals(9, player.getPoints());
+		player.addPoints(3);
+		assertEquals(12, player.getPoints());
+	}
 
 }
