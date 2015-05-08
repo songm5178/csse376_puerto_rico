@@ -99,7 +99,7 @@ public class Player {
 
 
 	public void addPoints(int addition) {
-		this.points = this.points;
+		this.points = this.points + 3;
 	}
 	
 	// Test method
