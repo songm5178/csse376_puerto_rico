@@ -346,7 +346,7 @@ public class GameBoardGUI {
 						JOptionPane.QUESTION_MESSAGE, null, options,
 						options[options.length - 1]);
 					System.out.println(gNames.get(n));
-				if (n != gNames.size() - 1) {
+				if (n != gNames.size() - 1 && gNames.get(n) != "Quarry") {
 					player.getPlantations().add(new Plantation(gNames.get(n), false));
 				}
 				player.updatePlayerInfo();

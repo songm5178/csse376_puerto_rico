@@ -418,5 +418,16 @@ public class PlayerTest {
 		player.checkPlantation();
 		assertEquals(1, player.getNumberOfGood("Tobacco"));
 	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testNullInput() {
+		Player player = new Player();
+		player.getPlantations().add(new Plantation("Quarry", false));
+		player.checkPlantation();
+	    player.getNumberOfGood("Quarry");
+	}
+	
+	
+
 
 }
