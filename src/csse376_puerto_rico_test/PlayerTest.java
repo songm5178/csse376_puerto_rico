@@ -336,5 +336,14 @@ public class PlayerTest {
 		String answer = player.getPlantationsStringList().toString();
 		assertEquals("[Indigo]", answer);
 	}
+	
+	@Test
+	public void settlerTest4()
+	{
+		Player player = new Player();
+		player.getPlantations().add(new Plantation("Quarry", false));
+		String answer = player.getPlantationsStringList().toString();
+		assertEquals("[]", answer);
+	}
 
 }
