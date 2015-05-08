@@ -19,6 +19,7 @@ public class GameBoardGUI {
 	private JFrame mainframe;
 	public static List<Player> players;
 	public static JTextArea msgBar;
+	public static JTextArea gameStateInfo;
 	// public static ArrayList<JPanel> playerCards;
 	private ButtonGroup bGroup;
 	private static int turnCount;
@@ -27,6 +28,7 @@ public class GameBoardGUI {
 	public GameBoardGUI() {
 		// For testing purposes.
 		this.msgBar = new JTextArea();
+		this.gameStateInfo = new JTextArea();
 		this.players = new ArrayList<Player>();
 		this.mainframe = new JFrame();
 		this.gameState = new GameState();
@@ -43,6 +45,7 @@ public class GameBoardGUI {
 		this.mainframe.setLayout(layout);
 		this.bGroup = group;
 		this.msgBar = new JTextArea();
+		this.gameStateInfo = new JTextArea();
 
 
 		String temp = "0";
@@ -56,7 +59,46 @@ public class GameBoardGUI {
 		int numberPlayers = Integer.parseInt(temp);
 		
 		this.addPlayers(numberPlayers);
-
+	}
+	
+	private void displayGameState() {
+		int coffee = this.gameState.getGood(Player.Good.COFFEE);
+		int corn = this.gameState.getGood(Player.Good.CORN);
+		int indigo = this.gameState.getGood(Player.Good.INDIGO);
+		int sugar = this.gameState.getGood(Player.Good.SUGAR);
+		int tobacco = this.gameState.getGood(Player.Good.TOBACCO);
+		int colonists = this.gameState.getColonistsOnBoard();
+		
+		String parsedInfo = "Coffe: "+coffee+"    Corn: "+corn+"    Indigo: "+indigo+
+				"\nSugar: "+sugar+"        Tobacco: "+tobacco+
+				"\nColonists: "+colonists+
+				"\n"+
+				"\nCargo Ship: "+(4 - this.gameState.cargoship4)+" spots for "+this.gameState.cargoship4Good+
+				"    Cargo Ship: "+(5 - this.gameState.cargoship5)+" spots for "+this.gameState.cargoship5Good+
+				"    Cargo Ship: "+(6 - this.gameState.cargoship6)+" spots for "+this.gameState.cargoship6Good;
+		gameStateInfo.setColumns(20);
+		gameStateInfo.setRows(7);
+		gameStateInfo.setText(parsedInfo);
+		this.mainframe.add(gameStateInfo, "cell 2 3");
+	}
+	
+	private void updateGameStateDisplay(){
+		int coffee = this.gameState.getGood(Player.Good.COFFEE);
+		int corn = this.gameState.getGood(Player.Good.CORN);
+		int indigo = this.gameState.getGood(Player.Good.INDIGO);
+		int sugar = this.gameState.getGood(Player.Good.SUGAR);
+		int tobacco = this.gameState.getGood(Player.Good.TOBACCO);
+		int colonists = this.gameState.getColonistsOnBoard();
+		
+		String parsedInfo = "Coffe: "+coffee+"    Corn: "+corn+"    Indigo: "+indigo+
+				"\nSugar: "+sugar+"        Tobacco: "+tobacco+
+				"\nColonists: "+colonists+
+				"\n"+
+				"\nCargo Ship: "+(4 - this.gameState.cargoship4)+" spots for "+this.gameState.cargoship4Good+
+				"    Cargo Ship: "+(5 - this.gameState.cargoship5)+" spots for "+this.gameState.cargoship5Good+
+				"    Cargo Ship: "+(6 - this.gameState.cargoship6)+" spots for "+this.gameState.cargoship6Good;
+		
+		gameStateInfo.setText(parsedInfo);
 	}
 
 	private void displayMessageBar() {
@@ -96,6 +138,8 @@ public class GameBoardGUI {
 
 		}
 		this.gameState = new GameState(this.players);
+		
+		displayGameState();
 		displayMessageBar();
 		addGoodsButtons();
 		updateRoles();
@@ -317,11 +361,40 @@ public class GameBoardGUI {
 
 			}
 		}else if(role.equals(PlayerRoles.Captain)){
-			//TODO: Isaiah
+			
 			for (int i = 0; i < players.size(); i++) {
-				
-				player = players.get(roleNum);
 				//TODO:
+				player = players.get(roleNum);
+				Object[] goodOptions = player.getAllGoods().toArray();
+				
+				int good = JOptionPane.showOptionDialog(this.mainframe,
+						"Choose a good to ship!", "Player " + (roleNum),
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, goodOptions,
+						goodOptions[goodOptions.length - 1]);
+				
+				Object[] shipOptions = new Object[3];
+				shipOptions[0] = 4;
+				shipOptions[1] = 5;
+				shipOptions[2] = 6;
+				int ship = JOptionPane.showOptionDialog(this.mainframe,
+						"Choose a cargo ship to put good!", "Player " + (roleNum),
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, shipOptions,
+						shipOptions[shipOptions.length - 1]);
+				
+				if(ship == 0){
+					this.gameState.cargoship4Good = (String) goodOptions[good];
+					this.gameState.cargoship4++;
+				}else if(ship == 1){
+					this.gameState.cargoship5Good = (String) goodOptions[good];
+					this.gameState.cargoship5++;
+				}else if(ship == 2){
+					this.gameState.cargoship6Good = (String) goodOptions[good];
+					this.gameState.cargoship6++;
+				}
+				
+				updateGameStateDisplay();
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
