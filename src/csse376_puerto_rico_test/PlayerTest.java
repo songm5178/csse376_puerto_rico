@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import csse376_puerto_rico.Buildings.Building;
 import csse376_puerto_rico.Player;
+import csse376_puerto_rico.Player.Good;
 import csse376_puerto_rico.Player.Plantation;
 
 public class PlayerTest {
@@ -380,7 +381,7 @@ public class PlayerTest {
 		Player player = new Player();
 		player.getPlantations().add(new Plantation("Sugar", false));
 		player.checkPlantation();
-		assertEquals(1, player.getNumberOfGood("Sugar"));
+		assertEquals(1, player.getNumberOfGood(Good.SUGAR));
 	}
 	
 	@Test
@@ -389,7 +390,7 @@ public class PlayerTest {
 		Player player = new Player();
 		player.getPlantations().add(new Plantation("Coffee", false));
 		player.checkPlantation();
-		assertEquals(1, player.getNumberOfGood("Coffee"));
+		assertEquals(1, player.getNumberOfGood(Good.COFFEE));
 	}
 	
 	@Test
@@ -398,7 +399,7 @@ public class PlayerTest {
 		Player player = new Player();
 		player.getPlantations().add(new Plantation("Corn", false));
 		player.checkPlantation();
-		assertEquals(1, player.getNumberOfGood("Corn"));
+		assertEquals(1, player.getNumberOfGood(Good.CORN));
 	}
 	
 	@Test
@@ -407,7 +408,7 @@ public class PlayerTest {
 		Player player = new Player();
 		player.getPlantations().add(new Plantation("Indigo", false));
 		player.checkPlantation();
-		assertEquals(1, player.getNumberOfGood("Indigo"));
+		assertEquals(1, player.getNumberOfGood(Good.INDIGO));
 	}
 	
 	@Test
@@ -416,7 +417,7 @@ public class PlayerTest {
 		Player player = new Player();
 		player.getPlantations().add(new Plantation("Tobacco", false));
 		player.checkPlantation();
-		assertEquals(1, player.getNumberOfGood("Tobacco"));
+		assertEquals(1, player.getNumberOfGood(Good.TOBACCO));
 	}
 	
 	@Test(expected=NullPointerException.class)
