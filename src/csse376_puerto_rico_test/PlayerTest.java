@@ -382,5 +382,41 @@ public class PlayerTest {
 		player.checkPlantation();
 		assertEquals(1, player.getNumberOfGood("Sugar"));
 	}
+	
+	@Test
+	public void craftsmanTest2()
+	{
+		Player player = new Player();
+		player.getPlantations().add(new Plantation("Coffee", false));
+		player.checkPlantation();
+		assertEquals(1, player.getNumberOfGood("Coffee"));
+	}
+	
+	@Test
+	public void craftsmanTest3()
+	{
+		Player player = new Player();
+		player.getPlantations().add(new Plantation("Corn", false));
+		player.checkPlantation();
+		assertEquals(1, player.getNumberOfGood("Corn"));
+	}
+	
+	@Test
+	public void craftsmanTest4()
+	{
+		Player player = new Player();
+		player.getPlantations().add(new Plantation("Indigo", false));
+		player.checkPlantation();
+		assertEquals(1, player.getNumberOfGood("Indigo"));
+	}
+	
+	@Test
+	public void craftsmanTest5()
+	{
+		Player player = new Player();
+		player.getPlantations().add(new Plantation("Tobacco", false));
+		player.checkPlantation();
+		assertEquals(1, player.getNumberOfGood("Tobacco"));
+	}
 
 }
