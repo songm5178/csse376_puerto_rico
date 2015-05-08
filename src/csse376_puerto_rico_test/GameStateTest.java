@@ -2,6 +2,8 @@ package csse376_puerto_rico_test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import csse376_puerto_rico.GameState;
@@ -35,7 +37,11 @@ public class GameStateTest {
 	
 	@Test
 	public void testColonists(){
-		GameState g = new GameState(3);
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		GameState g = new GameState(players);
 		
 		assertEquals(3, g.getColonistsOnBoard());
 		assertEquals(55, g.getColonistsTotal());
