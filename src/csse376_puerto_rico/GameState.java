@@ -36,6 +36,19 @@ public class GameState {
 		doubloons = 0;
 		
 	}
+
+
+	public int getGood(String good) {
+		
+		return goods.get(good);
+	}
+
+
+
+	public void addGood(String good) {
+		
+		goods.put(good, goods.get(good)+1);
+	}
 	
 	
 	
