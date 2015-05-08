@@ -354,5 +354,14 @@ public class PlayerTest {
 		String answer = player.getPlantationsStringList().toString();
 		assertEquals("[Tobacco]", answer);
 	}
+	
+	@Test
+	public void settlerTest6()
+	{
+		Player player = new Player();
+		player.getPlantations().add(new Plantation("Sugar", false));
+		String answer = player.getPlantationsStringList().toString();
+		assertEquals("[]", answer);
+	}
 
 }
