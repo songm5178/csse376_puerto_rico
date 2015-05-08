@@ -2,6 +2,7 @@ package csse376_puerto_rico;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import csse376_puerto_rico.Buildings.Building;
 import csse376_puerto_rico.Player.Plantation;
@@ -20,7 +21,7 @@ public class GameState {
 	public boolean isGameEndState = false;
 	public int doubloons;
 	private int numOfPlayers;
-	private ArrayList<Player> players;
+	private List<Player> players;
 
 	public static final int ERROR = -99;
 
@@ -45,7 +46,7 @@ public class GameState {
 
 	}
 
-	public GameState(ArrayList<Player> players) {
+	public GameState(List<Player> players2) {
 
 		// TODO: game start state - Min
 		// goods
@@ -56,8 +57,8 @@ public class GameState {
 		goods.put(Player.Good.TOBACCO, 0);
 
 		// colonists
-		this.players = players;
-		numOfPlayers = players.size();
+		this.players = players2;
+		numOfPlayers = players2.size();
 		colonistsOnBoard = numOfPlayers;
 		if (numOfPlayers == 3) {
 			colonistsTotal = 55;

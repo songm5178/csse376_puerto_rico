@@ -43,7 +43,7 @@ public class GameBoardGUI {
 		this.mainframe.setLayout(layout);
 		this.bGroup = group;
 		this.msgBar = new JTextArea();
-		this.gameState = new GameState();
+
 
 		String temp = "0";
 		for (Enumeration<AbstractButton> buttons = this.bGroup.getElements(); buttons
@@ -54,6 +54,7 @@ public class GameBoardGUI {
 			}
 		}
 		int numberPlayers = Integer.parseInt(temp);
+		
 		this.addPlayers(numberPlayers);
 
 	}
@@ -94,6 +95,7 @@ public class GameBoardGUI {
 			this.mainframe.add(jta, "cell " + i + " 1");
 
 		}
+		this.gameState = new GameState(this.players);
 		displayMessageBar();
 		addGoodsButtons();
 		updateRoles();
@@ -157,7 +159,10 @@ public class GameBoardGUI {
 				player.updatePlayerInfo();
 
 				playRole(i);
-
+				
+				// update
+				this.gameState.updateAtEndOfTurn();
+				
 				// removing selected
 				List<Object> temp = new ArrayList<Object>();
 				for (int j = 0; j < options.length; j++) {
@@ -174,7 +179,7 @@ public class GameBoardGUI {
 
 	public boolean checkEndGame() {
 		// checks the end of the game, default to true for testing, otherwise false
-		return false;
+		return gameState.isGameEndState();
 	}
 
 	public void updateMsgBar() {
