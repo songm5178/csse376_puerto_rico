@@ -80,7 +80,7 @@ public class GameBoardGUI {
 		gameStateInfo.setColumns(20);
 		gameStateInfo.setRows(7);
 		gameStateInfo.setText(parsedInfo);
-		this.mainframe.add(gameStateInfo, "cell 2 3");
+		this.mainframe.add(gameStateInfo, "cell 0 5");
 	}
 	
 	private void updateGameStateDisplay(){
@@ -107,19 +107,6 @@ public class GameBoardGUI {
 		this.mainframe.add(msgBar, "cell 0 0, span " + this.players.size());
 	}
 
-	private void addGoodsButtons() {
-		GoodsButton CoffeeButton = new GoodsButton("Coffee", this);
-		GoodsButton CornButton = new GoodsButton("Corn", this);
-		GoodsButton TobaccoButton = new GoodsButton("Tobacco", this);
-		GoodsButton IndigoButton = new GoodsButton("Indigo", this);
-		GoodsButton SugarButton = new GoodsButton("Sugar", this);
-		this.mainframe.add(CoffeeButton, "cell 0 2");
-		this.mainframe.add(CornButton, "cell 0 2");
-		this.mainframe.add(TobaccoButton, "cell 0 2");
-		this.mainframe.add(SugarButton, "cell 0 2");
-		this.mainframe.add(IndigoButton, "cell 0 2");
-	}
-
 	public List<Player> addPlayers(int numberOfPlayers) {
 		// this.addPlayerCards(numberOfPlayers);
 		for (int i = 0; i < numberOfPlayers; i++) {
@@ -142,7 +129,6 @@ public class GameBoardGUI {
 		
 		displayGameState();
 		displayMessageBar();
-		addGoodsButtons();
 		updateRoles();
 
 		return this.players;
