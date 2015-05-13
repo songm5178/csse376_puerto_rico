@@ -97,11 +97,10 @@ public class Player {
 		return isGovernor;
 	}
 
-
 	public void addPoints(int addition) {
 		this.points = this.points + addition;
 	}
-	
+
 	// Test method
 	public void setPoints(int points) {
 		// This method is strictly for setting points
@@ -169,7 +168,7 @@ public class Player {
 		String rtn = "";
 		String buildingList = "";
 		String goodsList = this.getGoods().toString();
-		String plantationList= "";
+		String plantationList = "";
 		for (int i = 0; i < this.buildings.size(); i++) {
 			buildingList = buildingList + " " + this.buildings.get(i).name;
 		}
@@ -197,7 +196,6 @@ public class Player {
 	public ArrayList<Plantation> getPlantations() {
 		return this.plantations;
 	}
-	
 
 	public ArrayList<String> getPlantationsStringList() {
 		ArrayList<String> rtn = new ArrayList<String>();
@@ -206,19 +204,17 @@ public class Player {
 		}
 		return rtn;
 	}
-	
-	//Only used by the Craftsman: checks if the plantation has a worker and adds one
-	//to the respective good count
-	public void checkPlantation()
-	{
-		for (Plantation p : this.plantations)
-		{
-			//TODO: Change this once mayor gets fixed. Must only work if the mayor places a colonist
-			// on the plantation.
+
+	// Only used by the Craftsman: checks if the plantation has a worker and
+	// adds one
+	// to the respective good count
+	public void checkPlantation() {
+		for (Plantation p : this.plantations) {
+			if (p.hasWorker) {
+				// Building condition here
 				this.addGood(p.good, 1);
+			}
 		}
 	}
-
-
 
 }
