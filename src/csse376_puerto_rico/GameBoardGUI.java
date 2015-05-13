@@ -80,7 +80,7 @@ public class GameBoardGUI {
 		gameStateInfo.setColumns(20);
 		gameStateInfo.setRows(7);
 		gameStateInfo.setText(parsedInfo);
-		this.mainframe.add(gameStateInfo, "cell 0 5");
+		this.mainframe.add(gameStateInfo, "cell 0 5, span 5");
 	}
 	
 	private void updateGameStateDisplay(){
