@@ -12,6 +12,7 @@ import csse376_puerto_rico.Buildings.Building;
 public class Player {
 
 	private int pNum;
+	private int doubloons;
 	private String role;
 	private JTextArea hud;
 	public boolean isTurn;
@@ -44,6 +45,7 @@ public class Player {
 
 	// For Testing purposes, null player
 	public Player() {
+		this.doubloons = 0;
 		this.pNum = 0;
 		this.role = "";
 		this.isGovernor = false;
@@ -55,6 +57,7 @@ public class Player {
 
 	public Player(String role) {
 		this.role = role;
+		this.doubloons = 0;
 		this.isGovernor = false;
 		this.isTurn = false;
 		this.hud = null;
@@ -215,6 +218,16 @@ public class Player {
 				this.addGood(p.good, 1);
 			}
 		}
+	}
+	
+	public int getDoubloons()
+	{
+		return this.doubloons;
+	}
+	
+	public void setDoubloons(int add)
+	{
+		this.doubloons = add;
 	}
 
 }
