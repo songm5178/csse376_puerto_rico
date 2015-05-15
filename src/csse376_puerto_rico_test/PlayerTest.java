@@ -346,7 +346,23 @@ public class PlayerTest {
 		
 	}
 	
-	
+	@Test
+	public void test_ownsBuildingSmallMarket()
+	{
+		Player player = new Player();
+		Building b = new Building("Small Market");
+		player.addBuilding(b);
+		assertEquals(true, player.ownsBuilding("Small Market"));
+	}
 
+	@Test
+	public void test_ownsBuildingSmallIndigoPlant()
+	{
+		Player player = new Player();
+		Building b = new Building("Small Indigo Plant");
+		player.addBuilding(b);
+		assertEquals(false, player.ownsBuilding("Small Market"));
+		assertEquals(true, player.ownsBuilding("Small Indigo Plant"));
+	}
 
 }
