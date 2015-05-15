@@ -180,12 +180,12 @@ public class Player {
 		}
 		if (isGovernor) {
 			rtn = String
-					.format("Player %d \nRole: %s \nScore: %d \nDoubloons: $d \nBuilding: %s \nPlantation: %s \nGoods: %s \nGovernor",
+					.format("Player %d \nRole: %s \nScore: %d \nDoubloons: %d \nBuilding: %s \nPlantation: %s \nGoods: %s \nGovernor",
 							pNum, role, points, doubloons, buildingList, plantationList,
 							goodsList);
 		} else {
 			rtn = String
-					.format("Player %d \nRole: %s \nScore: %d \nDoubloons: $d \nBuilding: %s \nPlantation: %s \nGoods: %s",
+					.format("Player %d \nRole: %s \nScore: %d \nDoubloons: %d \nBuilding: %s \nPlantation: %s \nGoods: %s",
 							pNum, role, points, doubloons, buildingList, plantationList,
 							goodsList);
 		}
