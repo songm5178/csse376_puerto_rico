@@ -185,11 +185,11 @@ public class GameBoardGUI {
 				// buildings,plantations into Strings
 
 				String role = (String) options[n];
-				
+
 				// Every start of the role each player gets an extra doubloon.
 				player.setDoubloons(player.getDoubloons() + 1);
 				gameState.doubloons--;
-				
+
 				player.setRole(role);
 
 				player.updatePlayerInfo();
@@ -442,34 +442,7 @@ public class GameBoardGUI {
 			for (int i = 0; i < players.size(); i++) {
 				// TODO:
 				player = players.get(roleNum);
-				Object[] goodOptions = player.getAllGoods().toArray();
 
-				int good = JOptionPane.showOptionDialog(this.mainframe,
-						"Choose a good to ship!", "Player " + (roleNum),
-						JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, goodOptions,
-						goodOptions[goodOptions.length - 1]);
-
-				Object[] shipOptions = new Object[3];
-				shipOptions[0] = 4;
-				shipOptions[1] = 5;
-				shipOptions[2] = 6;
-				int ship = JOptionPane.showOptionDialog(this.mainframe,
-						"Choose a cargo ship to put good!", "Player "
-								+ (roleNum), JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, shipOptions,
-						shipOptions[shipOptions.length - 1]);
-
-				if (ship == 0) {
-					this.gameState.cargoship4Good = (String) goodOptions[good];
-					this.gameState.cargoship4++;
-				} else if (ship == 1) {
-					this.gameState.cargoship5Good = (String) goodOptions[good];
-					this.gameState.cargoship5++;
-				} else if (ship == 2) {
-					this.gameState.cargoship6Good = (String) goodOptions[good];
-					this.gameState.cargoship6++;
-				}
 
 				updateGameStateDisplay();
 				// Adds +1 to the player's doubloons if the role was not used in
