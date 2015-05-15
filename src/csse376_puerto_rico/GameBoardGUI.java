@@ -48,7 +48,6 @@ public class GameBoardGUI {
 		this.msgBar = new JTextArea();
 		this.gameStateInfo = new JTextArea();
 
-
 		String temp = "0";
 		for (Enumeration<AbstractButton> buttons = this.bGroup.getElements(); buttons
 				.hasMoreElements();) {
@@ -58,10 +57,10 @@ public class GameBoardGUI {
 			}
 		}
 		int numberPlayers = Integer.parseInt(temp);
-		
+
 		this.addPlayers(numberPlayers);
 	}
-	
+
 	private void displayGameState() {
 		int coffee = this.gameState.getGood(Player.Good.COFFEE);
 		int corn = this.gameState.getGood(Player.Good.CORN);
@@ -69,36 +68,40 @@ public class GameBoardGUI {
 		int sugar = this.gameState.getGood(Player.Good.SUGAR);
 		int tobacco = this.gameState.getGood(Player.Good.TOBACCO);
 		int colonists = this.gameState.getColonistsOnBoard();
-		
-		String parsedInfo = "Coffe: "+coffee+"    Corn: "+corn+"    Indigo: "+indigo+
-				"\nSugar: "+sugar+"        Tobacco: "+tobacco+
-				"\nColonists: "+colonists+
-				"\n"+
-				"\nCargo Ship: "+(4 - this.gameState.cargoship4)+" spots for "+this.gameState.cargoship4Good+
-				"    Cargo Ship: "+(5 - this.gameState.cargoship5)+" spots for "+this.gameState.cargoship5Good+
-				"    Cargo Ship: "+(6 - this.gameState.cargoship6)+" spots for "+this.gameState.cargoship6Good;
+
+		String parsedInfo = "Coffe: " + coffee + "    Corn: " + corn
+				+ "    Indigo: " + indigo + "\nSugar: " + sugar
+				+ "        Tobacco: " + tobacco + "\nColonists: " + colonists
+				+ "\n" + "\nCargo Ship: " + (4 - this.gameState.cargoship4)
+				+ " spots for " + this.gameState.cargoship4Good
+				+ "    Cargo Ship: " + (5 - this.gameState.cargoship5)
+				+ " spots for " + this.gameState.cargoship5Good
+				+ "    Cargo Ship: " + (6 - this.gameState.cargoship6)
+				+ " spots for " + this.gameState.cargoship6Good;
 		gameStateInfo.setColumns(20);
 		gameStateInfo.setRows(7);
 		gameStateInfo.setText(parsedInfo);
 		this.mainframe.add(gameStateInfo, "cell 0 5, span 5");
 	}
-	
-	private void updateGameStateDisplay(){
+
+	private void updateGameStateDisplay() {
 		int coffee = this.gameState.getGood(Player.Good.COFFEE);
 		int corn = this.gameState.getGood(Player.Good.CORN);
 		int indigo = this.gameState.getGood(Player.Good.INDIGO);
 		int sugar = this.gameState.getGood(Player.Good.SUGAR);
 		int tobacco = this.gameState.getGood(Player.Good.TOBACCO);
 		int colonists = this.gameState.getColonistsOnBoard();
-		
-		String parsedInfo = "Coffe: "+coffee+"    Corn: "+corn+"    Indigo: "+indigo+
-				"\nSugar: "+sugar+"        Tobacco: "+tobacco+
-				"\nColonists: "+colonists+
-				"\n"+
-				"\nCargo Ship: "+(4 - this.gameState.cargoship4)+" spots for "+this.gameState.cargoship4Good+
-				"    Cargo Ship: "+(5 - this.gameState.cargoship5)+" spots for "+this.gameState.cargoship5Good+
-				"    Cargo Ship: "+(6 - this.gameState.cargoship6)+" spots for "+this.gameState.cargoship6Good;
-		
+
+		String parsedInfo = "Coffe: " + coffee + "    Corn: " + corn
+				+ "    Indigo: " + indigo + "\nSugar: " + sugar
+				+ "        Tobacco: " + tobacco + "\nColonists: " + colonists
+				+ "\n" + "\nCargo Ship: " + (4 - this.gameState.cargoship4)
+				+ " spots for " + this.gameState.cargoship4Good
+				+ "    Cargo Ship: " + (5 - this.gameState.cargoship5)
+				+ " spots for " + this.gameState.cargoship5Good
+				+ "    Cargo Ship: " + (6 - this.gameState.cargoship6)
+				+ " spots for " + this.gameState.cargoship6Good;
+
 		gameStateInfo.setText(parsedInfo);
 	}
 
@@ -126,7 +129,7 @@ public class GameBoardGUI {
 
 		}
 		this.gameState = new GameState(this.players);
-		
+
 		displayGameState();
 		displayMessageBar();
 		updateRoles();
@@ -186,14 +189,16 @@ public class GameBoardGUI {
 
 				String role = (String) options[n];
 				player.setRole(role);
+				// Every start of the role each player gets an extra doubloon.
+				player.setDoubloons(player.getDoubloons() + 1);
 
 				player.updatePlayerInfo();
 
 				playRole(i);
-				
+
 				// update
 				this.gameState.updateAtEndOfTurn();
-				
+
 				// removing selected
 				List<Object> temp = new ArrayList<Object>();
 				for (int j = 0; j < options.length; j++) {
@@ -209,18 +214,17 @@ public class GameBoardGUI {
 	}
 
 	public boolean checkEndGame() {
-		// checks the end of the game, default to true for testing, otherwise false
+		// checks the end of the game, default to true for testing, otherwise
+		// false
 		return gameState.isGameEndState();
 	}
 
 	public void updateMsgBar(String msg) {
 		this.msgBar.setText(msg);
 	}
-	
-	
 
 	public void playRole(int roleNum) {
-		// 
+		//
 		Player player = players.get(roleNum);
 		String role = player.getRole();
 
@@ -261,7 +265,7 @@ public class GameBoardGUI {
 							player.getBuildings().get(buildingNum).numberOfWorkers++;
 							selected = true;
 						} else {
-//							updateMsgBar("You have no buildings");
+							// updateMsgBar("You have no buildings");
 							selected = false;
 						}
 
@@ -282,7 +286,7 @@ public class GameBoardGUI {
 						if (plantationNum != temp.length - 1) {
 							selected = true;
 						} else {
-//							updateMsgBar("You have no plantions");
+							// updateMsgBar("You have no plantions");
 							selected = false;
 						}
 					} else {
@@ -317,8 +321,8 @@ public class GameBoardGUI {
 				roleNum = (roleNum + 1) % players.size();
 
 			}
-		}else if(role.equals(PlayerRoles.Settler)){
-			//DONE: kurian
+		} else if (role.equals(PlayerRoles.Settler)) {
+			// DONE: kurian
 			List<String> gNames = player.getAllGoods();
 			gNames.add("Quarry");
 			Object[] options = gNames.toArray();
@@ -331,15 +335,16 @@ public class GameBoardGUI {
 						JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, options,
 						options[options.length - 1]);
-					System.out.println(gNames.get(n));
+				System.out.println(gNames.get(n));
 				if (n != gNames.size() - 1 && gNames.get(n) != "Quarry") {
-					player.getPlantations().add(new Plantation(gNames.get(n), false));
+					player.getPlantations().add(
+							new Plantation(gNames.get(n), false));
 				}
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 			}
-		}else if(role.equals(PlayerRoles.Craftsman)){
-			//DONE: kurian
+		} else if (role.equals(PlayerRoles.Craftsman)) {
+			// DONE: kurian
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
@@ -348,61 +353,61 @@ public class GameBoardGUI {
 				roleNum = (roleNum + 1) % players.size();
 
 			}
-		}else if(role.equals(PlayerRoles.Trader)){
-			//TODO: Min
+		} else if (role.equals(PlayerRoles.Trader)) {
+			// TODO: Min
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
-				//TODO:
+				// TODO:
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
 			}
-		}else if(role.equals(PlayerRoles.Captain)){
-			
+		} else if (role.equals(PlayerRoles.Captain)) {
+
 			for (int i = 0; i < players.size(); i++) {
-				//TODO:
+				// TODO:
 				player = players.get(roleNum);
 				Object[] goodOptions = player.getAllGoods().toArray();
-				
+
 				int good = JOptionPane.showOptionDialog(this.mainframe,
 						"Choose a good to ship!", "Player " + (roleNum),
 						JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, goodOptions,
 						goodOptions[goodOptions.length - 1]);
-				
+
 				Object[] shipOptions = new Object[3];
 				shipOptions[0] = 4;
 				shipOptions[1] = 5;
 				shipOptions[2] = 6;
 				int ship = JOptionPane.showOptionDialog(this.mainframe,
-						"Choose a cargo ship to put good!", "Player " + (roleNum),
-						JOptionPane.YES_NO_CANCEL_OPTION,
+						"Choose a cargo ship to put good!", "Player "
+								+ (roleNum), JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, shipOptions,
 						shipOptions[shipOptions.length - 1]);
-				
-				if(ship == 0){
+
+				if (ship == 0) {
 					this.gameState.cargoship4Good = (String) goodOptions[good];
 					this.gameState.cargoship4++;
-				}else if(ship == 1){
+				} else if (ship == 1) {
 					this.gameState.cargoship5Good = (String) goodOptions[good];
 					this.gameState.cargoship5++;
-				}else if(ship == 2){
+				} else if (ship == 2) {
 					this.gameState.cargoship6Good = (String) goodOptions[good];
 					this.gameState.cargoship6++;
 				}
-				
+
 				updateGameStateDisplay();
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
 			}
-		}else if(role.equals(PlayerRoles.Prospector)){
-			//:do nothing
+		} else if (role.equals(PlayerRoles.Prospector)) {
+			// :do nothing
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
-				//:
+				// :
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 

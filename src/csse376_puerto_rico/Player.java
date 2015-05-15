@@ -199,7 +199,9 @@ public class Player {
 	public ArrayList<Plantation> getPlantations() {
 		return this.plantations;
 	}
-
+	public void addPlantations(Plantation add) {
+		this.plantations.add(add);
+	}
 	public ArrayList<String> getPlantationsStringList() {
 		ArrayList<String> rtn = new ArrayList<String>();
 		for (Plantation p : this.plantations) {

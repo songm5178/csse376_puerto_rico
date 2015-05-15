@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import csse376_puerto_rico.Buildings.Building;
+import csse376_puerto_rico.Player.Good;
 import csse376_puerto_rico.Player.Plantation;
 
 public class GameState {
@@ -22,6 +23,7 @@ public class GameState {
 	public int doubloons;
 	private int numOfPlayers;
 	private List<Player> players;
+	public int victoryPoints;
 
 	public static final int ERROR = -99;
 
@@ -44,34 +46,59 @@ public class GameState {
 		// doubloons
 		doubloons = 0;
 
+		victoryPoints = 50;
 	}
 
-	public GameState(List<Player> players2) {
+	public GameState(List<Player> players) {
 
-		// TODO: game start state - Min
+		// game start state - Min
+		
+		for(Player p: players){
+			p.setDoubloons(players.size()-1);
+		}
+		
+		
+		
 		// goods
-		goods.put(Player.Good.COFFEE, 0);
-		goods.put(Player.Good.CORN, 0);
-		goods.put(Player.Good.INDIGO, 0);
-		goods.put(Player.Good.SUGAR, 0);
-		goods.put(Player.Good.TOBACCO, 0);
+		goods.put(Player.Good.COFFEE, 9);
+		goods.put(Player.Good.CORN, 10);
+		goods.put(Player.Good.INDIGO, 11);
+		goods.put(Player.Good.SUGAR, 11);
+		goods.put(Player.Good.TOBACCO, 9);
 
-		// colonists
-		this.players = players2;
-		numOfPlayers = players2.size();
+
+		// colonists. victory points and plantations
+		this.players = players;
+		numOfPlayers = players.size();
 		colonistsOnBoard = numOfPlayers;
+		
+		this.players.get(0).addPlantations(new Plantation(Good.INDIGO, false));
+		this.players.get(1).addPlantations(new Plantation(Good.INDIGO, false));
+		
+		
 		if (numOfPlayers == 3) {
 			colonistsTotal = 55;
+			victoryPoints = 75;
+			this.players.get(2).addPlantations(new Plantation(Good.CORN, false));	
 		} else if (numOfPlayers == 4) {
 			colonistsTotal = 75;
+			victoryPoints = 100;
+			this.players.get(2).addPlantations(new Plantation(Good.CORN, false));
+			this.players.get(3).addPlantations(new Plantation(Good.CORN, false));
+			
 		} else if (numOfPlayers == 5) {
 			colonistsTotal = 95;
+			victoryPoints = 122;
+			this.players.get(2).addPlantations(new Plantation(Good.INDIGO, false));
+			this.players.get(3).addPlantations(new Plantation(Good.CORN, false));
+			this.players.get(4).addPlantations(new Plantation(Good.CORN, false));
 		}
 		// ships
 
 		// doubloons
-		doubloons = 0;
-
+		doubloons = 54;
+		
+		
 	}
 
 	public int getGood(String good) {
