@@ -121,6 +121,10 @@ public class Player {
 	public boolean ownsBuilding(String building){
 		return getBuildingsStringList().contains(building);
 	}
+	
+	public boolean ownsOccupiedBuilding(String building){
+		return getOccupiedBuildingsStringList().contains(building);
+	}
 
 	public ArrayList<String> getBuildingsStringList() {
 		ArrayList<String> rtn = new ArrayList<String>();
@@ -132,6 +136,35 @@ public class Player {
 
 	public ArrayList<Building> getBuildings() {
 		return this.buildings;
+	}
+	
+	public Building getBuilding(String building){
+		if(this.getBuildingsStringList().contains(building)){
+			for(Building b : this.buildings){
+				if(b.name == building){
+					return b;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public ArrayList<Building> getOccupiedBuildings(){
+		ArrayList<Building> occupiedList = new ArrayList<Building>();
+		for(Building b: this.buildings){
+			if((b.numberOfJobs - b.numberOfWorkers) == 0){
+				occupiedList.add(b);
+			}
+		}
+		return occupiedList;
+	}
+	
+	public ArrayList<String> getOccupiedBuildingsStringList() {
+		ArrayList<String> rtn = new ArrayList<String>();
+		for (Building b : this.getOccupiedBuildings()) {
+			rtn.add(b.name);
+		}
+		return rtn;
 	}
 
 	public List<String> getGoods() {
@@ -203,7 +236,9 @@ public class Player {
 	public ArrayList<Plantation> getPlantations() {
 		return this.plantations;
 	}
-
+	public void addPlantations(Plantation add) {
+		this.plantations.add(add);
+	}
 	public ArrayList<String> getPlantationsStringList() {
 		ArrayList<String> rtn = new ArrayList<String>();
 		for (Plantation p : this.plantations) {
