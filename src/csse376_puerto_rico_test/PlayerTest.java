@@ -238,50 +238,11 @@ public class PlayerTest {
 	public void test_toString1()
 	{
 		Player player = new Player();
-		String expected = "Player 0 \nRole:  \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
+		String expected = "Player 0 \nRole:  \nScore: 0 \nDoubloons: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
 		assertEquals(expected, player.toString());
 	}
 	
-	@Test
-	public void test_toString2()
-	{
-		Player player = new Player("Mayor");
-		String expected = "Player 0 \nRole: Mayor \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
-		assertEquals(expected, player.toString());
-	}
-	
-	@Test
-	public void test_toString3()
-	{
-		Player player = new Player("Prospector");
-		String expected = "Player 0 \nRole: Prospector \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
-		assertEquals(expected, player.toString());
-	}
-	
-	@Test
-	public void test_toString4()
-	{
-		Player player = new Player("Builder");
-		String expected = "Player 0 \nRole: Builder \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
-		assertEquals(expected, player.toString());
-	}
-	
-	@Test
-	public void test_toString6()
-	{
-		Player player = new Player("Captain");
-		String expected = "Player 0 \nRole: Captain \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
-		assertEquals(expected, player.toString());
-	}
-	
-	
-	@Test
-	public void test_toString7()
-	{
-		Player player = new Player("Trader");
-		String expected = "Player 0 \nRole: Trader \nScore: 0 \nBuilding:  \nPlantation:  \nGoods: [Coffee: 0, Corn: 0, Tobacco: 0, Sugar: 0, Indigo: 0]";
-		assertEquals(expected, player.toString());
-	}
+
 	
 	@Test
 	public void test_getPlayerNum(){
@@ -373,59 +334,6 @@ public class PlayerTest {
 		player.getPlantations().add(new Plantation("Coffee", false));
 		String answer = player.getPlantationsStringList().toString();
 		assertEquals("[Sugar, Coffee]", answer);
-	}
-	
-	@Test
-	public void craftsmanTest1()
-	{
-		Player player = new Player();
-		player.getPlantations().add(new Plantation("Sugar", false));
-		player.checkPlantation();
-		assertEquals(1, player.getNumberOfGood(Good.SUGAR));
-	}
-	
-	@Test
-	public void craftsmanTest2()
-	{
-		Player player = new Player();
-		player.getPlantations().add(new Plantation("Coffee", false));
-		player.checkPlantation();
-		assertEquals(1, player.getNumberOfGood(Good.COFFEE));
-	}
-	
-	@Test
-	public void craftsmanTest3()
-	{
-		Player player = new Player();
-		player.getPlantations().add(new Plantation("Corn", false));
-		player.checkPlantation();
-		assertEquals(1, player.getNumberOfGood(Good.CORN));
-	}
-	
-	@Test
-	public void craftsmanTest4()
-	{
-		Player player = new Player();
-		player.getPlantations().add(new Plantation("Indigo", false));
-		player.checkPlantation();
-		assertEquals(1, player.getNumberOfGood(Good.INDIGO));
-	}
-	
-	@Test
-	public void craftsmanTest5()
-	{
-		Player player = new Player();
-		player.getPlantations().add(new Plantation("Tobacco", false));
-		player.checkPlantation();
-		assertEquals(1, player.getNumberOfGood(Good.TOBACCO));
-	}
-	
-	@Test(expected=NullPointerException.class)
-	public void testNullInput() {
-		Player player = new Player();
-		player.getPlantations().add(new Plantation("Quarry", false));
-		player.checkPlantation();
-	    player.getNumberOfGood("Quarry");
 	}
 	
 	@Test

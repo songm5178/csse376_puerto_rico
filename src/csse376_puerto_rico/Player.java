@@ -176,18 +176,19 @@ public class Player {
 			buildingList = buildingList + " " + this.buildings.get(i).name;
 		}
 		for (int i = 0; i < this.plantations.size(); i++) {
-			plantationList = plantationList + " " + this.plantations.get(i).good ;
+			plantationList = plantationList + " "
+					+ this.plantations.get(i).good;
 		}
 		if (isGovernor) {
 			rtn = String
 					.format("Player %d \nRole: %s \nScore: %d \nDoubloons: %d \nBuilding: %s \nPlantation: %s \nGoods: %s \nGovernor",
-							pNum, role, points, doubloons, buildingList, plantationList,
-							goodsList);
+							pNum, role, points, doubloons, buildingList,
+							plantationList, goodsList);
 		} else {
 			rtn = String
 					.format("Player %d \nRole: %s \nScore: %d \nDoubloons: %d \nBuilding: %s \nPlantation: %s \nGoods: %s",
-							pNum, role, points, doubloons, buildingList, plantationList,
-							goodsList);
+							pNum, role, points, doubloons, buildingList,
+							plantationList, goodsList);
 		}
 		return rtn;
 	}
@@ -199,9 +200,11 @@ public class Player {
 	public ArrayList<Plantation> getPlantations() {
 		return this.plantations;
 	}
+
 	public void addPlantations(Plantation add) {
 		this.plantations.add(add);
 	}
+
 	public ArrayList<String> getPlantationsStringList() {
 		ArrayList<String> rtn = new ArrayList<String>();
 		for (Plantation p : this.plantations) {
@@ -221,15 +224,18 @@ public class Player {
 			}
 		}
 	}
-	
-	public int getDoubloons()
-	{
+
+	public int getDoubloons() {
 		return this.doubloons;
 	}
-	
-	public void setDoubloons(int add)
-	{
+
+	public void setDoubloons(int add) {
 		this.doubloons = add;
+	}
+
+	public void sellGood(String s, int i) {
+		this.goods.put(s, this.goods.get(s) - i);
+
 	}
 
 }
