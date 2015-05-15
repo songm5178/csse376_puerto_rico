@@ -185,6 +185,9 @@ public class GameBoardGUI {
 				// buildings,plantations into Strings
 
 				String role = (String) options[n];
+				
+				player.setDoubloons(player.getDoubloons()+1);
+				
 				player.setRole(role);
 
 				player.updatePlayerInfo();
