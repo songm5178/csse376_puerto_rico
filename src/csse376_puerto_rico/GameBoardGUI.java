@@ -309,6 +309,9 @@ public class GameBoardGUI {
 						// Do nothing
 						selected = true;
 					}
+					//Adds +1 to the player's doubloons if the role was not used in previous 3 turns
+					this.gameState.addRolesToList(PlayerRoles.Mayor);
+					this.gameState.addDoubloon(player, PlayerRoles.Mayor);
 					player.updatePlayerInfo();
 				}
 				roleNum = (roleNum + 1) % players.size();
@@ -344,6 +347,9 @@ public class GameBoardGUI {
 						this.gameState.isGameEndState = true;
 					}
 				}
+				//Adds +1 to the player's doubloons if the role was not used in previous 3 turns
+				this.gameState.addRolesToList(PlayerRoles.Builder);
+				this.gameState.addDoubloon(player, PlayerRoles.Builder);
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
@@ -368,6 +374,9 @@ public class GameBoardGUI {
 					player.getPlantations().add(
 							new Plantation(gNames.get(n), false));
 				}
+				//Adds +1 to the player's doubloons if the role was not used in previous 3 turns
+				this.gameState.addRolesToList(PlayerRoles.Settler);
+				this.gameState.addDoubloon(player, PlayerRoles.Settler);
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 			}
@@ -377,6 +386,9 @@ public class GameBoardGUI {
 
 				player = players.get(roleNum);
 				player.checkPlantation();
+				//Adds +1 to the player's doubloons if the role was not used in previous 3 turns
+				this.gameState.addRolesToList(PlayerRoles.Craftsman);
+				this.gameState.addDoubloon(player, PlayerRoles.Craftsman);
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
@@ -387,6 +399,9 @@ public class GameBoardGUI {
 
 				player = players.get(roleNum);
 				// TODO:
+				//Adds +1 to the player's doubloons if the role was not used in previous 3 turns
+				this.gameState.addRolesToList(PlayerRoles.Trader);
+				this.gameState.addDoubloon(player, PlayerRoles.Trader);
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
@@ -426,6 +441,9 @@ public class GameBoardGUI {
 				}
 
 				updateGameStateDisplay();
+				//Adds +1 to the player's doubloons if the role was not used in previous 3 turns
+				this.gameState.addRolesToList(PlayerRoles.Captain);
+				this.gameState.addDoubloon(player, PlayerRoles.Captain);
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
@@ -436,6 +454,9 @@ public class GameBoardGUI {
 
 				player = players.get(roleNum);
 				// :
+				//Adds +1 to the player's doubloons if the role was not used in previous 3 turns
+				this.gameState.addRolesToList(PlayerRoles.Prospector);
+				this.gameState.addDoubloon(player, PlayerRoles.Prospector);
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
