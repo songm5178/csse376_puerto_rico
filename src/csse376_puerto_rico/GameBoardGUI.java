@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
 import csse376_puerto_rico.Buildings.Building;
+import csse376_puerto_rico.Player.Good;
 import csse376_puerto_rico.Player.Plantation;
 
 public class GameBoardGUI {
@@ -180,11 +181,13 @@ public class GameBoardGUI {
 				// in this block of code I had to convert the lists of
 				// buildings,plantations into Strings
 
-				// TODO: move the building, plantation string builder to
-				// getPlayerText method.
-				// kurian
-
 				String role = (String) options[n];
+
+				
+				// Every start of the role each player gets an extra doubloon.
+				player.setDoubloons(player.getDoubloons() + 1);
+				gameState.doubloons--;
+				
 				player.setRole(role);
 
 				player.updatePlayerInfo();
@@ -205,6 +208,8 @@ public class GameBoardGUI {
 			}
 
 		}
+		updateMsgBar("Winner is Player : "
+				+ this.gameState.getWinner().getPlayerNum());
 
 	}
 
@@ -257,11 +262,21 @@ public class GameBoardGUI {
 										JOptionPane.QUESTION_MESSAGE, null,
 										temp, null);
 						if (buildingNum != temp.length - 1) {
-							// TODO: need a check on this, adding workers.
-							player.getBuildings().get(buildingNum).numberOfWorkers++;
-							selected = true;
+							Building playerB = player.getBuildings().get(
+									buildingNum);
+							if (playerB.numberOfJobs > playerB.numberOfWorkers) {
+								player.getBuildings().get(buildingNum).numberOfWorkers++;
+								selected = true;
+								updateMsgBar("Player " + i
+										+ " added worker to building "
+										+ playerB.name);
+							} else {
+								updateMsgBar("Building " + playerB.name
+										+ " is already full of workers.");
+							}
 						} else {
-//							updateMsgBar("You have no buildings");
+
+							updateMsgBar("Player " + i + " has no buildings");
 							selected = false;
 						}
 
@@ -280,30 +295,49 @@ public class GameBoardGUI {
 										JOptionPane.QUESTION_MESSAGE, null,
 										temp, null);
 						if (plantationNum != temp.length - 1) {
-							selected = true;
+							Plantation pPlantation = player.getPlantations()
+									.get(plantationNum);
+							if (pPlantation.hasWorker) {
+								updateMsgBar("Plantation already has a worker.");
+							} else {
+								pPlantation.hasWorker = true;
+								selected = true;
+								updateMsgBar("Player " + i
+										+ " added worker to plantation");
+							}
 						} else {
-//							updateMsgBar("You have no plantions");
+
+							updateMsgBar("Player " + i + " has no plantions");
 							selected = false;
 						}
 					} else {
 						// Do nothing
 						selected = true;
 					}
+
 					player.updatePlayerInfo();
 				}
 				roleNum = (roleNum + 1) % players.size();
 
 			}
 		} else if (role.equals(PlayerRoles.Builder)) {
+			player.setDoubloons(player.getDoubloons() + 1);
 			Buildings b = new Buildings();
-			ArrayList<String> bNames = b.getBuildingNames();
-			bNames.add("Nothing");
-			Object[] options = bNames.toArray();
-			// TODO: add condition that builder gets discount,
-			for (int i = 0; i < players.size(); i++) {
 
+			for (int i = 0; i < players.size(); i++) {
 				player = players.get(roleNum);
 				System.out.println(roleNum);
+
+				ArrayList<Building> bs = b.getBuildings();
+				ArrayList<String> bNames = new ArrayList<String>();
+				for (Building building : bs) {
+					if (building.cost <= player.getDoubloons()) {
+						bNames.add(building.name);
+					}
+				}
+				bNames.add("Nothing");
+				Object[] options = bNames.toArray();
+
 				// player = player.next at the end
 				int n = JOptionPane.showOptionDialog(this.mainframe,
 						"Choose a building to build!", "Player " + (roleNum),
@@ -316,7 +350,12 @@ public class GameBoardGUI {
 						player.getBuilding("University").numberOfWorkers++;
 						this.gameState.colonistsTotal--;
 					}
+					if (player.getBuildings().size() >= 12) {
+						this.gameState.isGameEndState = true;
+					}
 				}
+				// Adds +1 to the player's doubloons if the role was not used in
+				// previous 3 turns
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
@@ -324,9 +363,10 @@ public class GameBoardGUI {
 		}else if(role.equals(PlayerRoles.Settler)){
 			//DONE: kurian
 			List<String> gNames = player.getAllGoods();
-			gNames.add("Quarry");
+			gNames.add("Nothing");
 			Object[] options = gNames.toArray();
-			for (int i = 0; i < players.size(); i++) {
+			// Settler picks one more plantation
+			for (int i = 0; i <= players.size(); i++) {
 
 				player = players.get(roleNum);
 				
@@ -344,7 +384,7 @@ public class GameBoardGUI {
 						JOptionPane.QUESTION_MESSAGE, null, options,
 						options[options.length - 1]);
 					System.out.println(gNames.get(n));
-				if (n != gNames.size() - 1 && gNames.get(n) != "Quarry") {
+				if (n != gNames.size() - 1) {
 					player.getPlantations().add(new Plantation(gNames.get(n), false));
 				}
 				if(player.ownsOccupiedBuilding("Hospice")){
@@ -359,7 +399,10 @@ public class GameBoardGUI {
 						player.getBuilding("Hospice").numberOfWorkers++;
 						this.gameState.colonistsTotal--;
 					}
+
 				}
+				// Adds +1 to the player's doubloons if the role was not used in
+				// previous 3 turns
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 			}
@@ -383,16 +426,19 @@ public class GameBoardGUI {
 					}					
 				}
 				
+				// Adds +1 to the player's doubloons if the role was not used in
+				// previous 3 turns
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
 			}
-		}else if(role.equals(PlayerRoles.Trader)){
-			//TODO: Min
+
+		} else if (role.equals(PlayerRoles.Trader)) {
+			//
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
-				
+				// TODO:
 				//small market additions
 				if(player.ownsOccupiedBuilding("Small Market")){
 					player.setDoubloons(player.getDoubloons() + 1);
@@ -406,7 +452,40 @@ public class GameBoardGUI {
 				if(player.ownsOccupiedBuilding("Office")){
 					//player can sell same kind of good to the trading house??
 				}
-				
+				ArrayList<String> goodList = new ArrayList<String>();
+				for (String s : player.getAllGoods()) {
+					int n = player.getNumberOfGood(s);
+					if (n > 0) {
+						goodList.add(s);
+					}
+				}
+				goodList.add("Nothing");
+				Object[] options = goodList.toArray();
+
+				int n = JOptionPane.showOptionDialog(this.mainframe,
+						"Choose a Good to trade!", "Player " + (roleNum),
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, options,
+						options[options.length - 1]);
+				if (n != goodList.size() - 1) {
+					if (goodList.get(n).equals(Good.COFFEE)) {
+						player.setDoubloons(player.getDoubloons() + 4);
+						player.sellGood(Good.COFFEE, 1);
+					} else if (goodList.get(n).equals(Good.CORN)) {
+						player.sellGood(Good.CORN, 1);
+					} else if (goodList.get(n).equals(Good.INDIGO)) {
+						player.setDoubloons(player.getDoubloons() + 1);
+						player.sellGood(Good.INDIGO, 1);
+					} else if (goodList.get(n).equals(Good.SUGAR)) {
+						player.setDoubloons(player.getDoubloons() + 2);
+						player.sellGood(Good.SUGAR, 1);
+					} else if (goodList.get(n).equals(Good.TOBACCO)) {
+						player.setDoubloons(player.getDoubloons() + 3);
+						player.sellGood(Good.TOBACCO, 1);
+					}
+				}
+				// Adds +1 to the player's doubloons if the role was not used in
+				// previous 3 turns
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
@@ -490,6 +569,14 @@ public class GameBoardGUI {
 						roleNum = (roleNum + 1) % players.size();
 					}
 				}
+
+
+				updateGameStateDisplay();
+				// Adds +1 to the player's doubloons if the role was not used in
+				// previous 3 turns
+				player.updatePlayerInfo();
+				roleNum = (roleNum + 1) % players.size();
+
 			}
 			
 		}else if(role.equals(PlayerRoles.Prospector)){
@@ -497,7 +584,10 @@ public class GameBoardGUI {
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
-				//:
+
+				// :
+				// Adds +1 to the player's doubloons if the role was not used in
+				// previous 3 turns
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
