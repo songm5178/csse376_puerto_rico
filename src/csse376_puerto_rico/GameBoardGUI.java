@@ -312,6 +312,10 @@ public class GameBoardGUI {
 						options[options.length - 1]);
 				if (n != bNames.size() - 1) {
 					player.addBuilding(new Building(bNames.get(n)));
+					if(player.ownsOccupiedBuilding("University")){
+						player.getBuilding("University").numberOfWorkers++;
+						this.gameState.colonistsTotal--;
+					}
 				}
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
@@ -325,6 +329,14 @@ public class GameBoardGUI {
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
+				
+				if(player.ownsOccupiedBuilding("Construction Hut")){
+					//give option to place quarry, but if chooses quarry, you can't get plantation
+				}
+				
+				if(player.ownsOccupiedBuilding("Hacienda")){
+					//give option to add another plantion here!!
+				}
 				// player = player.next at the end
 				int n = JOptionPane.showOptionDialog(this.mainframe,
 						"Choose a Good to harvest!", "Player " + (roleNum),
@@ -335,6 +347,19 @@ public class GameBoardGUI {
 				if (n != gNames.size() - 1 && gNames.get(n) != "Quarry") {
 					player.getPlantations().add(new Plantation(gNames.get(n), false));
 				}
+				if(player.ownsOccupiedBuilding("Hospice")){
+					//give option to take colonist form supply and put it here
+					Object[] yesNo = {"Yes", "No"};
+					int answ = JOptionPane.showOptionDialog(this.mainframe,
+							"Would you like to place a colonist at your Hospice?", "Player " + (roleNum),
+							JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, yesNo,
+							yesNo[yesNo.length - 1]);
+					if(answ == 1){
+						player.getBuilding("Hospice").numberOfWorkers++;
+						this.gameState.colonistsTotal--;
+					}
+				}
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 			}
@@ -344,6 +369,20 @@ public class GameBoardGUI {
 
 				player = players.get(roleNum);
 				player.checkPlantation();
+				
+				//factory addition
+				if(player.ownsOccupiedBuilding("Factory")){
+					if(player.getPlantations().size() == 2){
+						player.setDoubloons(player.getDoubloons() + 1);					
+					}else if(player.getPlantations().size() == 3){
+						player.setDoubloons(player.getDoubloons() + 2);
+					}else if(player.getPlantations().size() == 4){
+						player.setDoubloons(player.getDoubloons() + 3);
+					}else if(player.getPlantations().size() == 5){
+						player.setDoubloons(player.getDoubloons() + 5);
+					}					
+				}
+				
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
@@ -355,9 +394,17 @@ public class GameBoardGUI {
 				player = players.get(roleNum);
 				
 				//small market additions
-				if(player.ownsBuilding("Small Market")){
-					//add 1 doubloon here!!!
+				if(player.ownsOccupiedBuilding("Small Market")){
 					player.setDoubloons(player.getDoubloons() + 1);
+				}
+				
+				//large market additions
+				if(player.ownsOccupiedBuilding("Large Market")){
+					player.setDoubloons(player.getDoubloons() + 2);
+				}
+				
+				if(player.ownsOccupiedBuilding("Office")){
+					//player can sell same kind of good to the trading house??
 				}
 				
 				player.updatePlayerInfo();
@@ -367,42 +414,84 @@ public class GameBoardGUI {
 		}else if(role.equals(PlayerRoles.Captain)){
 			
 			for (int i = 0; i < players.size(); i++) {
-				//TODO:
 				player = players.get(roleNum);
-				Object[] goodOptions = player.getAllGoods().toArray();
-				
-				int good = JOptionPane.showOptionDialog(this.mainframe,
-						"Choose a good to ship!", "Player " + (roleNum),
-						JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, goodOptions,
-						goodOptions[goodOptions.length - 1]);
-				
-				Object[] shipOptions = new Object[3];
-				shipOptions[0] = 4;
-				shipOptions[1] = 5;
-				shipOptions[2] = 6;
-				int ship = JOptionPane.showOptionDialog(this.mainframe,
-						"Choose a cargo ship to put good!", "Player " + (roleNum),
-						JOptionPane.YES_NO_CANCEL_OPTION,
-						JOptionPane.QUESTION_MESSAGE, null, shipOptions,
-						shipOptions[shipOptions.length - 1]);
-				
-				if(ship == 0){
-					this.gameState.cargoship4Good = (String) goodOptions[good];
-					this.gameState.cargoship4++;
-				}else if(ship == 1){
-					this.gameState.cargoship5Good = (String) goodOptions[good];
-					this.gameState.cargoship5++;
-				}else if(ship == 2){
-					this.gameState.cargoship6Good = (String) goodOptions[good];
-					this.gameState.cargoship6++;
+				if(player.getAllGoods().size() != 0){
+					Object[] goodOptions = player.getAllGoods().toArray();
+					
+					int good = JOptionPane.showOptionDialog(this.mainframe,
+							"Choose a good to ship!", "Player " + (roleNum),
+							JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, goodOptions,
+							goodOptions[goodOptions.length - 1]);
+					
+					Object[] shipOptions = new Object[3];
+					shipOptions[0] = 4;
+					shipOptions[1] = 5;
+					shipOptions[2] = 6;
+					int ship = JOptionPane.showOptionDialog(this.mainframe,
+							"Choose a cargo ship to put good!", "Player " + (roleNum),
+							JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, shipOptions,
+							shipOptions[shipOptions.length - 1]);
+					
+					if(ship == 0){
+						this.gameState.cargoship4Good = (String) goodOptions[good];
+						this.gameState.cargoship4++;
+						if(player.ownsOccupiedBuilding("Harbor")){
+							player.addPoints(1);
+						}
+					}else if(ship == 1){
+						this.gameState.cargoship5Good = (String) goodOptions[good];
+						this.gameState.cargoship5++;
+						if(player.ownsOccupiedBuilding("Harbor")){
+							player.addPoints(1);
+						}
+					}else if(ship == 2){
+						this.gameState.cargoship6Good = (String) goodOptions[good];
+						this.gameState.cargoship6++;
+						if(player.ownsOccupiedBuilding("Harbor")){
+							player.addPoints(1);
+						}
+					}
+					
+					updateGameStateDisplay();
+					player.updatePlayerInfo();
+					roleNum = (roleNum + 1) % players.size();
+					//warehouse stuff
+					for(int j = 0; j < players.size(); j++){
+						if(players.get(roleNum).ownsOccupiedBuilding("Large Warehouse")){
+							Object[] goptions = player.getAllGoods().toArray();
+							int firstGood = JOptionPane.showOptionDialog(this.mainframe,
+									"Choose a good to store!", "Player " + (roleNum),
+									JOptionPane.YES_NO_CANCEL_OPTION,
+									JOptionPane.QUESTION_MESSAGE, null, goptions,
+									goptions[goptions.length - 1]);
+							int secondGood = JOptionPane.showOptionDialog(this.mainframe,
+									"Choose a good to store!", "Player " + (roleNum),
+									JOptionPane.YES_NO_CANCEL_OPTION,
+									JOptionPane.QUESTION_MESSAGE, null, goptions,
+									goptions[goptions.length - 1]);
+							players.get(roleNum).getBuilding("Large Warehouse").storedGood =  goptions[firstGood].toString();
+							players.get(roleNum).getBuilding("Large Warehouse").amountOfStoredGood++;
+							players.get(roleNum).getBuilding("Large Warehouse").storedGood =  goptions[secondGood].toString();
+							players.get(roleNum).getBuilding("Large Warehouse").amountOfStoredGood++;
+						}else if(players.get(roleNum).ownsOccupiedBuilding("Small Warehouse")){
+							Object[] options = player.getAllGoods().toArray();
+							int g = JOptionPane.showOptionDialog(this.mainframe,
+									"Choose a good to store!", "Player " + (roleNum),
+									JOptionPane.YES_NO_CANCEL_OPTION,
+									JOptionPane.QUESTION_MESSAGE, null, options,
+									options[options.length - 1]);
+							players.get(roleNum).getBuilding("Small Warehouse").storedGood =  options[g].toString();
+							players.get(roleNum).getBuilding("Small Warehouse").amountOfStoredGood++;
+						}
+						updateGameStateDisplay();
+						player.updatePlayerInfo();
+						roleNum = (roleNum + 1) % players.size();
+					}
 				}
-				
-				updateGameStateDisplay();
-				player.updatePlayerInfo();
-				roleNum = (roleNum + 1) % players.size();
-
 			}
+			
 		}else if(role.equals(PlayerRoles.Prospector)){
 			//:do nothing
 			for (int i = 0; i < players.size(); i++) {
