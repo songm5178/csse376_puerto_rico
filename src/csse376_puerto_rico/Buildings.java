@@ -38,6 +38,9 @@ public class Buildings {
 		public int points;
 		public int numberOfJobs;
 		public int numberOfWorkers;
+		
+		public String storedGood;
+		public int amountOfStoredGood;
 
 		public Building(String name) {
 			this.name = name;
@@ -86,6 +89,8 @@ public class Buildings {
 				points = 1;
 				numberOfJobs = 1;
 				numberOfWorkers = 0;
+				storedGood = "";
+				amountOfStoredGood = 0;
 				break;
 				
 			case "Indigo Plant":
@@ -132,6 +137,8 @@ public class Buildings {
 				points = 2;
 				numberOfJobs = 1;
 				numberOfWorkers = 0;
+				storedGood = "";
+				amountOfStoredGood = 0;
 				break;
 				
 			case "Tobacco Storage":
@@ -186,6 +193,11 @@ public class Buildings {
 				numberOfJobs = 0;
 				numberOfWorkers = 0;
 			}
+			
+		}
+		
+		public boolean isOccupied(){
+			return ((this.numberOfJobs - this.numberOfWorkers) == 0);
 		}
 	}
 }
