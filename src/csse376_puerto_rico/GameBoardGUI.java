@@ -13,6 +13,7 @@ import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
 import csse376_puerto_rico.Buildings.Building;
+import csse376_puerto_rico.Player.Good;
 import csse376_puerto_rico.Player.Plantation;
 
 public class GameBoardGUI {
@@ -382,11 +383,40 @@ public class GameBoardGUI {
 
 			}
 		} else if (role.equals(PlayerRoles.Trader)) {
-			// TODO: Min
+			// 
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
 				// TODO:
+				
+				ArrayList<String> goodList = new ArrayList<String>();
+				for (String s : player.getAllGoods()){
+					int n = player.getNumberOfGood(s);
+					if(n>0){
+						goodList.add(s);
+					}
+				}
+				goodList.add("Nothing");
+				Object[] options = goodList.toArray();
+				
+				int n = JOptionPane.showOptionDialog(this.mainframe,
+						"Choose a Good to trade!", "Player " + (roleNum),
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, options,
+						options[options.length - 1]);
+				if(n!=goodList.size()-1){
+					if(goodList.get(n).equals(Good.COFFEE)){
+						
+					}else if(goodList.get(n).equals(Good.CORN)){
+						
+					}else if(goodList.get(n).equals(Good.INDIGO)){
+						
+					}else if(goodList.get(n).equals(Good.SUGAR)){
+						
+					}else if(goodList.get(n).equals(Good.TOBACCO)){
+						
+					}
+				}
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
