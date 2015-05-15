@@ -513,7 +513,6 @@ public class GameBoardGUI {
 							JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, shipOptions,
 							shipOptions[shipOptions.length - 1]);
-					
 					if(ship == 0){
 						this.gameState.cargoship4Good = (String) goodOptions[good];
 						this.gameState.cargoship4++;
