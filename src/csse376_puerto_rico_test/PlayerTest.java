@@ -428,6 +428,16 @@ public class PlayerTest {
 	    player.getNumberOfGood("Quarry");
 	}
 	
+	@Test
+	public void test_sellGood(){
+		Player player= new Player();
+		player.addGood(Good.COFFEE, 2);
+		assertEquals(2, player.getNumberOfGood(Good.COFFEE));
+		player.sellGood(Good.COFFEE, 1);
+		assertEquals(1, player.getNumberOfGood(Good.COFFEE));
+		
+	}
+	
 	
 
 

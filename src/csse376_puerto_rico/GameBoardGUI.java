@@ -186,9 +186,7 @@ public class GameBoardGUI {
 
 				String role = (String) options[n];
 				player.setRole(role);
-				// Every start of the role each player gets an extra doubloon.
-				player.setDoubloons(player.getDoubloons() + 1);
-				gameState.doubloons--;
+
 				player.updatePlayerInfo();
 
 				playRole(i);
