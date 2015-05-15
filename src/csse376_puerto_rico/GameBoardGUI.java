@@ -353,7 +353,13 @@ public class GameBoardGUI {
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
-				//TODO:
+				
+				//small market additions
+				if(player.ownsBuilding("Small Market")){
+					//add 1 doubloon here!!!
+					player.setDoubloons(player.getDoubloons() + 1);
+				}
+				
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 

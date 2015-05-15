@@ -117,6 +117,10 @@ public class Player {
 	public void addBuilding(Building building) {
 		buildings.add(building);
 	}
+	
+	public boolean ownsBuilding(String building){
+		return getBuildingsStringList().contains(building);
+	}
 
 	public ArrayList<String> getBuildingsStringList() {
 		ArrayList<String> rtn = new ArrayList<String>();
