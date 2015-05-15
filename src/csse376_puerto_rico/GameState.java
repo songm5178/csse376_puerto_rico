@@ -52,13 +52,11 @@ public class GameState {
 	public GameState(List<Player> players) {
 
 		// game start state - Min
-		
-		for(Player p: players){
-			p.setDoubloons(players.size()-1);
+
+		for (Player p : players) {
+			p.setDoubloons(players.size() - 1);
 		}
-		
-		
-		
+
 		// goods
 		goods.put(Player.Good.COFFEE, 9);
 		goods.put(Player.Good.CORN, 10);
@@ -66,39 +64,42 @@ public class GameState {
 		goods.put(Player.Good.SUGAR, 11);
 		goods.put(Player.Good.TOBACCO, 9);
 
-
 		// colonists. victory points and plantations
 		this.players = players;
 		numOfPlayers = players.size();
 		colonistsOnBoard = numOfPlayers;
-		
+
 		this.players.get(0).addPlantations(new Plantation(Good.INDIGO, false));
 		this.players.get(1).addPlantations(new Plantation(Good.INDIGO, false));
-		
-		
+
 		if (numOfPlayers == 3) {
 			colonistsTotal = 55;
 			victoryPoints = 75;
-			this.players.get(2).addPlantations(new Plantation(Good.CORN, false));	
+			this.players.get(2)
+					.addPlantations(new Plantation(Good.CORN, false));
 		} else if (numOfPlayers == 4) {
 			colonistsTotal = 75;
 			victoryPoints = 100;
-			this.players.get(2).addPlantations(new Plantation(Good.CORN, false));
-			this.players.get(3).addPlantations(new Plantation(Good.CORN, false));
-			
+			this.players.get(2)
+					.addPlantations(new Plantation(Good.CORN, false));
+			this.players.get(3)
+					.addPlantations(new Plantation(Good.CORN, false));
+
 		} else if (numOfPlayers == 5) {
 			colonistsTotal = 95;
 			victoryPoints = 122;
-			this.players.get(2).addPlantations(new Plantation(Good.INDIGO, false));
-			this.players.get(3).addPlantations(new Plantation(Good.CORN, false));
-			this.players.get(4).addPlantations(new Plantation(Good.CORN, false));
+			this.players.get(2).addPlantations(
+					new Plantation(Good.INDIGO, false));
+			this.players.get(3)
+					.addPlantations(new Plantation(Good.CORN, false));
+			this.players.get(4)
+					.addPlantations(new Plantation(Good.CORN, false));
 		}
 		// ships
 
 		// doubloons
 		doubloons = 54;
-		
-		
+
 	}
 
 	public int getGood(String good) {
@@ -163,21 +164,24 @@ public class GameState {
 		int leftover = 0;
 		switch (shipNum) {
 		case 4:
-			if (cargoship4 == 0 || (cargoship4 < 4 && cargoship4Good.equals(good))) {
+			if (cargoship4 == 0
+					|| (cargoship4 < 4 && cargoship4Good.equals(good))) {
 				leftover = cargoship4 + goodNum - 4;
 			} else {
 				leftover = ERROR;
 			}
 			break;
 		case 5:
-			if (cargoship5 == 0 ||(cargoship5 < 5 && cargoship5Good.equals(good))) {
+			if (cargoship5 == 0
+					|| (cargoship5 < 5 && cargoship5Good.equals(good))) {
 				leftover = cargoship4 + goodNum - 5;
 			} else {
 				leftover = ERROR;
 			}
 			break;
 		case 6:
-			if (cargoship6 == 0 ||(cargoship6 < 6 && cargoship6Good.equals(good))) {
+			if (cargoship6 == 0
+					|| (cargoship6 < 6 && cargoship6Good.equals(good))) {
 				leftover = cargoship6 + goodNum - 6;
 			} else {
 				leftover = ERROR;
@@ -190,14 +194,25 @@ public class GameState {
 	}
 
 	public boolean isGameEndState() {
-		
+
 		return isGameEndState;
+	}
+
+	public Player getWinner() {
+		Player max = this.players.get(0);
+		for (Player p : this.players) {
+			if (max.getPoints() <= p.getPoints()) {
+				max = p;
+			}
+		}
+
+		return max;
 	}
 
 	public void updateAtEndOfTurn() {
 		addColonistsToBoard();
-		
-		//Must ship these
+
+		// Must ship these
 		if (cargoship4 == 4) {
 			cargoship4 = 0;
 		}

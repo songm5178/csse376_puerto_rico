@@ -183,15 +183,11 @@ public class GameBoardGUI {
 				// in this block of code I had to convert the lists of
 				// buildings,plantations into Strings
 
-				// TODO: move the building, plantation string builder to
-				// getPlayerText method.
-				// kurian
-
 				String role = (String) options[n];
 				player.setRole(role);
 				// Every start of the role each player gets an extra doubloon.
 				player.setDoubloons(player.getDoubloons() + 1);
-
+				gameState.doubloons--;
 				player.updatePlayerInfo();
 
 				playRole(i);
@@ -210,6 +206,8 @@ public class GameBoardGUI {
 			}
 
 		}
+		updateMsgBar("Winner is Player : "
+				+ this.gameState.getWinner().getPlayerNum());
 
 	}
 
@@ -261,11 +259,20 @@ public class GameBoardGUI {
 										JOptionPane.QUESTION_MESSAGE, null,
 										temp, null);
 						if (buildingNum != temp.length - 1) {
-							// TODO: need a check on this, adding workers.
-							player.getBuildings().get(buildingNum).numberOfWorkers++;
-							selected = true;
+							Building playerB = player.getBuildings().get(
+									buildingNum);
+							if (playerB.numberOfJobs > playerB.numberOfWorkers) {
+								player.getBuildings().get(buildingNum).numberOfWorkers++;
+								selected = true;
+								updateMsgBar("Player " + i
+										+ " added worker to building "
+										+ playerB.name);
+							} else {
+								updateMsgBar("Building " + playerB.name
+										+ " is already full of workers.");
+							}
 						} else {
-							// updateMsgBar("You have no buildings");
+							updateMsgBar("Player " + i + " has no buildings");
 							selected = false;
 						}
 
@@ -284,9 +291,18 @@ public class GameBoardGUI {
 										JOptionPane.QUESTION_MESSAGE, null,
 										temp, null);
 						if (plantationNum != temp.length - 1) {
-							selected = true;
+							Plantation pPlantation = player.getPlantations()
+									.get(plantationNum);
+							if (pPlantation.hasWorker) {
+								updateMsgBar("Plantation already has a worker.");
+							} else {
+								pPlantation.hasWorker = true;
+								selected = true;
+								updateMsgBar("Player " + i
+										+ " added worker to plantation");
+							}
 						} else {
-							// updateMsgBar("You have no plantions");
+							updateMsgBar("Player " + i + " has no plantions");
 							selected = false;
 						}
 					} else {
@@ -299,15 +315,23 @@ public class GameBoardGUI {
 
 			}
 		} else if (role.equals(PlayerRoles.Builder)) {
+			player.setDoubloons(player.getDoubloons() + 1);
 			Buildings b = new Buildings();
-			ArrayList<String> bNames = b.getBuildingNames();
-			bNames.add("Nothing");
-			Object[] options = bNames.toArray();
-			// TODO: add condition that builder gets discount,
-			for (int i = 0; i < players.size(); i++) {
 
+			for (int i = 0; i < players.size(); i++) {
 				player = players.get(roleNum);
 				System.out.println(roleNum);
+
+				ArrayList<Building> bs = b.getBuildings();
+				ArrayList<String> bNames = new ArrayList<String>();
+				for (Building building : bs) {
+					if (building.cost <= player.getDoubloons()) {
+						bNames.add(building.name);
+					}
+				}
+				bNames.add("Nothing");
+				Object[] options = bNames.toArray();
+
 				// player = player.next at the end
 				int n = JOptionPane.showOptionDialog(this.mainframe,
 						"Choose a building to build!", "Player " + (roleNum),
@@ -316,6 +340,9 @@ public class GameBoardGUI {
 						options[options.length - 1]);
 				if (n != bNames.size() - 1) {
 					player.addBuilding(new Building(bNames.get(n)));
+					if (player.getBuildings().size() >= 12) {
+						this.gameState.isGameEndState = true;
+					}
 				}
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
@@ -324,9 +351,10 @@ public class GameBoardGUI {
 		} else if (role.equals(PlayerRoles.Settler)) {
 			// DONE: kurian
 			List<String> gNames = player.getAllGoods();
-			gNames.add("Quarry");
+			gNames.add("Nothing");
 			Object[] options = gNames.toArray();
-			for (int i = 0; i < players.size(); i++) {
+			// Settler picks one more plantation
+			for (int i = 0; i <= players.size(); i++) {
 
 				player = players.get(roleNum);
 				// player = player.next at the end
@@ -336,7 +364,7 @@ public class GameBoardGUI {
 						JOptionPane.QUESTION_MESSAGE, null, options,
 						options[options.length - 1]);
 				System.out.println(gNames.get(n));
-				if (n != gNames.size() - 1 && gNames.get(n) != "Quarry") {
+				if (n != gNames.size() - 1) {
 					player.getPlantations().add(
 							new Plantation(gNames.get(n), false));
 				}
