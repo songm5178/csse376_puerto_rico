@@ -363,9 +363,22 @@ public class PlayerTest {
 	{
 		Player player = new Player();
 		Building b = new Building("Small Indigo Plant");
+		Building b1 = new Building("Small Sugar Mill");
 		player.addBuilding(b);
+		player.addBuilding(b1);
 		assertEquals(false, player.ownsBuilding("Small Market"));
 		assertEquals(true, player.ownsBuilding("Small Indigo Plant"));
+		
+		Building pb = player.getBuilding("Small Indigo Plant");
+		Building pb1 = player.getBuilding("Small Sugar Mill");
+		Building pb2 = player.getBuilding("Small Market");
+
+		
+		assertEquals(b, pb);
+		assertEquals(b1, pb1);
+		assertEquals(null, pb2);
 	}
+	
+	
 
 }
