@@ -115,12 +115,12 @@ public class Player {
 	public void addBuilding(Building building) {
 		buildings.add(building);
 	}
-	
-	public boolean ownsBuilding(String building){
+
+	public boolean ownsBuilding(String building) {
 		return getBuildingsStringList().contains(building);
 	}
-	
-	public boolean ownsOccupiedBuilding(String building){
+
+	public boolean ownsOccupiedBuilding(String building) {
 		return getOccupiedBuildingsStringList().contains(building);
 	}
 
@@ -135,28 +135,28 @@ public class Player {
 	public ArrayList<Building> getBuildings() {
 		return this.buildings;
 	}
-	
-	public Building getBuilding(String building){
-		if(this.getBuildingsStringList().contains(building)){
-			for(Building b : this.buildings){
-				if(b.name == building){
+
+	public Building getBuilding(String building) {
+		if (this.getBuildingsStringList().contains(building)) {
+			for (Building b : this.buildings) {
+				if (b.name == building) {
 					return b;
 				}
 			}
 		}
 		return null;
 	}
-	
-	public ArrayList<Building> getOccupiedBuildings(){
+
+	public ArrayList<Building> getOccupiedBuildings() {
 		ArrayList<Building> occupiedList = new ArrayList<Building>();
-		for(Building b: this.buildings){
-			if((b.numberOfJobs - b.numberOfWorkers) == 0){
+		for (Building b : this.buildings) {
+			if ((b.numberOfJobs - b.numberOfWorkers) == 0) {
 				occupiedList.add(b);
 			}
 		}
 		return occupiedList;
 	}
-	
+
 	public ArrayList<String> getOccupiedBuildingsStringList() {
 		ArrayList<String> rtn = new ArrayList<String>();
 		for (Building b : this.getOccupiedBuildings()) {
