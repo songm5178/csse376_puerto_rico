@@ -74,6 +74,13 @@ public class GameStateTest {
 		assertEquals(5, g.getColonistsOnBoard());
 		assertEquals(95, g.getColonistsTotal());
 	}
+	
+	@Test
+	public void testAddGoodToCargoShipWithCornToShip4(){
+		GameState g = new GameState();
+		
+		assertEquals(3, g.addGoodToCargoShip(4, 1, "corn"));
+	}
 
 
 }
