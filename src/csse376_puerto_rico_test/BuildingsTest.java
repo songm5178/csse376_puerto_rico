@@ -1,11 +1,11 @@
 package csse376_puerto_rico_test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
+import csse376_puerto_rico.Building;
 import csse376_puerto_rico.Buildings;
-import csse376_puerto_rico.Buildings.Building;
 
 /**
  * TODO Put here a description of what this class does.

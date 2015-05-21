@@ -26,41 +26,6 @@ public class GameBoardGuiTest {
 
 	}
 
-
-
-	@Test
-	public void player_text_format_test() {
-		// GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
-		GameBoardGUI g = new GameBoardGUI();
-		int playerNum = 0;
-		String role = "roleTest";
-		int points = 1;
-		String expected = String
-				.format("Player %d \nRole: %s \nScore: %d \nBuilding: [] \nPlantation: ",
-						playerNum, role, points);
-		assertEquals(expected,
-				g.getPlayerText(playerNum, role, points, "[]", "", false));
-
-	}
-
-	@Test
-	public void player_text_format_test_governor() {
-		// GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
-		GameBoardGUI g = new GameBoardGUI();
-		int playerNum = 0;
-		String role = "roleTest";
-		int points = 1;
-		String expected = String
-				.format("Player %d \nRole: %s \nScore: %d \nBuilding: [] \nPlantation:  \nGovernor",
-						playerNum, role, points);
-
-		assertEquals(expected,
-				g.getPlayerText(playerNum, role, points, "[]", "", true));
-
-	}
-
-
-
 	@Test
 	public void test_updateMsgBar() {
 		// GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
@@ -68,7 +33,5 @@ public class GameBoardGuiTest {
 		g.updateMsgBar("Updated");
 		assertEquals("Updated", g.msgBar.getText());
 	}
-
-
 
 }

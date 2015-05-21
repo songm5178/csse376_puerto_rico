@@ -7,8 +7,6 @@ import java.util.List;
 
 import javax.swing.JTextArea;
 
-import csse376_puerto_rico.Buildings.Building;
-
 public class Player {
 
 	private int pNum;

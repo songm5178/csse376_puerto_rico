@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 import net.miginfocom.swing.MigLayout;
-import csse376_puerto_rico.Buildings.Building;
 import csse376_puerto_rico.Player.Good;
 import csse376_puerto_rico.Player.Plantation;
 
@@ -58,7 +57,7 @@ public class GameBoardGUI {
 			}
 		}
 		int numberPlayers = Integer.parseInt(temp);
-		
+
 		this.addPlayers(numberPlayers);
 	}
 
@@ -70,17 +69,19 @@ public class GameBoardGUI {
 		int tobacco = this.gameState.getGood(Player.Good.TOBACCO);
 		int colonists = this.gameState.getColonistsOnBoard();
 		int colonistsTotal = this.gameState.getColonistsTotal();
+		int points = this.gameState.victoryPoints;
 
 		String parsedInfo = "Coffe: " + coffee + "    Corn: " + corn
 				+ "    Indigo: " + indigo + "\nSugar: " + sugar
 				+ "        Tobacco: " + tobacco + "\nColonists On Board: "
-				+ colonists + "\nColonists Total: " + colonistsTotal + "\n"
-				+ "\nCargo Ship: " + (4 - this.gameState.cargoship4)
-				+ " spots for " + this.gameState.cargoship4Good
-				+ "    Cargo Ship: " + (5 - this.gameState.cargoship5)
-				+ " spots for " + this.gameState.cargoship5Good
-				+ "    Cargo Ship: " + (6 - this.gameState.cargoship6)
-				+ " spots for " + this.gameState.cargoship6Good;
+				+ colonists + "\nColonists Total: " + colonistsTotal
+				+ "\nVictory Points: " + points + "\n" + "\nCargo Ship: "
+				+ (4 - this.gameState.cargoship4) + " spots for "
+				+ this.gameState.cargoship4Good + "    Cargo Ship: "
+				+ (5 - this.gameState.cargoship5) + " spots for "
+				+ this.gameState.cargoship5Good + "    Cargo Ship: "
+				+ (6 - this.gameState.cargoship6) + " spots for "
+				+ this.gameState.cargoship6Good;
 		gameStateInfo.setColumns(20);
 		gameStateInfo.setRows(7);
 		gameStateInfo.setText(parsedInfo);
@@ -95,17 +96,19 @@ public class GameBoardGUI {
 		int tobacco = this.gameState.getGood(Player.Good.TOBACCO);
 		int colonists = this.gameState.getColonistsOnBoard();
 		int colonistsTotal = this.gameState.getColonistsTotal();
+		int points = this.gameState.victoryPoints;
 
 		String parsedInfo = "Coffe: " + coffee + "    Corn: " + corn
 				+ "    Indigo: " + indigo + "\nSugar: " + sugar
 				+ "        Tobacco: " + tobacco + "\nColonists: " + colonists
-				+ "\nColonists Total: " + colonistsTotal + "\n"
-				+ "\nCargo Ship: " + (4 - this.gameState.cargoship4)
-				+ " spots for " + this.gameState.cargoship4Good
-				+ "    Cargo Ship: " + (5 - this.gameState.cargoship5)
-				+ " spots for " + this.gameState.cargoship5Good
-				+ "    Cargo Ship: " + (6 - this.gameState.cargoship6)
-				+ " spots for " + this.gameState.cargoship6Good;
+				+ "\nColonists Total: " + colonistsTotal + "\nVictory Points: "
+				+ points + "\n" + "\nCargo Ship: "
+				+ (4 - this.gameState.cargoship4) + " spots for "
+				+ this.gameState.cargoship4Good + "    Cargo Ship: "
+				+ (5 - this.gameState.cargoship5) + " spots for "
+				+ this.gameState.cargoship5Good + "    Cargo Ship: "
+				+ (6 - this.gameState.cargoship6) + " spots for "
+				+ this.gameState.cargoship6Good;
 
 		gameStateInfo.setText(parsedInfo);
 	}
@@ -149,27 +152,6 @@ public class GameBoardGUI {
 
 	public static int getTurnCount() {
 		return turnCount;
-	}
-
-	// Will be deleted
-	@Deprecated
-	public String getPlayerText(int playerNum, String role, int points,
-			String buildingList, String plantationList, boolean isGovernor) {
-		String rtn = null;
-		if (isGovernor) {
-			rtn = String
-					.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s \nGovernor",
-							playerNum, role, points, buildingList,
-							plantationList);
-
-		} else {
-			rtn = String
-					.format("Player %d \nRole: %s \nScore: %d \nBuilding: %s \nPlantation: %s",
-							playerNum, role, points, buildingList,
-							plantationList);
-
-		}
-		return rtn;
 	}
 
 	public void updateRoles() {
@@ -517,21 +499,22 @@ public class GameBoardGUI {
 							goodList.add(s);
 						}
 					}
+					boolean selected = false;
 
 					Object[] options = goodList.toArray();
-
-					int good = JOptionPane.showOptionDialog(this.mainframe,
-							"Choose a good to ship!", "Player " + (roleNum),
-							JOptionPane.YES_NO_CANCEL_OPTION,
-							JOptionPane.QUESTION_MESSAGE, null, options,
-							options[options.length - 1]);
-
-					Object[] shipOptions = new Object[3];
-					shipOptions[0] = 4;
-					shipOptions[1] = 5;
-					shipOptions[2] = 6;
-					boolean selected = false;
 					while (!selected) {
+						int good = JOptionPane.showOptionDialog(this.mainframe,
+								"Choose a good to ship!",
+								"Player " + (roleNum),
+								JOptionPane.YES_NO_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE, null, options,
+								options[options.length - 1]);
+
+						Object[] shipOptions = new Object[3];
+						shipOptions[0] = 4;
+						shipOptions[1] = 5;
+						shipOptions[2] = 6;
+
 						System.out.println("selecting ship");
 						int ship = JOptionPane.showOptionDialog(this.mainframe,
 								"Choose a cargo ship to put good!", "Player "
@@ -556,6 +539,8 @@ public class GameBoardGUI {
 								gameState.victoryPoints--;
 							}
 							selected = true;
+						} else {
+							updateMsgBar("The ship you selected is invalid. Choose a different ship!");
 						}
 					}
 				}
@@ -566,7 +551,7 @@ public class GameBoardGUI {
 				roleNum = (roleNum + 1) % players.size();
 
 			}
-			if(gameState.victoryPoints <= 0){
+			if (gameState.victoryPoints <= 0) {
 				gameState.isGameEndState = true;
 			}
 			// warehouse stuff

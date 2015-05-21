@@ -1,6 +1,7 @@
 package csse376_puerto_rico_test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import javax.swing.JTextArea;
 import org.junit.Assert;
 import org.junit.Test;
 
-import csse376_puerto_rico.Buildings.Building;
+import csse376_puerto_rico.Building;
 import csse376_puerto_rico.Player;
 import csse376_puerto_rico.Player.Good;
 import csse376_puerto_rico.Player.Plantation;
