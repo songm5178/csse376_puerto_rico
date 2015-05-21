@@ -138,12 +138,6 @@ public class GameState {
 		}
 	}
 
-	public void addDoubloon(Player player, String role) {
-		if (addDoubloonToRole.contains(role) && addDoubloonToRole.size() > 0) {
-			player.setDoubloons(player.getDoubloons() + 1);
-			addDoubloonToRole.remove(role);
-		}
-	}
 
 	public void addColonistsToBoard() {
 		/**

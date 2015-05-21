@@ -47,6 +47,32 @@ public class GameStateTest {
 		assertEquals(55, g.getColonistsTotal());
 		
 	}
-
+	
+	@Test
+	public void TestIsAbleToAddGood1(){
+		Player player = new Player();
+		player.addGood("Corn", 3);
+		GameState g = new GameState();
+		assertEquals(true, g.isAbleToAddGood(player));	
+	}
+	
+	@Test
+	public void TestIsAbleToAddGood2(){
+		Player player = new Player();
+		GameState g = new GameState();
+		assertEquals(false, g.isAbleToAddGood(player));
+	}
+	
+	@Test
+	public void TestIsAbleToAddGood3(){
+		Player player = new Player();
+		GameState g = new GameState();
+		player.addGood("Corn", 3);
+		g.addGoodToCargoShip(4, 3, "Indigo");
+		g.addGoodToCargoShip(5, 4, "Coffee");
+		g.addGoodToCargoShip(6, 5, "Tobacco");
+		assertEquals(false, g.isAbleToAddGood(player));
+		
+	}
 
 }
