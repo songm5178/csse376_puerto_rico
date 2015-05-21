@@ -45,7 +45,7 @@ public class Building {
 			numberOfWorkers = 0;
 			break;
 
-		case "Construciton Hut":
+		case "Construction Hut":
 			// quarry instead of plantation in settler phase
 			cost = 2;
 			points = 1;
@@ -118,7 +118,7 @@ public class Building {
 			numberOfWorkers = 0;
 			break;
 
-		case "Coffe Roaster":
+		case "Coffee Roaster":
 			cost = 6;
 			points = 3;
 			numberOfJobs = 2;

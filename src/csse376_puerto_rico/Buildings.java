@@ -9,7 +9,7 @@ public class Buildings {
 	private ArrayList<Building> buildings;
 	private ArrayList<String> buildingNames = new ArrayList<String>(Arrays.asList("Small Indigo Plant",
 			"Small Sugar Mill", "Small Market", "Hacienda", "Construction Hut",
-			"Small Warehouse", "Indigo Plant", "Surgar Mill", "Hospice", "Office",
+			"Small Warehouse", "Indigo Plant", "Sugar Mill", "Hospice", "Office",
 			"Large Market", "Large Warehouse", "Tobacco Storage", "Coffee Roaster",
 			"Factory", "University", "Harbor", "Wharf"));
 

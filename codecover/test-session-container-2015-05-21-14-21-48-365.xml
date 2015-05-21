@@ -9000,4 +9000,554 @@
 </HierarchyLvl>
 </HierarchyLvl>
 </MASTRoot>
+<TestSession Comment="" Date="1432232515267" Name="May 21, 2015 2:21:54 PM">
+<TestCase Comment="This is a test case containing all coverage results cause no startTestCase methods where captured." Date="1432232514202" Name="UNNAMED TESTCASE">
+<CovList>
+<CovPrefix CovItemPrefix="csse376_puerto_rico.Buildings.java">
+<Cov CovItemId="B1" Value="5"/>
+<Cov CovItemId="B10" Value="4"/>
+<Cov CovItemId="B11" Value="4"/>
+<Cov CovItemId="B12" Value="4"/>
+<Cov CovItemId="B13" Value="4"/>
+<Cov CovItemId="B15" Value="4"/>
+<Cov CovItemId="B16" Value="4"/>
+<Cov CovItemId="B17" Value="4"/>
+<Cov CovItemId="B18" Value="4"/>
+<Cov CovItemId="B19" Value="13"/>
+<Cov CovItemId="B2" Value="4"/>
+<Cov CovItemId="B3" Value="5"/>
+<Cov CovItemId="B4" Value="4"/>
+<Cov CovItemId="B6" Value="4"/>
+<Cov CovItemId="B7" Value="4"/>
+<Cov CovItemId="B9" Value="4"/>
+<Cov CovItemId="L1-2" Value="4"/>
+<Cov CovItemId="S1" Value="4"/>
+<Cov CovItemId="S10" Value="5"/>
+<Cov CovItemId="S100" Value="4"/>
+<Cov CovItemId="S101" Value="4"/>
+<Cov CovItemId="S102" Value="4"/>
+<Cov CovItemId="S103" Value="13"/>
+<Cov CovItemId="S104" Value="13"/>
+<Cov CovItemId="S105" Value="13"/>
+<Cov CovItemId="S106" Value="13"/>
+<Cov CovItemId="S11" Value="5"/>
+<Cov CovItemId="S12" Value="5"/>
+<Cov CovItemId="S13" Value="5"/>
+<Cov CovItemId="S14" Value="4"/>
+<Cov CovItemId="S15" Value="4"/>
+<Cov CovItemId="S16" Value="4"/>
+<Cov CovItemId="S17" Value="4"/>
+<Cov CovItemId="S18" Value="4"/>
+<Cov CovItemId="S19" Value="5"/>
+<Cov CovItemId="S2" Value="4"/>
+<Cov CovItemId="S20" Value="5"/>
+<Cov CovItemId="S21" Value="5"/>
+<Cov CovItemId="S22" Value="5"/>
+<Cov CovItemId="S23" Value="5"/>
+<Cov CovItemId="S24" Value="4"/>
+<Cov CovItemId="S25" Value="4"/>
+<Cov CovItemId="S26" Value="4"/>
+<Cov CovItemId="S27" Value="4"/>
+<Cov CovItemId="S28" Value="4"/>
+<Cov CovItemId="S3" Value="4"/>
+<Cov CovItemId="S34" Value="4"/>
+<Cov CovItemId="S35" Value="4"/>
+<Cov CovItemId="S36" Value="4"/>
+<Cov CovItemId="S37" Value="4"/>
+<Cov CovItemId="S38" Value="4"/>
+<Cov CovItemId="S39" Value="4"/>
+<Cov CovItemId="S4" Value="72"/>
+<Cov CovItemId="S40" Value="4"/>
+<Cov CovItemId="S41" Value="4"/>
+<Cov CovItemId="S42" Value="4"/>
+<Cov CovItemId="S43" Value="4"/>
+<Cov CovItemId="S44" Value="4"/>
+<Cov CovItemId="S45" Value="4"/>
+<Cov CovItemId="S5" Value="2"/>
+<Cov CovItemId="S51" Value="4"/>
+<Cov CovItemId="S52" Value="4"/>
+<Cov CovItemId="S53" Value="4"/>
+<Cov CovItemId="S54" Value="4"/>
+<Cov CovItemId="S55" Value="4"/>
+<Cov CovItemId="S56" Value="4"/>
+<Cov CovItemId="S57" Value="4"/>
+<Cov CovItemId="S58" Value="4"/>
+<Cov CovItemId="S59" Value="4"/>
+<Cov CovItemId="S6" Value="1"/>
+<Cov CovItemId="S60" Value="4"/>
+<Cov CovItemId="S61" Value="4"/>
+<Cov CovItemId="S62" Value="4"/>
+<Cov CovItemId="S63" Value="4"/>
+<Cov CovItemId="S64" Value="4"/>
+<Cov CovItemId="S65" Value="4"/>
+<Cov CovItemId="S66" Value="4"/>
+<Cov CovItemId="S67" Value="4"/>
+<Cov CovItemId="S68" Value="4"/>
+<Cov CovItemId="S69" Value="4"/>
+<Cov CovItemId="S7" Value="75"/>
+<Cov CovItemId="S70" Value="4"/>
+<Cov CovItemId="S71" Value="4"/>
+<Cov CovItemId="S72" Value="4"/>
+<Cov CovItemId="S73" Value="4"/>
+<Cov CovItemId="S74" Value="4"/>
+<Cov CovItemId="S75" Value="4"/>
+<Cov CovItemId="S76" Value="4"/>
+<Cov CovItemId="S77" Value="4"/>
+<Cov CovItemId="S8" Value="75"/>
+<Cov CovItemId="S83" Value="4"/>
+<Cov CovItemId="S84" Value="4"/>
+<Cov CovItemId="S85" Value="4"/>
+<Cov CovItemId="S86" Value="4"/>
+<Cov CovItemId="S87" Value="4"/>
+<Cov CovItemId="S88" Value="4"/>
+<Cov CovItemId="S89" Value="4"/>
+<Cov CovItemId="S9" Value="5"/>
+<Cov CovItemId="S90" Value="4"/>
+<Cov CovItemId="S91" Value="4"/>
+<Cov CovItemId="S92" Value="4"/>
+<Cov CovItemId="S93" Value="4"/>
+<Cov CovItemId="S94" Value="4"/>
+<Cov CovItemId="S95" Value="4"/>
+<Cov CovItemId="S96" Value="4"/>
+<Cov CovItemId="S97" Value="4"/>
+<Cov CovItemId="S98" Value="4"/>
+<Cov CovItemId="S99" Value="4"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java">
+<Cov CovItemId="B5" Value="1"/>
+<Cov CovItemId="B6" Value="1"/>
+<Cov CovItemId="S1" Value="4"/>
+<Cov CovItemId="S2" Value="4"/>
+<Cov CovItemId="S3" Value="4"/>
+<Cov CovItemId="S4" Value="4"/>
+<Cov CovItemId="S5" Value="4"/>
+<Cov CovItemId="S66" Value="2"/>
+<Cov CovItemId="S67" Value="2"/>
+<Cov CovItemId="S68" Value="1"/>
+<Cov CovItemId="S69" Value="1"/>
+<Cov CovItemId="S70" Value="2"/>
+<Cov CovItemId="S91" Value="1"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="csse376_puerto_rico.GameState.java">
+<Cov CovItemId="S1" Value="4"/>
+<Cov CovItemId="S10" Value="4"/>
+<Cov CovItemId="S11" Value="4"/>
+<Cov CovItemId="S12" Value="4"/>
+<Cov CovItemId="S13" Value="4"/>
+<Cov CovItemId="S14" Value="4"/>
+<Cov CovItemId="S15" Value="4"/>
+<Cov CovItemId="S16" Value="4"/>
+<Cov CovItemId="S17" Value="4"/>
+<Cov CovItemId="S18" Value="4"/>
+<Cov CovItemId="S19" Value="4"/>
+<Cov CovItemId="S2" Value="4"/>
+<Cov CovItemId="S20" Value="4"/>
+<Cov CovItemId="S3" Value="4"/>
+<Cov CovItemId="S4" Value="4"/>
+<Cov CovItemId="S5" Value="4"/>
+<Cov CovItemId="S6" Value="4"/>
+<Cov CovItemId="S7" Value="4"/>
+<Cov CovItemId="S8" Value="4"/>
+<Cov CovItemId="S9" Value="1"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="csse376_puerto_rico.Player.java">
+<Cov CovItemId="B10" Value="1"/>
+<Cov CovItemId="B8" Value="22"/>
+<Cov CovItemId="L1-2" Value="34"/>
+<Cov CovItemId="L2-2" Value="10"/>
+<Cov CovItemId="L3-1" Value="4"/>
+<Cov CovItemId="L7-0" Value="1"/>
+<Cov CovItemId="L8-0" Value="1"/>
+<Cov CovItemId="L9-0" Value="1"/>
+<Cov CovItemId="L9-1" Value="6"/>
+<Cov CovItemId="L9-2" Value="1"/>
+<Cov CovItemId="S1" Value="44"/>
+<Cov CovItemId="S10" Value="34"/>
+<Cov CovItemId="S11" Value="34"/>
+<Cov CovItemId="S12" Value="34"/>
+<Cov CovItemId="S13" Value="34"/>
+<Cov CovItemId="S14" Value="170"/>
+<Cov CovItemId="S15" Value="10"/>
+<Cov CovItemId="S16" Value="10"/>
+<Cov CovItemId="S17" Value="10"/>
+<Cov CovItemId="S18" Value="10"/>
+<Cov CovItemId="S19" Value="10"/>
+<Cov CovItemId="S2" Value="44"/>
+<Cov CovItemId="S20" Value="10"/>
+<Cov CovItemId="S21" Value="50"/>
+<Cov CovItemId="S22" Value="1"/>
+<Cov CovItemId="S23" Value="1"/>
+<Cov CovItemId="S24" Value="8"/>
+<Cov CovItemId="S25" Value="5"/>
+<Cov CovItemId="S26" Value="6"/>
+<Cov CovItemId="S27" Value="2"/>
+<Cov CovItemId="S28" Value="1"/>
+<Cov CovItemId="S29" Value="2"/>
+<Cov CovItemId="S3" Value="8"/>
+<Cov CovItemId="S30" Value="2"/>
+<Cov CovItemId="S31" Value="2"/>
+<Cov CovItemId="S32" Value="1"/>
+<Cov CovItemId="S33" Value="3"/>
+<Cov CovItemId="S34" Value="3"/>
+<Cov CovItemId="S36" Value="4"/>
+<Cov CovItemId="S37" Value="4"/>
+<Cov CovItemId="S38" Value="4"/>
+<Cov CovItemId="S39" Value="4"/>
+<Cov CovItemId="S4" Value="8"/>
+<Cov CovItemId="S5" Value="44"/>
+<Cov CovItemId="S55" Value="2"/>
+<Cov CovItemId="S56" Value="2"/>
+<Cov CovItemId="S57" Value="2"/>
+<Cov CovItemId="S58" Value="2"/>
+<Cov CovItemId="S59" Value="2"/>
+<Cov CovItemId="S6" Value="44"/>
+<Cov CovItemId="S60" Value="2"/>
+<Cov CovItemId="S61" Value="2"/>
+<Cov CovItemId="S62" Value="2"/>
+<Cov CovItemId="S63" Value="22"/>
+<Cov CovItemId="S65" Value="22"/>
+<Cov CovItemId="S66" Value="44"/>
+<Cov CovItemId="S67" Value="44"/>
+<Cov CovItemId="S68" Value="44"/>
+<Cov CovItemId="S69" Value="11"/>
+<Cov CovItemId="S7" Value="1"/>
+<Cov CovItemId="S70" Value="1"/>
+<Cov CovItemId="S71" Value="1"/>
+<Cov CovItemId="S72" Value="1"/>
+<Cov CovItemId="S73" Value="1"/>
+<Cov CovItemId="S74" Value="1"/>
+<Cov CovItemId="S76" Value="1"/>
+<Cov CovItemId="S78" Value="1"/>
+<Cov CovItemId="S8" Value="34"/>
+<Cov CovItemId="S80" Value="1"/>
+<Cov CovItemId="S81" Value="1"/>
+<Cov CovItemId="S83" Value="9"/>
+<Cov CovItemId="S85" Value="8"/>
+<Cov CovItemId="S86" Value="8"/>
+<Cov CovItemId="S87" Value="8"/>
+<Cov CovItemId="S88" Value="8"/>
+<Cov CovItemId="S9" Value="34"/>
+<Cov CovItemId="S94" Value="1"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="csse376_puerto_rico.PlayerRoles.java">
+<Cov CovItemId="S1" Value="1"/>
+<Cov CovItemId="S10" Value="2"/>
+<Cov CovItemId="S11" Value="2"/>
+<Cov CovItemId="S12" Value="2"/>
+<Cov CovItemId="S13" Value="2"/>
+<Cov CovItemId="S14" Value="2"/>
+<Cov CovItemId="S15" Value="2"/>
+<Cov CovItemId="S16" Value="2"/>
+<Cov CovItemId="S2" Value="1"/>
+<Cov CovItemId="S3" Value="1"/>
+<Cov CovItemId="S4" Value="1"/>
+<Cov CovItemId="S5" Value="1"/>
+<Cov CovItemId="S6" Value="1"/>
+<Cov CovItemId="S7" Value="1"/>
+<Cov CovItemId="S8" Value="2"/>
+<Cov CovItemId="S9" Value="2"/>
+</CovPrefix>
+</CovList>
+<AssgnmntList>
+<AssgnmntPrefix RootTermCovItemPrefix="csse376_puerto_rico.GameBoardGUI.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C5">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+<MapEntry BoolAssgnmnt="1" Value="1"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+<AssgnmntPrefix RootTermCovItemPrefix="csse376_puerto_rico.Player.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C4">
+<MapEntry BoolAssgnmnt="0" Value="22"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C5">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C6">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C7">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+</AssgnmntList>
+<ObjMetaDataList/>
+<MetaDataList/>
+</TestCase>
+<MetaDataList/>
+</TestSession>
+<TestSession Comment="" Date="1432232646406" Name="May 21, 2015 2:24:06 PM">
+<TestCase Comment="This is a test case containing all coverage results cause no startTestCase methods where captured." Date="1432232646128" Name="UNNAMED TESTCASE">
+<CovList>
+<CovPrefix CovItemPrefix="csse376_puerto_rico.Buildings.java">
+<Cov CovItemId="B1" Value="5"/>
+<Cov CovItemId="B10" Value="4"/>
+<Cov CovItemId="B11" Value="4"/>
+<Cov CovItemId="B12" Value="4"/>
+<Cov CovItemId="B13" Value="4"/>
+<Cov CovItemId="B15" Value="4"/>
+<Cov CovItemId="B16" Value="4"/>
+<Cov CovItemId="B17" Value="4"/>
+<Cov CovItemId="B18" Value="4"/>
+<Cov CovItemId="B19" Value="13"/>
+<Cov CovItemId="B2" Value="4"/>
+<Cov CovItemId="B3" Value="5"/>
+<Cov CovItemId="B4" Value="4"/>
+<Cov CovItemId="B6" Value="4"/>
+<Cov CovItemId="B7" Value="4"/>
+<Cov CovItemId="B9" Value="4"/>
+<Cov CovItemId="L1-2" Value="4"/>
+<Cov CovItemId="S1" Value="4"/>
+<Cov CovItemId="S10" Value="5"/>
+<Cov CovItemId="S100" Value="4"/>
+<Cov CovItemId="S101" Value="4"/>
+<Cov CovItemId="S102" Value="4"/>
+<Cov CovItemId="S103" Value="13"/>
+<Cov CovItemId="S104" Value="13"/>
+<Cov CovItemId="S105" Value="13"/>
+<Cov CovItemId="S106" Value="13"/>
+<Cov CovItemId="S11" Value="5"/>
+<Cov CovItemId="S12" Value="5"/>
+<Cov CovItemId="S13" Value="5"/>
+<Cov CovItemId="S14" Value="4"/>
+<Cov CovItemId="S15" Value="4"/>
+<Cov CovItemId="S16" Value="4"/>
+<Cov CovItemId="S17" Value="4"/>
+<Cov CovItemId="S18" Value="4"/>
+<Cov CovItemId="S19" Value="5"/>
+<Cov CovItemId="S2" Value="4"/>
+<Cov CovItemId="S20" Value="5"/>
+<Cov CovItemId="S21" Value="5"/>
+<Cov CovItemId="S22" Value="5"/>
+<Cov CovItemId="S23" Value="5"/>
+<Cov CovItemId="S24" Value="4"/>
+<Cov CovItemId="S25" Value="4"/>
+<Cov CovItemId="S26" Value="4"/>
+<Cov CovItemId="S27" Value="4"/>
+<Cov CovItemId="S28" Value="4"/>
+<Cov CovItemId="S3" Value="4"/>
+<Cov CovItemId="S34" Value="4"/>
+<Cov CovItemId="S35" Value="4"/>
+<Cov CovItemId="S36" Value="4"/>
+<Cov CovItemId="S37" Value="4"/>
+<Cov CovItemId="S38" Value="4"/>
+<Cov CovItemId="S39" Value="4"/>
+<Cov CovItemId="S4" Value="72"/>
+<Cov CovItemId="S40" Value="4"/>
+<Cov CovItemId="S41" Value="4"/>
+<Cov CovItemId="S42" Value="4"/>
+<Cov CovItemId="S43" Value="4"/>
+<Cov CovItemId="S44" Value="4"/>
+<Cov CovItemId="S45" Value="4"/>
+<Cov CovItemId="S5" Value="2"/>
+<Cov CovItemId="S51" Value="4"/>
+<Cov CovItemId="S52" Value="4"/>
+<Cov CovItemId="S53" Value="4"/>
+<Cov CovItemId="S54" Value="4"/>
+<Cov CovItemId="S55" Value="4"/>
+<Cov CovItemId="S56" Value="4"/>
+<Cov CovItemId="S57" Value="4"/>
+<Cov CovItemId="S58" Value="4"/>
+<Cov CovItemId="S59" Value="4"/>
+<Cov CovItemId="S6" Value="1"/>
+<Cov CovItemId="S60" Value="4"/>
+<Cov CovItemId="S61" Value="4"/>
+<Cov CovItemId="S62" Value="4"/>
+<Cov CovItemId="S63" Value="4"/>
+<Cov CovItemId="S64" Value="4"/>
+<Cov CovItemId="S65" Value="4"/>
+<Cov CovItemId="S66" Value="4"/>
+<Cov CovItemId="S67" Value="4"/>
+<Cov CovItemId="S68" Value="4"/>
+<Cov CovItemId="S69" Value="4"/>
+<Cov CovItemId="S7" Value="75"/>
+<Cov CovItemId="S70" Value="4"/>
+<Cov CovItemId="S71" Value="4"/>
+<Cov CovItemId="S72" Value="4"/>
+<Cov CovItemId="S73" Value="4"/>
+<Cov CovItemId="S74" Value="4"/>
+<Cov CovItemId="S75" Value="4"/>
+<Cov CovItemId="S76" Value="4"/>
+<Cov CovItemId="S77" Value="4"/>
+<Cov CovItemId="S8" Value="75"/>
+<Cov CovItemId="S83" Value="4"/>
+<Cov CovItemId="S84" Value="4"/>
+<Cov CovItemId="S85" Value="4"/>
+<Cov CovItemId="S86" Value="4"/>
+<Cov CovItemId="S87" Value="4"/>
+<Cov CovItemId="S88" Value="4"/>
+<Cov CovItemId="S89" Value="4"/>
+<Cov CovItemId="S9" Value="5"/>
+<Cov CovItemId="S90" Value="4"/>
+<Cov CovItemId="S91" Value="4"/>
+<Cov CovItemId="S92" Value="4"/>
+<Cov CovItemId="S93" Value="4"/>
+<Cov CovItemId="S94" Value="4"/>
+<Cov CovItemId="S95" Value="4"/>
+<Cov CovItemId="S96" Value="4"/>
+<Cov CovItemId="S97" Value="4"/>
+<Cov CovItemId="S98" Value="4"/>
+<Cov CovItemId="S99" Value="4"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="csse376_puerto_rico.GameBoardGUI.java">
+<Cov CovItemId="B5" Value="1"/>
+<Cov CovItemId="B6" Value="1"/>
+<Cov CovItemId="S1" Value="4"/>
+<Cov CovItemId="S2" Value="4"/>
+<Cov CovItemId="S3" Value="4"/>
+<Cov CovItemId="S4" Value="4"/>
+<Cov CovItemId="S5" Value="4"/>
+<Cov CovItemId="S66" Value="2"/>
+<Cov CovItemId="S67" Value="2"/>
+<Cov CovItemId="S68" Value="1"/>
+<Cov CovItemId="S69" Value="1"/>
+<Cov CovItemId="S70" Value="2"/>
+<Cov CovItemId="S91" Value="1"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="csse376_puerto_rico.GameState.java">
+<Cov CovItemId="S1" Value="4"/>
+<Cov CovItemId="S10" Value="4"/>
+<Cov CovItemId="S11" Value="4"/>
+<Cov CovItemId="S12" Value="4"/>
+<Cov CovItemId="S13" Value="4"/>
+<Cov CovItemId="S14" Value="4"/>
+<Cov CovItemId="S15" Value="4"/>
+<Cov CovItemId="S16" Value="4"/>
+<Cov CovItemId="S17" Value="4"/>
+<Cov CovItemId="S18" Value="4"/>
+<Cov CovItemId="S19" Value="4"/>
+<Cov CovItemId="S2" Value="4"/>
+<Cov CovItemId="S20" Value="4"/>
+<Cov CovItemId="S3" Value="4"/>
+<Cov CovItemId="S4" Value="4"/>
+<Cov CovItemId="S5" Value="4"/>
+<Cov CovItemId="S6" Value="4"/>
+<Cov CovItemId="S7" Value="4"/>
+<Cov CovItemId="S8" Value="4"/>
+<Cov CovItemId="S9" Value="1"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="csse376_puerto_rico.Player.java">
+<Cov CovItemId="B10" Value="1"/>
+<Cov CovItemId="B8" Value="22"/>
+<Cov CovItemId="L1-2" Value="34"/>
+<Cov CovItemId="L2-2" Value="10"/>
+<Cov CovItemId="L3-1" Value="4"/>
+<Cov CovItemId="L7-0" Value="1"/>
+<Cov CovItemId="L8-0" Value="1"/>
+<Cov CovItemId="L9-0" Value="1"/>
+<Cov CovItemId="L9-1" Value="6"/>
+<Cov CovItemId="L9-2" Value="1"/>
+<Cov CovItemId="S1" Value="44"/>
+<Cov CovItemId="S10" Value="34"/>
+<Cov CovItemId="S11" Value="34"/>
+<Cov CovItemId="S12" Value="34"/>
+<Cov CovItemId="S13" Value="34"/>
+<Cov CovItemId="S14" Value="170"/>
+<Cov CovItemId="S15" Value="10"/>
+<Cov CovItemId="S16" Value="10"/>
+<Cov CovItemId="S17" Value="10"/>
+<Cov CovItemId="S18" Value="10"/>
+<Cov CovItemId="S19" Value="10"/>
+<Cov CovItemId="S2" Value="44"/>
+<Cov CovItemId="S20" Value="10"/>
+<Cov CovItemId="S21" Value="50"/>
+<Cov CovItemId="S22" Value="1"/>
+<Cov CovItemId="S23" Value="1"/>
+<Cov CovItemId="S24" Value="8"/>
+<Cov CovItemId="S25" Value="5"/>
+<Cov CovItemId="S26" Value="6"/>
+<Cov CovItemId="S27" Value="2"/>
+<Cov CovItemId="S28" Value="1"/>
+<Cov CovItemId="S29" Value="2"/>
+<Cov CovItemId="S3" Value="8"/>
+<Cov CovItemId="S30" Value="2"/>
+<Cov CovItemId="S31" Value="2"/>
+<Cov CovItemId="S32" Value="1"/>
+<Cov CovItemId="S33" Value="3"/>
+<Cov CovItemId="S34" Value="3"/>
+<Cov CovItemId="S36" Value="4"/>
+<Cov CovItemId="S37" Value="4"/>
+<Cov CovItemId="S38" Value="4"/>
+<Cov CovItemId="S39" Value="4"/>
+<Cov CovItemId="S4" Value="8"/>
+<Cov CovItemId="S5" Value="44"/>
+<Cov CovItemId="S55" Value="2"/>
+<Cov CovItemId="S56" Value="2"/>
+<Cov CovItemId="S57" Value="2"/>
+<Cov CovItemId="S58" Value="2"/>
+<Cov CovItemId="S59" Value="2"/>
+<Cov CovItemId="S6" Value="44"/>
+<Cov CovItemId="S60" Value="2"/>
+<Cov CovItemId="S61" Value="2"/>
+<Cov CovItemId="S62" Value="2"/>
+<Cov CovItemId="S63" Value="22"/>
+<Cov CovItemId="S65" Value="22"/>
+<Cov CovItemId="S66" Value="44"/>
+<Cov CovItemId="S67" Value="44"/>
+<Cov CovItemId="S68" Value="44"/>
+<Cov CovItemId="S69" Value="11"/>
+<Cov CovItemId="S7" Value="1"/>
+<Cov CovItemId="S70" Value="1"/>
+<Cov CovItemId="S71" Value="1"/>
+<Cov CovItemId="S72" Value="1"/>
+<Cov CovItemId="S73" Value="1"/>
+<Cov CovItemId="S74" Value="1"/>
+<Cov CovItemId="S76" Value="1"/>
+<Cov CovItemId="S78" Value="1"/>
+<Cov CovItemId="S8" Value="34"/>
+<Cov CovItemId="S80" Value="1"/>
+<Cov CovItemId="S81" Value="1"/>
+<Cov CovItemId="S83" Value="9"/>
+<Cov CovItemId="S85" Value="8"/>
+<Cov CovItemId="S86" Value="8"/>
+<Cov CovItemId="S87" Value="8"/>
+<Cov CovItemId="S88" Value="8"/>
+<Cov CovItemId="S9" Value="34"/>
+<Cov CovItemId="S94" Value="1"/>
+</CovPrefix>
+<CovPrefix CovItemPrefix="csse376_puerto_rico.PlayerRoles.java">
+<Cov CovItemId="S1" Value="1"/>
+<Cov CovItemId="S10" Value="2"/>
+<Cov CovItemId="S11" Value="2"/>
+<Cov CovItemId="S12" Value="2"/>
+<Cov CovItemId="S13" Value="2"/>
+<Cov CovItemId="S14" Value="2"/>
+<Cov CovItemId="S15" Value="2"/>
+<Cov CovItemId="S16" Value="2"/>
+<Cov CovItemId="S2" Value="1"/>
+<Cov CovItemId="S3" Value="1"/>
+<Cov CovItemId="S4" Value="1"/>
+<Cov CovItemId="S5" Value="1"/>
+<Cov CovItemId="S6" Value="1"/>
+<Cov CovItemId="S7" Value="1"/>
+<Cov CovItemId="S8" Value="2"/>
+<Cov CovItemId="S9" Value="2"/>
+</CovPrefix>
+</CovList>
+<AssgnmntList>
+<AssgnmntPrefix RootTermCovItemPrefix="csse376_puerto_rico.GameBoardGUI.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C5">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+<MapEntry BoolAssgnmnt="1" Value="1"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+<AssgnmntPrefix RootTermCovItemPrefix="csse376_puerto_rico.Player.java">
+<AssgnmntListEntry Length="1" RootTermCovItemId="C4">
+<MapEntry BoolAssgnmnt="0" Value="22"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C5">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C6">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+</AssgnmntListEntry>
+<AssgnmntListEntry Length="1" RootTermCovItemId="C7">
+<MapEntry BoolAssgnmnt="0" Value="1"/>
+</AssgnmntListEntry>
+</AssgnmntPrefix>
+</AssgnmntList>
+<ObjMetaDataList/>
+<MetaDataList/>
+</TestCase>
+<MetaDataList/>
+</TestSession>
 </TestSessionContainer>

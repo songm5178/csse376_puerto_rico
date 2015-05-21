@@ -36,7 +36,7 @@ public class GameStateTest {
 	}
 	
 	@Test
-	public void testColonists(){
+	public void testColonistsThreePlayers(){
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player());
 		players.add(new Player());
@@ -73,6 +73,38 @@ public class GameStateTest {
 		g.addGoodToCargoShip(6, 5, "Tobacco");
 		assertEquals(false, g.isAbleToAddGood(player));
 		
+	}
+	public void testColonistsFourPlayers(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		GameState g = new GameState(players);
+		
+		assertEquals(4, g.getColonistsOnBoard());
+		assertEquals(75, g.getColonistsTotal());
+	}
+	
+	@Test
+	public void testColonistsFivePlayers(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		GameState g = new GameState(players);
+		
+		assertEquals(5, g.getColonistsOnBoard());
+		assertEquals(95, g.getColonistsTotal());
+	}
+	
+	@Test
+	public void testAddGoodToCargoShipWithCornToShip4(){
+		GameState g = new GameState();
+		
+		assertEquals(3, g.addGoodToCargoShip(4, 1, "corn"));
 	}
 
 }

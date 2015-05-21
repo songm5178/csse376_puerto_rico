@@ -17,7 +17,9 @@ import csse376_puerto_rico.Player.Good;
 import csse376_puerto_rico.Player.Plantation;
 
 public class PlayerTest {
-
+	
+	private Good g = new Good();
+	
 	@Test
 	public void test_playersRoleAsTrader() {
 		Player player = new Player("Trader");
@@ -155,8 +157,8 @@ public class PlayerTest {
 	@Test
 	public void add_1Tobacco(){
 		Player player = new Player();
-		player.addGood("Tobacco", 1);
-		assertEquals(1, player.getNumberOfGood("Tobacco"));
+		player.addGood(g.TOBACCO, 1);
+		assertEquals(1, player.getNumberOfGood(g.TOBACCO));
 	}
 	
 	@Test
@@ -169,8 +171,8 @@ public class PlayerTest {
 	@Test
 	public void add_1Corn(){
 		Player player = new Player();
-		player.addGood("Corn", 1);
-		assertEquals(1, player.getNumberOfGood("Corn"));
+		player.addGood(g.CORN, 1);
+		assertEquals(1, player.getNumberOfGood(g.CORN));
 	}
 	
 	@Test
@@ -183,8 +185,8 @@ public class PlayerTest {
 	@Test
 	public void add_1Sugar(){
 		Player player = new Player();
-		player.addGood("Sugar", 1);
-		assertEquals(1, player.getNumberOfGood("Sugar"));
+		player.addGood(g.SUGAR, 1);
+		assertEquals(1, player.getNumberOfGood(g.SUGAR));
 	}
 	
 	@Test
@@ -197,8 +199,8 @@ public class PlayerTest {
 	@Test
 	public void add_1Coffee(){
 		Player player = new Player();
-		player.addGood("Coffee", 1);
-		assertEquals(1, player.getNumberOfGood("Coffee"));
+		player.addGood(g.COFFEE, 1);
+		assertEquals(1, player.getNumberOfGood(g.COFFEE));
 	}
 	
 	@Test
@@ -211,8 +213,8 @@ public class PlayerTest {
 	@Test
 	public void add_1Indigo(){
 		Player player = new Player();
-		player.addGood("Indigo", 1);
-		assertEquals(1, player.getNumberOfGood("Indigo"));
+		player.addGood(g.INDIGO, 1);
+		assertEquals(1, player.getNumberOfGood(g.INDIGO));
 	}
 	
 	@Test
@@ -361,9 +363,22 @@ public class PlayerTest {
 	{
 		Player player = new Player();
 		Building b = new Building("Small Indigo Plant");
+		Building b1 = new Building("Small Sugar Mill");
 		player.addBuilding(b);
+		player.addBuilding(b1);
 		assertEquals(false, player.ownsBuilding("Small Market"));
 		assertEquals(true, player.ownsBuilding("Small Indigo Plant"));
+		
+		Building pb = player.getBuilding("Small Indigo Plant");
+		Building pb1 = player.getBuilding("Small Sugar Mill");
+		Building pb2 = player.getBuilding("Small Market");
+
+		
+		assertEquals(b, pb);
+		assertEquals(b1, pb1);
+		assertEquals(null, pb2);
 	}
+	
+	
 
 }
