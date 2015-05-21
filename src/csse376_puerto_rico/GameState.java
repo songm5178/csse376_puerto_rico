@@ -186,55 +186,57 @@ public class GameState {
 	 */
 	public int addGoodToCargoShip(int shipNum, int goodNum, String good) {
 		int leftover = 0;
-		switch (shipNum) {
-		case 4:
+		if (shipNum == 4) {
+			System.out.println("ship4");
 			if (cargoship4 == 0
 					|| (cargoship4 < 4 && cargoship4Good.equals(good))) {
 				leftover = cargoship4 + goodNum - 4;
-				cargoship4Good = good;
+				if (goodNum != 0)
+					cargoship4Good = good;
 
 				if (leftover > 0) {
 					cargoship4 = 4;
 				} else {
 					cargoship4 += goodNum;
+					leftover = 0;
 				}
 
 			} else {
 				leftover = ERROR;
 			}
-			break;
-		case 5:
-			System.out.println("5");
+		} else if (shipNum == 5) {
+			System.out.println("ship5");
 			if (cargoship5 == 0
 					|| (cargoship5 < 5 && cargoship5Good.equals(good))) {
 				leftover = cargoship5 + goodNum - 5;
-				cargoship5Good = good;
+				if (goodNum != 0)
+					cargoship5Good = good;
 				if (leftover > 0) {
 					cargoship5 = 5;
 				} else {
 					cargoship5 += goodNum;
+					leftover = 0;
 				}
 			} else {
 				leftover = ERROR;
 			}
-			break;
-		case 6:
-			System.out.println(6);
+
+		} else if (shipNum == 6) {
+			System.out.println("ship6");
 			if (cargoship6 == 0
 					|| (cargoship6 < 6 && cargoship6Good.equals(good))) {
 				leftover = cargoship6 + goodNum - 6;
-				cargoship6Good = good;
+				if (goodNum != 0)
+					cargoship6Good = good;
 				if (leftover > 0) {
 					cargoship6 = 6;
 				} else {
 					cargoship6 += goodNum;
+					leftover = 0;
 				}
 			} else {
 				leftover = ERROR;
 			}
-			break;
-		default:
-			break;
 		}
 		return leftover;
 	}

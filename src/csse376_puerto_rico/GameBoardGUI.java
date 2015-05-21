@@ -396,8 +396,8 @@ public class GameBoardGUI {
 						options[options.length - 1]);
 				System.out.println(plantationNames.get(n));
 				if (n != plantationNames.size() - 1) {
-					player.getPlantations().add(
-							new Plantation(plantationNames.get(n), false));
+					player.addPlantations(new Plantation(
+							plantationNames.get(n), false));
 					updateMsgBar("Player " + roleNum + " added plantation"
 							+ plantationNames.get(n));
 				}
@@ -510,33 +510,49 @@ public class GameBoardGUI {
 			while (gameState.isAbleToAddGood()) {
 				player = players.get(roleNum);
 				if (gameState.isAbleToAddGood(player)) {
-					Object[] goodOptions = player.getAllGoods().toArray();
+					ArrayList<String> goodList = new ArrayList<String>();
+					for (String s : player.getAllGoods()) {
+						int n = player.getNumberOfGood(s);
+						if (n > 0) {
+							goodList.add(s);
+						}
+					}
+
+					Object[] options = goodList.toArray();
 
 					int good = JOptionPane.showOptionDialog(this.mainframe,
 							"Choose a good to ship!", "Player " + (roleNum),
 							JOptionPane.YES_NO_CANCEL_OPTION,
-							JOptionPane.QUESTION_MESSAGE, null, goodOptions,
-							goodOptions[goodOptions.length - 1]);
+							JOptionPane.QUESTION_MESSAGE, null, options,
+							options[options.length - 1]);
 
 					Object[] shipOptions = new Object[3];
 					shipOptions[0] = 4;
 					shipOptions[1] = 5;
 					shipOptions[2] = 6;
-					int ship = JOptionPane.showOptionDialog(this.mainframe,
-							"Choose a cargo ship to put good!", "Player "
-									+ (roleNum),
-							JOptionPane.YES_NO_CANCEL_OPTION,
-							JOptionPane.QUESTION_MESSAGE, null, shipOptions,
-							shipOptions[shipOptions.length - 1]);
-					String goodString = (String) goodOptions[good];
-					int goodCount = player.getNumberOfGood(goodString);
-					int leftOver = this.gameState.addGoodToCargoShip(ship,
-							goodCount, goodString);
-					if (leftOver != 99) {
-						player.addGood(goodString, leftOver);
-						player.addPoints(goodCount - leftOver);
-						if (player.ownsOccupiedBuilding("Harbor")) {
-							player.addPoints(1);
+					boolean selected = false;
+					while (!selected) {
+						System.out.println("selecting ship");
+						int ship = JOptionPane.showOptionDialog(this.mainframe,
+								"Choose a cargo ship to put good!", "Player "
+										+ (roleNum),
+								JOptionPane.YES_NO_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE, null,
+								shipOptions,
+								shipOptions[shipOptions.length - 1]);
+						String goodString = (String) options[good];
+						int goodCount = player.getNumberOfGood(goodString);
+						
+						int leftOver = this.gameState.addGoodToCargoShip(
+								(int) shipOptions[ship], goodCount, goodString);
+						if (leftOver != -99) {
+							player.addGood(goodString, leftOver);
+							player.sellGood(goodString, goodCount - leftOver);
+							player.addPoints(goodCount - leftOver);
+							if (player.ownsOccupiedBuilding("Harbor")) {
+								player.addPoints(1);
+							}
+							selected = true;
 						}
 					}
 				}
@@ -568,7 +584,7 @@ public class GameBoardGUI {
 						JOptionPane.QUESTION_MESSAGE, null, options,
 						options[options.length - 1]);
 
-				if (good - 1 != options.length) {
+				if (good != options.length - 1) {
 					String goodString = (String) options[good];
 					storeGood.add(goodString);
 					player.sellGood(goodString, 1);
