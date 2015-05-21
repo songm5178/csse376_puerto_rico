@@ -26,15 +26,7 @@ public class GameBoardGuiTest {
 
 	}
 
-	@Test
-	public void first_player_test() {
-		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
-		//GameBoardGUI g = new GameBoardGUI();
-		List<Player> players = g.addPlayers(3);
-		Player p0 = players.get(0);
 
-		assertEquals(p0.isGovernor(), true);
-	}
 
 	@Test
 	public void player_text_format_test() {
@@ -67,14 +59,7 @@ public class GameBoardGuiTest {
 
 	}
 
-	@Test
-	public void other_player_isNot_governor() {
-		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
-		List<Player> players = g.addPlayers(3);
-		Player p0 = players.get(1);
 
-		assertEquals(p0.isGovernor(), false);
-	}
 
 	@Test
 	public void test_updateMsgBar() {
@@ -84,25 +69,6 @@ public class GameBoardGuiTest {
 		assertEquals("Updated", g.msgBar.getText());
 	}
 
-	@Test
-	public void test_endGame() {
-		GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
-		boolean isEndGame = g.checkEndGame();
-		
-		//True for now
-		assertEquals(true, isEndGame);
 
-	}
-	// @Test
-	// public void addPlayerCard_test5() {
-	// GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
-	// assertEquals(5, g.addPlayerCards(5).size());
-	// }
-
-	// @Test
-	// public void addPlayerCard_test10() {
-	// GameBoardGUI g = new GameBoardGUI(new JFrame(), new ButtonGroup());
-	// assertEquals(10, g.addPlayerCards(10).size());
-	// }
 
 }
