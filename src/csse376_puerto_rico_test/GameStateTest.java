@@ -36,7 +36,7 @@ public class GameStateTest {
 	}
 	
 	@Test
-	public void testColonists(){
+	public void testColonistsThreePlayers(){
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player());
 		players.add(new Player());
@@ -45,6 +45,20 @@ public class GameStateTest {
 		
 		assertEquals(3, g.getColonistsOnBoard());
 		assertEquals(55, g.getColonistsTotal());
+		
+	}
+	
+	@Test
+	public void testColonistsFourPlayers(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		GameState g = new GameState(players);
+		
+		assertEquals(4, g.getColonistsOnBoard());
+		assertEquals(75, g.getColonistsTotal());
 		
 	}
 
