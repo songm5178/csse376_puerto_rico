@@ -14,11 +14,11 @@ public class GameState {
 	public int colonistsTotal;
 	public int colonistsOnBoard;
 	public int cargoship4 = 0;
-	public String cargoship4Good;
+	public String cargoship4Good = "";
 	public int cargoship5 = 0;
-	public String cargoship5Good;
+	public String cargoship5Good = "";
 	public int cargoship6 = 0;
-	public String cargoship6Good;
+	public String cargoship6Good = "";
 	public boolean isGameEndState = false;
 	public int doubloons;
 	private int numOfPlayers;
@@ -126,31 +126,25 @@ public class GameState {
 		//
 		return colonistsTotal;
 	}
-	
-	public void addRolesToList(String toAdd)
-	{
+
+	public void addRolesToList(String toAdd) {
 		rolesToAdd.add(toAdd);
-		if(rolesToAdd.size() == 3)
-		{
+		if (rolesToAdd.size() == 3) {
 			List<String> totalRoles = Player.getRoles();
-			for(int i=0; i<rolesToAdd.size();i++)
-			{
+			for (int i = 0; i < rolesToAdd.size(); i++) {
 				totalRoles.remove(rolesToAdd.get(i));
 			}
 			addDoubloonToRole = rolesToAdd;
 			rolesToAdd = new ArrayList<String>();
 		}
 	}
-	
-	public void addDoubloon(Player player, String role)
-	{
-		if(addDoubloonToRole.contains(role) && addDoubloonToRole.size() > 0)
-		{
+
+	public void addDoubloon(Player player, String role) {
+		if (addDoubloonToRole.contains(role) && addDoubloonToRole.size() > 0) {
 			player.setDoubloons(player.getDoubloons() + 1);
 			addDoubloonToRole.remove(role);
 		}
 	}
-
 
 	public void addColonistsToBoard() {
 		/**
@@ -197,22 +191,44 @@ public class GameState {
 			if (cargoship4 == 0
 					|| (cargoship4 < 4 && cargoship4Good.equals(good))) {
 				leftover = cargoship4 + goodNum - 4;
+				cargoship4Good = good;
+
+				if (leftover > 0) {
+					cargoship4 = 4;
+				} else {
+					cargoship4 += goodNum;
+				}
+
 			} else {
 				leftover = ERROR;
 			}
 			break;
 		case 5:
+			System.out.println("5");
 			if (cargoship5 == 0
 					|| (cargoship5 < 5 && cargoship5Good.equals(good))) {
-				leftover = cargoship4 + goodNum - 5;
+				leftover = cargoship5 + goodNum - 5;
+				cargoship5Good = good;
+				if (leftover > 0) {
+					cargoship5 = 5;
+				} else {
+					cargoship5 += goodNum;
+				}
 			} else {
 				leftover = ERROR;
 			}
 			break;
 		case 6:
+			System.out.println(6);
 			if (cargoship6 == 0
 					|| (cargoship6 < 6 && cargoship6Good.equals(good))) {
 				leftover = cargoship6 + goodNum - 6;
+				cargoship6Good = good;
+				if (leftover > 0) {
+					cargoship6 = 6;
+				} else {
+					cargoship6 += goodNum;
+				}
 			} else {
 				leftover = ERROR;
 			}
@@ -221,6 +237,33 @@ public class GameState {
 			break;
 		}
 		return leftover;
+	}
+
+	public boolean isAbleToAddGood() {
+
+		for (Player p : players) {
+			if (isAbleToAddGood(p)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isAbleToAddGood(Player p) {
+		List<String> goodStringList = p.getAllGoods();
+		for (String good : goodStringList) {
+
+			if (p.getNumberOfGood(good) > 0) {
+				for (int i = 4; i <= 6; i++) {
+					int e = addGoodToCargoShip(i, 0, good);
+					if (e != ERROR) {
+						return true;
+
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public boolean isGameEndState() {
@@ -245,12 +288,15 @@ public class GameState {
 		// Must ship these
 		if (cargoship4 == 4) {
 			cargoship4 = 0;
+			cargoship4Good = "";
 		}
 		if (cargoship5 == 5) {
 			cargoship5 = 0;
+			cargoship5Good = "";
 		}
 		if (cargoship6 == 6) {
 			cargoship6 = 0;
+			cargoship6Good = "";
 		}
 	}
 

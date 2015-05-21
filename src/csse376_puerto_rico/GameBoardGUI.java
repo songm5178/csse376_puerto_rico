@@ -49,7 +49,6 @@ public class GameBoardGUI {
 		this.msgBar = new JTextArea();
 		this.gameStateInfo = new JTextArea();
 
-
 		String temp = "0";
 		for (Enumeration<AbstractButton> buttons = this.bGroup.getElements(); buttons
 				.hasMoreElements();) {
@@ -59,10 +58,10 @@ public class GameBoardGUI {
 			}
 		}
 		int numberPlayers = Integer.parseInt(temp);
-		
+
 		this.addPlayers(numberPlayers);
 	}
-	
+
 	private void displayGameState() {
 		int coffee = this.gameState.getGood(Player.Good.COFFEE);
 		int corn = this.gameState.getGood(Player.Good.CORN);
@@ -70,36 +69,44 @@ public class GameBoardGUI {
 		int sugar = this.gameState.getGood(Player.Good.SUGAR);
 		int tobacco = this.gameState.getGood(Player.Good.TOBACCO);
 		int colonists = this.gameState.getColonistsOnBoard();
-		
-		String parsedInfo = "Coffe: "+coffee+"    Corn: "+corn+"    Indigo: "+indigo+
-				"\nSugar: "+sugar+"        Tobacco: "+tobacco+
-				"\nColonists: "+colonists+
-				"\n"+
-				"\nCargo Ship: "+(4 - this.gameState.cargoship4)+" spots for "+this.gameState.cargoship4Good+
-				"    Cargo Ship: "+(5 - this.gameState.cargoship5)+" spots for "+this.gameState.cargoship5Good+
-				"    Cargo Ship: "+(6 - this.gameState.cargoship6)+" spots for "+this.gameState.cargoship6Good;
+		int colonistsTotal = this.gameState.getColonistsTotal();
+
+		String parsedInfo = "Coffe: " + coffee + "    Corn: " + corn
+				+ "    Indigo: " + indigo + "\nSugar: " + sugar
+				+ "        Tobacco: " + tobacco + "\nColonists On Board: "
+				+ colonists + "\nColonists Total: " + colonistsTotal + "\n"
+				+ "\nCargo Ship: " + (4 - this.gameState.cargoship4)
+				+ " spots for " + this.gameState.cargoship4Good
+				+ "    Cargo Ship: " + (5 - this.gameState.cargoship5)
+				+ " spots for " + this.gameState.cargoship5Good
+				+ "    Cargo Ship: " + (6 - this.gameState.cargoship6)
+				+ " spots for " + this.gameState.cargoship6Good;
 		gameStateInfo.setColumns(20);
 		gameStateInfo.setRows(7);
 		gameStateInfo.setText(parsedInfo);
 		this.mainframe.add(gameStateInfo, "cell 0 5, span 5");
 	}
-	
-	private void updateGameStateDisplay(){
+
+	private void updateGameStateDisplay() {
 		int coffee = this.gameState.getGood(Player.Good.COFFEE);
 		int corn = this.gameState.getGood(Player.Good.CORN);
 		int indigo = this.gameState.getGood(Player.Good.INDIGO);
 		int sugar = this.gameState.getGood(Player.Good.SUGAR);
 		int tobacco = this.gameState.getGood(Player.Good.TOBACCO);
 		int colonists = this.gameState.getColonistsOnBoard();
-		
-		String parsedInfo = "Coffe: "+coffee+"    Corn: "+corn+"    Indigo: "+indigo+
-				"\nSugar: "+sugar+"        Tobacco: "+tobacco+
-				"\nColonists: "+colonists+
-				"\n"+
-				"\nCargo Ship: "+(4 - this.gameState.cargoship4)+" spots for "+this.gameState.cargoship4Good+
-				"    Cargo Ship: "+(5 - this.gameState.cargoship5)+" spots for "+this.gameState.cargoship5Good+
-				"    Cargo Ship: "+(6 - this.gameState.cargoship6)+" spots for "+this.gameState.cargoship6Good;
-		
+		int colonistsTotal = this.gameState.getColonistsTotal();
+
+		String parsedInfo = "Coffe: " + coffee + "    Corn: " + corn
+				+ "    Indigo: " + indigo + "\nSugar: " + sugar
+				+ "        Tobacco: " + tobacco + "\nColonists: " + colonists
+				+ "\nColonists Total: " + colonistsTotal + "\n"
+				+ "\nCargo Ship: " + (4 - this.gameState.cargoship4)
+				+ " spots for " + this.gameState.cargoship4Good
+				+ "    Cargo Ship: " + (5 - this.gameState.cargoship5)
+				+ " spots for " + this.gameState.cargoship5Good
+				+ "    Cargo Ship: " + (6 - this.gameState.cargoship6)
+				+ " spots for " + this.gameState.cargoship6Good;
+
 		gameStateInfo.setText(parsedInfo);
 	}
 
@@ -124,10 +131,11 @@ public class GameBoardGUI {
 			p.setHUD(jta);
 			this.players.add(p);
 			this.mainframe.add(jta, "cell " + i + " 1");
+			p.updatePlayerInfo();
 
 		}
 		this.gameState = new GameState(this.players);
-		
+
 		displayGameState();
 		displayMessageBar();
 		updateRoles();
@@ -183,7 +191,6 @@ public class GameBoardGUI {
 
 				String role = (String) options[n];
 
-
 				// Every start of the role each player gets an extra doubloon.
 				player.setDoubloons(player.getDoubloons() + 1);
 				gameState.doubloons--;
@@ -193,10 +200,10 @@ public class GameBoardGUI {
 				player.updatePlayerInfo();
 
 				playRole(i);
-				
+
 				// update
 				this.gameState.updateAtEndOfTurn();
-				
+
 				// removing selected
 				List<Object> temp = new ArrayList<Object>();
 				for (int j = 0; j < options.length; j++) {
@@ -214,25 +221,25 @@ public class GameBoardGUI {
 	}
 
 	public boolean checkEndGame() {
-		// checks the end of the game, default to true for testing, otherwise false
+		// checks the end of the game, default to true for testing, otherwise
+		// false
 		return gameState.isGameEndState();
 	}
 
 	public void updateMsgBar(String msg) {
 		this.msgBar.setText(msg);
 	}
-	
-	
 
 	public void playRole(int roleNum) {
-		// 
+		//
 		Player player = players.get(roleNum);
 		String role = player.getRole();
 
 		if (role.equals(PlayerRoles.Mayor)) {
+			int colonists = gameState.getColonistsOnBoard();
+			gameState.colonistsTotal = gameState.colonistsTotal - colonists;
 
-			for (int i = 0; i < players.size(); i++) {
-				// TODO: player goes to next person, it should not start with
+			while (colonists > 0) {
 
 				player = players.get(roleNum);
 
@@ -267,7 +274,7 @@ public class GameBoardGUI {
 							if (playerB.numberOfJobs > playerB.numberOfWorkers) {
 								player.getBuildings().get(buildingNum).numberOfWorkers++;
 								selected = true;
-								updateMsgBar("Player " + i
+								updateMsgBar("Player " + roleNum
 										+ " added worker to building "
 										+ playerB.name);
 							} else {
@@ -276,7 +283,8 @@ public class GameBoardGUI {
 							}
 						} else {
 
-							updateMsgBar("Player " + i + " has no buildings");
+							updateMsgBar("Player " + roleNum
+									+ " has no buildings");
 							selected = false;
 						}
 
@@ -302,12 +310,13 @@ public class GameBoardGUI {
 							} else {
 								pPlantation.hasWorker = true;
 								selected = true;
-								updateMsgBar("Player " + i
+								updateMsgBar("Player " + roleNum
 										+ " added worker to plantation");
 							}
 						} else {
 
-							updateMsgBar("Player " + i + " has no plantions");
+							updateMsgBar("Player " + roleNum
+									+ " has no plantions");
 							selected = false;
 						}
 					} else {
@@ -318,6 +327,7 @@ public class GameBoardGUI {
 					player.updatePlayerInfo();
 				}
 				roleNum = (roleNum + 1) % players.size();
+				colonists--;
 
 			}
 		} else if (role.equals(PlayerRoles.Builder)) {
@@ -346,7 +356,7 @@ public class GameBoardGUI {
 						options[options.length - 1]);
 				if (n != bNames.size() - 1) {
 					player.addBuilding(new Building(bNames.get(n)));
-					if(player.ownsOccupiedBuilding("University")){
+					if (player.ownsOccupiedBuilding("University")) {
 						player.getBuilding("University").numberOfWorkers++;
 						this.gameState.colonistsTotal--;
 					}
@@ -360,22 +370,23 @@ public class GameBoardGUI {
 				roleNum = (roleNum + 1) % players.size();
 
 			}
-		}else if(role.equals(PlayerRoles.Settler)){
-			//DONE: kurian
-			List<String> gNames = player.getAllGoods();
-			gNames.add("Nothing");
-			Object[] options = gNames.toArray();
+		} else if (role.equals(PlayerRoles.Settler)) {
+			// DONE: kurian
+			List<String> plantationNames = player.getAllGoods();
+			plantationNames.add("Nothing");
+			Object[] options = plantationNames.toArray();
 			// Settler picks one more plantation
 			for (int i = 0; i <= players.size(); i++) {
 
 				player = players.get(roleNum);
-				
-				if(player.ownsOccupiedBuilding("Construction Hut")){
-					//give option to place quarry, but if chooses quarry, you can't get plantation
+
+				if (player.ownsOccupiedBuilding("Construction Hut")) {
+					// give option to place quarry, but if chooses quarry, you
+					// can't get plantation
 				}
-				
-				if(player.ownsOccupiedBuilding("Hacienda")){
-					//give option to add another plantion here!!
+
+				if (player.ownsOccupiedBuilding("Hacienda")) {
+					// give option to add another plantion here!!
 				}
 				// player = player.next at the end
 				int n = JOptionPane.showOptionDialog(this.mainframe,
@@ -383,19 +394,25 @@ public class GameBoardGUI {
 						JOptionPane.YES_NO_CANCEL_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, options,
 						options[options.length - 1]);
-					System.out.println(gNames.get(n));
-				if (n != gNames.size() - 1) {
-					player.getPlantations().add(new Plantation(gNames.get(n), false));
+				System.out.println(plantationNames.get(n));
+				if (n != plantationNames.size() - 1) {
+					player.getPlantations().add(
+							new Plantation(plantationNames.get(n), false));
+					updateMsgBar("Player " + roleNum + " added plantation"
+							+ plantationNames.get(n));
 				}
-				if(player.ownsOccupiedBuilding("Hospice")){
-					//give option to take colonist form supply and put it here
-					Object[] yesNo = {"Yes", "No"};
-					int answ = JOptionPane.showOptionDialog(this.mainframe,
-							"Would you like to place a colonist at your Hospice?", "Player " + (roleNum),
-							JOptionPane.YES_NO_CANCEL_OPTION,
-							JOptionPane.QUESTION_MESSAGE, null, yesNo,
-							yesNo[yesNo.length - 1]);
-					if(answ == 1){
+				if (player.ownsOccupiedBuilding("Hospice")) {
+					// give option to take colonist form supply and put it here
+					Object[] yesNo = { "Yes", "No" };
+					int answ = JOptionPane
+							.showOptionDialog(
+									this.mainframe,
+									"Would you like to place a colonist at your Hospice?",
+									"Player " + (roleNum),
+									JOptionPane.YES_NO_CANCEL_OPTION,
+									JOptionPane.QUESTION_MESSAGE, null, yesNo,
+									yesNo[yesNo.length - 1]);
+					if (answ == 1) {
 						player.getBuilding("Hospice").numberOfWorkers++;
 						this.gameState.colonistsTotal--;
 					}
@@ -406,28 +423,26 @@ public class GameBoardGUI {
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 			}
-		}else if(role.equals(PlayerRoles.Craftsman)){
-			//DONE: kurian
+		} else if (role.equals(PlayerRoles.Craftsman)) {
+			// DONE: kurian
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
 				player.checkPlantation();
-				
-				//factory addition
-				if(player.ownsOccupiedBuilding("Factory")){
-					if(player.getPlantations().size() == 2){
-						player.setDoubloons(player.getDoubloons() + 1);					
-					}else if(player.getPlantations().size() == 3){
+
+				// factory addition
+				if (player.ownsOccupiedBuilding("Factory")) {
+					if (player.getPlantations().size() == 2) {
+						player.setDoubloons(player.getDoubloons() + 1);
+					} else if (player.getPlantations().size() == 3) {
 						player.setDoubloons(player.getDoubloons() + 2);
-					}else if(player.getPlantations().size() == 4){
+					} else if (player.getPlantations().size() == 4) {
 						player.setDoubloons(player.getDoubloons() + 3);
-					}else if(player.getPlantations().size() == 5){
+					} else if (player.getPlantations().size() == 5) {
 						player.setDoubloons(player.getDoubloons() + 5);
-					}					
+					}
 				}
-				
-				// Adds +1 to the player's doubloons if the role was not used in
-				// previous 3 turns
+
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
@@ -438,19 +453,19 @@ public class GameBoardGUI {
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
-				
-				//small market additions
-				if(player.ownsOccupiedBuilding("Small Market")){
+
+				// small market additions
+				if (player.ownsOccupiedBuilding("Small Market")) {
 					player.setDoubloons(player.getDoubloons() + 1);
 				}
-				
-				//large market additions
-				if(player.ownsOccupiedBuilding("Large Market")){
+
+				// large market additions
+				if (player.ownsOccupiedBuilding("Large Market")) {
 					player.setDoubloons(player.getDoubloons() + 2);
 				}
-				
-				if(player.ownsOccupiedBuilding("Office")){
-					//player can sell same kind of good to the trading house??
+
+				if (player.ownsOccupiedBuilding("Office")) {
+					// player can sell same kind of good to the trading house??
 				}
 				ArrayList<String> goodList = new ArrayList<String>();
 				for (String s : player.getAllGoods()) {
@@ -490,109 +505,171 @@ public class GameBoardGUI {
 				roleNum = (roleNum + 1) % players.size();
 
 			}
-		}else if(role.equals(PlayerRoles.Captain)){
-			
-			for (int i = 0; i < players.size(); i++) {
-				player = players.get(roleNum);
+		} else if (role.equals(PlayerRoles.Captain)) {
 
-				if(player.getAllGoods().size() != 0){
+			while (gameState.isAbleToAddGood()) {
+				player = players.get(roleNum);
+				if (gameState.isAbleToAddGood(player)) {
 					Object[] goodOptions = player.getAllGoods().toArray();
-					
+
 					int good = JOptionPane.showOptionDialog(this.mainframe,
 							"Choose a good to ship!", "Player " + (roleNum),
 							JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, goodOptions,
 							goodOptions[goodOptions.length - 1]);
-					
+
 					Object[] shipOptions = new Object[3];
 					shipOptions[0] = 4;
 					shipOptions[1] = 5;
 					shipOptions[2] = 6;
 					int ship = JOptionPane.showOptionDialog(this.mainframe,
-							"Choose a cargo ship to put good!", "Player " + (roleNum),
+							"Choose a cargo ship to put good!", "Player "
+									+ (roleNum),
 							JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, shipOptions,
 							shipOptions[shipOptions.length - 1]);
-					if(ship == 0){
-						this.gameState.cargoship4Good = (String) goodOptions[good];
-						this.gameState.cargoship4++;
-						if(player.ownsOccupiedBuilding("Harbor")){
+					String goodString = (String) goodOptions[good];
+					int goodCount = player.getNumberOfGood(goodString);
+					int leftOver = this.gameState.addGoodToCargoShip(ship,
+							goodCount, goodString);
+					if (leftOver != 99) {
+						player.addGood(goodString, leftOver);
+						player.addPoints(goodCount - leftOver);
+						if (player.ownsOccupiedBuilding("Harbor")) {
 							player.addPoints(1);
 						}
-					}else if(ship == 1){
-						this.gameState.cargoship5Good = (String) goodOptions[good];
-						this.gameState.cargoship5++;
-						if(player.ownsOccupiedBuilding("Harbor")){
-							player.addPoints(1);
-						}
-					}else if(ship == 2){
-						this.gameState.cargoship6Good = (String) goodOptions[good];
-						this.gameState.cargoship6++;
-						if(player.ownsOccupiedBuilding("Harbor")){
-							player.addPoints(1);
-						}
-					}
-					
-					updateGameStateDisplay();
-					player.updatePlayerInfo();
-					roleNum = (roleNum + 1) % players.size();
-					//warehouse stuff
-					for(int j = 0; j < players.size(); j++){
-						if(players.get(roleNum).ownsOccupiedBuilding("Large Warehouse")){
-							Object[] goptions = player.getAllGoods().toArray();
-							int firstGood = JOptionPane.showOptionDialog(this.mainframe,
-									"Choose a good to store!", "Player " + (roleNum),
-									JOptionPane.YES_NO_CANCEL_OPTION,
-									JOptionPane.QUESTION_MESSAGE, null, goptions,
-									goptions[goptions.length - 1]);
-							int secondGood = JOptionPane.showOptionDialog(this.mainframe,
-									"Choose a good to store!", "Player " + (roleNum),
-									JOptionPane.YES_NO_CANCEL_OPTION,
-									JOptionPane.QUESTION_MESSAGE, null, goptions,
-									goptions[goptions.length - 1]);
-							players.get(roleNum).getBuilding("Large Warehouse").storedGood =  goptions[firstGood].toString();
-							players.get(roleNum).getBuilding("Large Warehouse").amountOfStoredGood++;
-							players.get(roleNum).getBuilding("Large Warehouse").storedGood =  goptions[secondGood].toString();
-							players.get(roleNum).getBuilding("Large Warehouse").amountOfStoredGood++;
-						}else if(players.get(roleNum).ownsOccupiedBuilding("Small Warehouse")){
-							Object[] options = player.getAllGoods().toArray();
-							int g = JOptionPane.showOptionDialog(this.mainframe,
-									"Choose a good to store!", "Player " + (roleNum),
-									JOptionPane.YES_NO_CANCEL_OPTION,
-									JOptionPane.QUESTION_MESSAGE, null, options,
-									options[options.length - 1]);
-							players.get(roleNum).getBuilding("Small Warehouse").storedGood =  options[g].toString();
-							players.get(roleNum).getBuilding("Small Warehouse").amountOfStoredGood++;
-						}
-						updateGameStateDisplay();
-						player.updatePlayerInfo();
-						roleNum = (roleNum + 1) % players.size();
 					}
 				}
 
-
 				updateGameStateDisplay();
-				// Adds +1 to the player's doubloons if the role was not used in
-				// previous 3 turns
+
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
 			}
-			
-		}else if(role.equals(PlayerRoles.Prospector)){
-			//:do nothing
+			// warehouse stuff
+			for (int j = 0; j < players.size(); j++) {
+				player = players.get(roleNum);
+
+				ArrayList<String> goodList = new ArrayList<String>();
+				for (String s : player.getAllGoods()) {
+					int n = player.getNumberOfGood(s);
+					if (n > 0) {
+						goodList.add(s);
+					}
+				}
+				goodList.add("Nothing");
+				Object[] options = goodList.toArray();
+
+				ArrayList<String> storeGood = new ArrayList<String>();
+				int good = JOptionPane.showOptionDialog(this.mainframe,
+						"Choose a good to store!", "Player " + (roleNum),
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null, options,
+						options[options.length - 1]);
+
+				if (good - 1 != options.length) {
+					String goodString = (String) options[good];
+					storeGood.add(goodString);
+					player.sellGood(goodString, 1);
+				}
+
+				if (player.ownsOccupiedBuilding("Large Warehouse")) {
+					goodList = new ArrayList<String>();
+					for (String s : player.getAllGoods()) {
+						int n = player.getNumberOfGood(s);
+						if (n > 0) {
+							goodList.add(s);
+						}
+					}
+					goodList.add("Nothing");
+					options = goodList.toArray();
+					int firstGood = JOptionPane.showOptionDialog(
+							this.mainframe, "Choose a good to store!",
+							"Player " + (roleNum),
+							JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, options,
+							options[options.length - 1]);
+					if (firstGood - 1 != options.length) {
+						String goodString = (String) options[firstGood];
+						storeGood.add(goodString);
+						player.sellGood(goodString, 1);
+						player.getBuilding("Large Warehouse").storedGood = options[firstGood]
+								.toString();
+						player.getBuilding("Large Warehouse").amountOfStoredGood++;
+					}
+					goodList = new ArrayList<String>();
+					for (String s : player.getAllGoods()) {
+						int n = player.getNumberOfGood(s);
+						if (n > 0) {
+							goodList.add(s);
+						}
+					}
+					goodList.add("Nothing");
+					options = goodList.toArray();
+					int secondGood = JOptionPane.showOptionDialog(
+							this.mainframe, "Choose a good to store!",
+							"Player " + (roleNum),
+							JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, options,
+							options[options.length - 1]);
+
+					if (secondGood - 1 != options.length) {
+						String goodString = (String) options[secondGood];
+						storeGood.add(goodString);
+						player.sellGood(goodString, 1);
+						player.getBuilding("Large Warehouse").storedGood = options[secondGood]
+								.toString();
+						player.getBuilding("Large Warehouse").amountOfStoredGood++;
+					}
+				}
+				if (player.ownsOccupiedBuilding("Small Warehouse")) {
+					goodList = new ArrayList<String>();
+					for (String s : player.getAllGoods()) {
+						int n = player.getNumberOfGood(s);
+						if (n > 0) {
+							goodList.add(s);
+						}
+					}
+					goodList.add("Nothing");
+					options = goodList.toArray();
+					int g = JOptionPane.showOptionDialog(this.mainframe,
+							"Choose a good to store!", "Player " + (roleNum),
+							JOptionPane.YES_NO_CANCEL_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, options,
+							options[options.length - 1]);
+					if (g - 1 != options.length) {
+						String goodString = (String) options[g];
+						storeGood.add(goodString);
+						player.sellGood(goodString, 1);
+						player.getBuilding("Small Warehouse").storedGood = options[g]
+								.toString();
+						player.getBuilding("Small Warehouse").amountOfStoredGood++;
+					}
+				}
+
+				for (String s : storeGood) {
+					player.addGood(s, 1);
+				}
+
+				updateGameStateDisplay();
+				player.updatePlayerInfo();
+				roleNum = (roleNum + 1) % players.size();
+			}
+
+		} else if (role.equals(PlayerRoles.Prospector)) {
+			// :do nothing
 			for (int i = 0; i < players.size(); i++) {
 
 				player = players.get(roleNum);
 
-				// :
-				// Adds +1 to the player's doubloons if the role was not used in
-				// previous 3 turns
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
 			}
 		}
+		gameState.updateAtEndOfTurn();
+		updateGameStateDisplay();
 
 	}
 
