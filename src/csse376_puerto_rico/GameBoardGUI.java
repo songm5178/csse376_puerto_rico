@@ -49,7 +49,7 @@ public class GameBoardGUI {
 		this.msgBar = new JTextArea();
 		this.gameStateInfo = new JTextArea();
 
-		String temp = "0";
+		String temp = "3";
 		for (Enumeration<AbstractButton> buttons = this.bGroup.getElements(); buttons
 				.hasMoreElements();) {
 			AbstractButton button = buttons.nextElement();
@@ -58,7 +58,7 @@ public class GameBoardGUI {
 			}
 		}
 		int numberPlayers = Integer.parseInt(temp);
-
+		
 		this.addPlayers(numberPlayers);
 	}
 
@@ -549,8 +549,11 @@ public class GameBoardGUI {
 							player.addGood(goodString, leftOver);
 							player.sellGood(goodString, goodCount - leftOver);
 							player.addPoints(goodCount - leftOver);
+							gameState.victoryPoints = gameState.victoryPoints
+									- (goodCount - leftOver);
 							if (player.ownsOccupiedBuilding("Harbor")) {
 								player.addPoints(1);
+								gameState.victoryPoints--;
 							}
 							selected = true;
 						}
@@ -562,6 +565,9 @@ public class GameBoardGUI {
 				player.updatePlayerInfo();
 				roleNum = (roleNum + 1) % players.size();
 
+			}
+			if(gameState.victoryPoints <= 0){
+				gameState.isGameEndState = true;
 			}
 			// warehouse stuff
 			for (int j = 0; j < players.size(); j++) {
@@ -675,14 +681,7 @@ public class GameBoardGUI {
 
 		} else if (role.equals(PlayerRoles.Prospector)) {
 			// :do nothing
-			for (int i = 0; i < players.size(); i++) {
-
-				player = players.get(roleNum);
-
-				player.updatePlayerInfo();
-				roleNum = (roleNum + 1) % players.size();
-
-			}
+			player.setDoubloons(player.getDoubloons() + 1);
 		}
 		gameState.updateAtEndOfTurn();
 		updateGameStateDisplay();
