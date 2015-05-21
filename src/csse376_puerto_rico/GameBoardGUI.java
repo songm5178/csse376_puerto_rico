@@ -542,7 +542,7 @@ public class GameBoardGUI {
 								shipOptions[shipOptions.length - 1]);
 						String goodString = (String) options[good];
 						int goodCount = player.getNumberOfGood(goodString);
-						
+
 						int leftOver = this.gameState.addGoodToCargoShip(
 								(int) shipOptions[ship], goodCount, goodString);
 						if (leftOver != -99) {
@@ -606,7 +606,7 @@ public class GameBoardGUI {
 							JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, options,
 							options[options.length - 1]);
-					if (firstGood - 1 != options.length) {
+					if (firstGood != options.length - 1) {
 						String goodString = (String) options[firstGood];
 						storeGood.add(goodString);
 						player.sellGood(goodString, 1);
@@ -630,7 +630,7 @@ public class GameBoardGUI {
 							JOptionPane.QUESTION_MESSAGE, null, options,
 							options[options.length - 1]);
 
-					if (secondGood - 1 != options.length) {
+					if (secondGood != options.length - 1) {
 						String goodString = (String) options[secondGood];
 						storeGood.add(goodString);
 						player.sellGood(goodString, 1);
@@ -654,7 +654,7 @@ public class GameBoardGUI {
 							JOptionPane.YES_NO_CANCEL_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, options,
 							options[options.length - 1]);
-					if (g - 1 != options.length) {
+					if (g != options.length - 1) {
 						String goodString = (String) options[g];
 						storeGood.add(goodString);
 						player.sellGood(goodString, 1);
