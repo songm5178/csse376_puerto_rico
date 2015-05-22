@@ -32,7 +32,10 @@ public class GameBoardGUI {
 		this.gameStateInfo = new JTextArea();
 		this.players = new ArrayList<Player>();
 		this.mainframe = new JFrame();
-		this.gameState = new GameState();
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		this.gameState = new GameState(players);
 	}
 
 	public GameBoardGUI(JFrame frame, ButtonGroup group) {

@@ -28,28 +28,7 @@ public class GameState {
 
 	public static final int ERROR = -99;
 
-	public GameState() {
 
-		// for testing purposes
-		// goods
-		goods.put(Player.Good.COFFEE, 0);
-		goods.put(Player.Good.CORN, 0);
-		goods.put(Player.Good.INDIGO, 0);
-		goods.put(Player.Good.SUGAR, 0);
-		goods.put(Player.Good.TOBACCO, 0);
-
-		// colonists
-
-		colonistsTotal = 0;
-		colonistsOnBoard = 0;
-		// ships
-
-		// doubloons
-		doubloons = 0;
-		rolesToAdd = new ArrayList<String>();
-		addDoubloonToRole = new ArrayList<String>();
-		victoryPoints = 50;
-	}
 
 	public GameState(List<Player> players) {
 
@@ -126,17 +105,6 @@ public class GameState {
 		return colonistsTotal;
 	}
 
-	public void addRolesToList(String toAdd) {
-		rolesToAdd.add(toAdd);
-		if (rolesToAdd.size() == 3) {
-			List<String> totalRoles = Player.getRoles();
-			for (int i = 0; i < rolesToAdd.size(); i++) {
-				totalRoles.remove(rolesToAdd.get(i));
-			}
-			addDoubloonToRole = rolesToAdd;
-			rolesToAdd = new ArrayList<String>();
-		}
-	}
 
 
 	public void addColonistsToBoard() {
