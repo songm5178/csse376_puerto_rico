@@ -28,8 +28,6 @@ public class GameState {
 
 	public static final int ERROR = -99;
 
-
-
 	public GameState(List<Player> players) {
 
 		// game start state - Min
@@ -54,8 +52,12 @@ public class GameState {
 		this.players.get(1).addPlantations(new Plantation(Good.INDIGO, false));
 
 		if (numOfPlayers == 3) {
-			colonistsTotal = 55;
-			victoryPoints = 75;
+			// FIXME: replace the bottom comment with the one after to make the
+			// test
+			// colonistsTotal = 55;
+			// victoryPoints = 75;
+			colonistsTotal = 10;
+			victoryPoints = 3;
 			this.players.get(2)
 					.addPlantations(new Plantation(Good.CORN, false));
 		} else if (numOfPlayers == 4) {
@@ -104,8 +106,6 @@ public class GameState {
 		//
 		return colonistsTotal;
 	}
-
-
 
 	public void addColonistsToBoard() {
 		/**
@@ -237,8 +237,12 @@ public class GameState {
 	public Player getWinner() {
 		Player max = this.players.get(0);
 		for (Player p : this.players) {
-			if (max.getPoints() <= p.getPoints()) {
+			if (max.getPoints() < p.getPoints()) {
 				max = p;
+			} else if (max.getPoints() == p.getPoints()) {
+				if (max.getDoubloons() < p.getDoubloons()) {
+					max = p;
+				}
 			}
 		}
 

@@ -202,6 +202,17 @@ public class GameBoardGUI {
 		}
 		updateMsgBar("Winner is Player : "
 				+ this.gameState.getWinner().getPlayerNum());
+		Object[] option = new Object[1];
+		option[0] = "OK";
+		int n = JOptionPane
+				.showOptionDialog(
+						this.mainframe,
+						"Game End!!!",
+						"Player " + this.gameState.getWinner().getPlayerNum() + " Wins!",
+						JOptionPane.YES_NO_CANCEL_OPTION,
+						JOptionPane.QUESTION_MESSAGE, null,
+						option, option[option.length - 1]);
+
 
 	}
 
@@ -223,7 +234,8 @@ public class GameBoardGUI {
 		if (role.equals(PlayerRoles.Mayor)) {
 			int colonists = gameState.getColonistsOnBoard();
 			gameState.colonistsTotal = gameState.colonistsTotal - colonists;
-
+			if(gameState.colonistsOnBoard<= 0)
+				gameState.isGameEndState = true;
 			while (colonists > 0) {
 
 				player = players.get(roleNum);
@@ -340,7 +352,8 @@ public class GameBoardGUI {
 						JOptionPane.QUESTION_MESSAGE, null, options,
 						options[options.length - 1]);
 				if (n != bNames.size() - 1) {
-					player.addBuilding(new Building(bNames.get(n)));
+					Building selectedB = new Building(bNames.get(n));
+					player.addBuilding(selectedB);
 					if (player.ownsOccupiedBuilding("University")) {
 						player.getBuilding("University").numberOfWorkers++;
 						this.gameState.colonistsTotal--;
@@ -348,6 +361,7 @@ public class GameBoardGUI {
 					if (player.getBuildings().size() >= 12) {
 						this.gameState.isGameEndState = true;
 					}
+					player.setDoubloons(player.getDoubloons() - selectedB.cost);
 				}
 				// Adds +1 to the player's doubloons if the role was not used in
 				// previous 3 turns
