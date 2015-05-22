@@ -58,7 +58,17 @@ public class GameStateTest {
 		assertEquals(55, g.getColonistsTotal());
 
 	}
+	@Test
+	public void TestIsAbleToAddGood() {
+		Player player = new Player();
+		player.addGood("Corn", 3);
+		fakePlayers.add(player);
+		fakePlayers.add(new Player());
+		fakePlayers.add(new Player());
 
+		GameState g = new GameState(fakePlayers);
+		assertEquals(true, g.isAbleToAddGood());
+	}
 	@Test
 	public void TestIsAbleToAddGood1() {
 		Player player = new Player();
